@@ -2769,7 +2769,6 @@ function showArea(areaName) {
   }
 
   const m = AREA_META[areaName] || {};
-  const comuni = COMUNI_BY_AREA[areaName] || [];
   const totalPop = comuni.reduce((s,c)=>(s+(c.pop||0)),0);
   const dist = m.snai_dist;
   const cf = CAPOFILA[areaName];
