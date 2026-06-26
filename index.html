@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard SNAI — Strategia Nazionale Aree Interne</title>
+<meta name="description" content="Dashboard interattiva sulla Strategia Nazionale Aree Interne (SNAI), cicli 2014-2020 e 2021-2027. 128 aree, oltre 1.880 comuni, dati ufficiali DPCoe.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0f172a;
+    --surface:   #1e293b;
+    --border:    #334155;
+    --muted:     #64748b;
+    --text:      #e2e8f0;
+    --text-dim:  #94a3b8;
+    --teal:      #2dd4bf;
+    --blue:      #60a5fa;
+    --green:     #4ade80;
+    --lblue:     #93c5fd;
+    --orange:    #fb923c;
+    --gray:      #94a3b8;
+    --yellow:    #fbbf24;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand { font-size: 0.88rem; font-weight: 700; color: var(--text); letter-spacing: 0.01em; }
+  .nav-brand span { color: var(--teal); }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color .18s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--teal);
+    color: #0f172a !important;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 6px;
+    transition: opacity .18s !important;
+  }
+  .nav-cta:hover { opacity: .85; }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 100px 32px 80px;
+    text-align: center;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: rgba(45, 212, 191, 0.1);
+    border: 1px solid rgba(45, 212, 191, 0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: normal; color: var(--teal); }
+  .hero p {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    color: var(--text-dim);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--teal);
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 13px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity .18s, transform .18s;
+  }
+  .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    padding: 13px 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color .18s, color .18s;
+  }
+  .btn-secondary:hover { border-color: var(--text-dim); color: var(--text); }
+
+  /* ── Stats strip ── */
+  .stats-strip {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 32px;
+  }
+  .stats-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+  }
+  .stat-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-card .lbl {
+    font-size: 0.67rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 1.4;
+  }
+  .stat-card.teal  .num { color: var(--teal); }
+  .stat-card.blue  .num { color: var(--blue); }
+  .stat-card.green .num { color: var(--green); }
+  .stat-card.lblue .num { color: var(--lblue); }
+  .stat-card.orange .num { color: var(--orange); }
+  .stat-card.gray  .num { color: var(--gray); }
+
+  /* ── Features ── */
+  .features {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+  .feat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .feat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color .18s;
+  }
+  .feat-card:hover { border-color: #475569; }
+  .feat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .feat-card h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+  }
+  .feat-card p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* ── Context ── */
+  .context {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 32px;
+  }
+  .context-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 680px) { .context-inner { grid-template-columns: 1fr; gap: 32px; } }
+  .context-text p {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+  .context-text p:last-child { margin-bottom: 0; }
+  .context-text strong { color: var(--text); }
+  .class-list { display: flex; flex-direction: column; gap: 8px; }
+  .class-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .class-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .class-item:nth-child(1) .class-badge { background: rgba(251,191,36,.15); color: #fbbf24; }
+  .class-item:nth-child(2) .class-badge { background: rgba(251,191,36,.1); color: #fbbf24; }
+  .class-item:nth-child(3) .class-badge { background: rgba(96,165,250,.12); color: var(--blue); }
+  .class-item:nth-child(4) .class-badge { background: rgba(74,222,128,.12); color: var(--green); }
+  .class-item:nth-child(5) .class-badge { background: rgba(45,212,191,.12); color: var(--teal); }
+  .class-item:nth-child(6) .class-badge { background: rgba(251,146,60,.12); color: var(--orange); }
+  .class-item p { font-size: 0.78rem; color: var(--text-dim); line-height: 1.4; }
+  .class-item p strong { color: var(--text); font-size: 0.8rem; }
+
+  /* ── CTA bottom ── */
+  .cta-bottom {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    text-align: center;
+  }
+  .cta-bottom h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .cta-bottom p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 28px 32px;
+  }
+  .footer-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-inner p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+  .footer-inner a { color: var(--text-dim); text-decoration: underline; text-underline-offset: 2px; }
+  .footer-source {
+    font-size: 0.72rem;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+
+  /* ── Preview box ── */
+  .preview-box {
+    max-width: 880px;
+    margin: 0 auto 0;
+    padding: 0 32px 64px;
+  }
+  .preview-frame {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .preview-bar {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #f87171; }
+  .dot.y { background: #fbbf24; }
+  .dot.g { background: #4ade80; }
+  .preview-url {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: monospace;
+  }
+  .preview-content {
+    padding: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    min-height: 220px;
+  }
+  @media (max-width: 560px) { .preview-content { grid-template-columns: 1fr; } }
+  .prev-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .prev-card .prev-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .prev-bars { display: flex; flex-direction: column; gap: 5px; }
+  .prev-bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: var(--muted); }
+  .prev-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .prev-bar-fill { height: 100%; border-radius: 3px; }
+  .prev-map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .prev-map-icon { font-size: 2.5rem; opacity: .5; }
+  .prev-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .prev-kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 8px; text-align: center; }
+  .prev-kpi .val { font-size: 0.95rem; font-weight: 700; color: #f1f5f9; }
+  .prev-kpi .lab { font-size: 0.58rem; color: var(--muted); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-brand"><span>SNAI</span> Dashboard</div>
+  <div class="nav-links">
+    <a href="#features">Funzionalità</a>
+    <a href="#contesto">Contesto</a>
+    <a href="dashboard-aree-interne.html" class="nav-cta">Apri Dashboard →</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-tag">Dati ufficiali DPCoe · Cicli 2014-2020 e 2021-2027</div>
+  <h1>Strategia Nazionale<br><em>Aree Interne</em></h1>
+  <p>Dashboard interattiva sulla distribuzione geografica e le caratteristiche delle 128 aree SNAI. Esplora comuni, statistiche e classificazioni ISTAT a livello di area su mappa Leaflet.</p>
+  <div class="hero-actions">
+    <a href="dashboard-aree-interne.html" class="btn-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Esplora la Dashboard
+    </a>
+    <a href="https://github.com/izilab/aree-interne-italia" class="btn-secondary">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+
+<!-- Preview -->
+<div class="preview-box">
+  <div class="preview-frame">
+    <div class="preview-bar">
+      <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+      <div class="preview-url">dashboard-aree-interne.html</div>
+    </div>
+    <div class="preview-content">
+      <div class="prev-card">
+        <div class="prev-label">Aree per regione</div>
+        <div class="prev-bars">
+          <div class="prev-bar-row">Sicilia<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:85%;background:#2dd4bf"></div></div>13</div>
+          <div class="prev-bar-row">Sardegna<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:60%;background:#60a5fa"></div></div>9</div>
+          <div class="prev-bar-row">Campania<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:52%;background:#4ade80"></div></div>8</div>
+          <div class="prev-bar-row">Calabria<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:45%;background:#fb923c"></div></div>7</div>
+          <div class="prev-bar-row">Basilicata<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:38%;background:#93c5fd"></div></div>6</div>
+          <div class="prev-bar-row">Toscana<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:32%;background:#fbbf24"></div></div>5</div>
+          <div class="prev-bar-row">altre…<div class="prev-bar-bg"><div class="prev-bar-fill" style="width:72%;background:#334155"></div></div></div>
+        </div>
+      </div>
+      <div class="prev-card prev-map">
+        <div class="prev-map-icon">🗺️</div>
+        <div>Mappa interattiva<br>con filtri per stato,<br>regione e area</div>
+      </div>
+      <div class="prev-card">
+        <div class="prev-label">Statistiche area</div>
+        <div class="prev-kpis">
+          <div class="prev-kpi"><div class="val" style="color:#2dd4bf">128</div><div class="lab">Aree</div></div>
+          <div class="prev-kpi"><div class="val" style="color:#60a5fa">1.880+</div><div class="lab">Comuni</div></div>
+          <div class="prev-kpi"><div class="val" style="color:#4ade80">43</div><div class="lab">Finanz.</div></div>
+          <div class="prev-kpi"><div class="val" style="color:#93c5fd">67</div><div class="lab">Conf.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats strip -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-card teal">
+      <div class="num">128</div>
+      <div class="lbl">Aree SNAI totali</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="num">1.880+</div>
+      <div class="lbl">Comuni coinvolti</div>
+    </div>
+    <div class="stat-card green">
+      <div class="num">43</div>
+      <div class="lbl">Finanziate 21-27</div>
+    </div>
+    <div class="stat-card lblue">
+      <div class="num">67</div>
+      <div class="lbl">Confermate 14-20</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="num">13</div>
+      <div class="lbl">Non finanziate</div>
+    </div>
+    <div class="stat-card gray">
+      <div class="num">5</div>
+      <div class="lbl">Solo ciclo 14-20</div>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="section-label">Funzionalità</div>
+  <div class="section-title">Tutto in un solo file</div>
+  <p class="section-sub">La dashboard è un file HTML self-contained: nessun server, nessuna dipendenza locale. Apri il file e funziona.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <span class="feat-icon">🗺️</span>
+      <h3>Mappa Leaflet interattiva</h3>
+      <p>Poligoni dissolti per area e per comune, con tooltip al passaggio del mouse e popup di dettaglio al clic. Zoom e pan fluidi su tutta Italia.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🔍</span>
+      <h3>Filtri multipli</h3>
+      <p>Filtra per stato di finanziamento (SI / CONF / NO), regione e ricerca testuale per nome area. La mappa si aggiorna in tempo reale.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📊</span>
+      <h3>Grafici e statistiche</h3>
+      <p>Distribuzione aree per regione, confronto tra cicli, contesto ISTAT 2020. Chart.js per i grafici a barre e a torta nella sidebar.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📋</span>
+      <h3>Navigazione gerarchica</h3>
+      <p>Dal livello nazionale si scende a regione, poi ad area, poi ai comuni singoli. Il pannello laterale destro mostra i dettagli di ogni livello.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🌗</span>
+      <h3>Tema chiaro e scuro</h3>
+      <p>Toggle per passare dal tema dark (default) al tema chiaro, con palette ottimizzata per la leggibilità in entrambe le modalità.</p>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">⭐</span>
+      <h3>Capofila evidenziato</h3>
+      <p>Il comune capofila di ogni area è identificato con badge dorato nella lista comuni e nella mappa, per riconoscere il centro di governance dell'area.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Context -->
+<section class="context" id="contesto">
+  <div class="context-inner">
+    <div class="context-text">
+      <div class="section-label">Contesto</div>
+      <div class="section-title" style="font-size:1.5rem;margin-bottom:16px">Cos'è la SNAI</div>
+      <p>La <strong>Strategia Nazionale Aree Interne (SNAI)</strong> è una politica di sviluppo territoriale promossa dal <strong>Dipartimento per le Politiche di Coesione (DPCoe)</strong> che interviene sui comuni italiani classificati come "aree interne": territori distanti dai principali centri di erogazione di servizi (scuola, sanità, mobilità), spesso caratterizzati da spopolamento e declino economico.</p>
+      <p>Le aree SNAI sono selezionate tra i comuni classificati da ISTAT nelle categorie D (intermedio), E (periferico) e F (ultraperiferico). Il programma opera su due cicli: <strong>2014-2020</strong> (sperimentazione) e <strong>2021-2027</strong> (consolidamento e nuovi territori).</p>
+      <p>Su 3.834 comuni italiani classificati ISTAT come aree interne, la SNAI copre una selezione strategica: <strong>22,7% della popolazione</strong> nazionale risiede in aree interne, su una superficie pari al <strong>58,8% del territorio</strong>.</p>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:14px">Classificazione ISTAT 2020</div>
+      <div class="class-list">
+        <div class="class-item">
+          <div class="class-badge">A</div>
+          <p><strong>Polo</strong> — centri principali di erogazione servizi, esclusi dalla SNAI</p>
+        </div>
+        <div class="class-item">
+          <div class="class-badge">B</div>
+          <p><strong>Polo intercomunale</strong> — polo di rango secondario, escluso dalla SNAI</p>
+        </div>
+        <div class="class-item">
+          <div class="class-badge">C</div>
+          <p><strong>Cintura</strong> — comuni adiacenti al polo, esclusi dalla SNAI</p>
+        </div>
+        <div class="class-item">
+          <div class="class-badge">D</div>
+          <p><strong>Intermedio</strong> — prima fascia di area interna, inclusa nella SNAI</p>
+        </div>
+        <div class="class-item">
+          <div class="class-badge">E</div>
+          <p><strong>Periferico</strong> — seconda fascia, più distante dai servizi</p>
+        </div>
+        <div class="class-item">
+          <div class="class-badge">F</div>
+          <p><strong>Ultraperiferico</strong> — massima distanza dai servizi essenziali</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA bottom -->
+<section class="cta-bottom">
+  <h2>Pronto a esplorare?</h2>
+  <p>La dashboard carica tutti i dati inline: nessuna connessione necessaria dopo il primo caricamento.</p>
+  <a href="dashboard-aree-interne.html" class="btn-primary" style="display:inline-flex">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    Apri la Dashboard
+  </a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <p>Dati: <a href="https://www.coesione.gov.it/it/aree-interne/" target="_blank" rel="noopener">DPCoe — Dipartimento per le Politiche di Coesione</a> · Classificazione ISTAT 2020 · Confini comunali <a href="https://github.com/openpolis/geojson-italy" target="_blank" rel="noopener">openpolis/geojson-italy</a></p>
+    <span class="footer-source">Dati ufficiali · Ciclo 2021-2027</span>
+  </div>
+</footer>
+
+</body>
+</html>
