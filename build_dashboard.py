@@ -707,6 +707,8 @@ function snaiColor(s) {
 function snaiName(s) {
   return {F:'Ultraperiferico',E:'Periferico',D:'Intermedio',C:'Cintura',B:'Polo intercomunale',A:'Polo'}[s] || s;
 }
+const AREA_DISPLAY = {'Pre.gio': 'Terre Di Pregio'};
+function adn(a) { return AREA_DISPLAY[a] || a; }
 function statusColor(s) {
   if (s==='SI')   return '#22c55e';
   if (s==='CONF') return '#60a5fa';
@@ -774,7 +776,7 @@ function popupHTML(area, status) {
   if (dist) {
     snaiRow = `<div class="popup-snai">AI 2020: ${snaiLabel(dist)}<span style="color:#475569"> (F=Ultra E=Peri D=Inter C=Cin)</span></div>`;
   }
-  return `<div class="popup-title">${area}</div>
+  return `<div class="popup-title">${adn(area)}</div>
     <div class="popup-row"><span>Regione</span><span>${m.regione||'&mdash;'}</span></div>
     <div class="popup-row"><span>Comuni</span><span>${m.n!=null?m.n:'&mdash;'}</span></div>
     <div class="popup-row"><span>Pop. 2020</span><span>${m.pop?m.pop.toLocaleString('it'):'&mdash;'}</span></div>
@@ -999,7 +1001,7 @@ function showRegion(aree, reg, fin, q) {
   const regStr = !reg ? `<div class="s-kpi"><span class="val">${new Set(aree.map(a=>a.regione)).size}</span><span class="lbl">Regioni</span></div>` : '';
   const extraRow = (popStr||regStr) ? `<div class="s-kpi-row">${popStr}${regStr}</div>` : '';
   const itemsHtml = aree.map(a=>`<div class="list-item clickable" onclick="showArea('${a.area.replace(/'/g,"\\'")}')">
-    <div class="i-name" style="color:${statusColor(a.status)}">${a.area}</div>
+    <div class="i-name" style="color:${statusColor(a.status)}">${adn(a.area)}</div>
     <div class="i-meta">${[a.n!=null?a.n+' comuni':null, a.pop?(a.pop/1000).toFixed(0)+'k ab.':null].filter(x=>x).join(' · ')}</div>
   </div>`).join('');
   document.getElementById('rightPanel').innerHTML = `
@@ -1120,7 +1122,7 @@ function showArea(areaName) {
         layer.on('mouseout', e => { comuniLayer.resetStyle(e.target); });
         layer.on('click', e => {
           L.DomEvent.stopPropagation(e);
-          showComuneDetail(c.pc, areaName);
+          showComuneDetail(c.pc);
         });
       }
     }).addTo(map);
@@ -1156,8 +1158,7 @@ function showArea(areaName) {
   const comuniHtml = sortedComuni.length > 0
     ? sortedComuni.map(c => {
         const isCf = cfComune && c.n === cfComune;
-        const aEsc = areaName.replace(/'/g,"\\'");
-        return `<div class="comune-item${isCf?' is-capofila':''}" onclick="showComuneDetail('${c.pc}','${aEsc}')">
+        return `<div class="comune-item${isCf?' is-capofila':''}" onclick="showComuneDetail('${c.pc}')">
         <div class="c-name">${c.n}${isCf?'<span class="capofila-badge">CAPOFILA</span>':''}${c.p?` <span style="color:#475569">(${c.p})</span>`:''}</div>
         <div class="c-meta">${[c.pop?c.pop.toLocaleString('it')+' ab.':null, c.s?snaiName(c.s):null].filter(x=>x).join(' · ')}</div>
         ${accDots(c.pc)}
@@ -1167,7 +1168,7 @@ function showArea(areaName) {
   _navStack.push({level:'area', areaName});
   document.getElementById('rightPanel').innerHTML = `
     <div class="rp-header">${backBtn}<h3>Area</h3></div>
-    <div class="stats-title" style="color:${statusColor(m.status||'')}">${areaName}</div>
+    <div class="stats-title" style="color:${statusColor(m.status||'')}">${adn(areaName)}</div>
     <div class="s-kpi-row">
       <div class="s-kpi"><span class="val">${comuni.length>0?comuni.length:(m.n||'—')}</span><span class="lbl">Comuni</span></div>
       <div class="s-kpi"><span class="val">${totalPop>0?(totalPop/1000).toFixed(0)+'k':m.pop?(m.pop/1000).toFixed(0)+'k':'—'}</span><span class="lbl">Pop. 2020</span></div>
@@ -1178,19 +1179,22 @@ function showArea(areaName) {
     <div class="item-list">${comuniHtml}</div>`;
 }
 
-function showComuneDetail(pc, areaName) {
-  const c = (COMUNI_BY_AREA[areaName] || []).find(x => x.pc === pc);
+function showComuneDetail(pc) {
+  let c = null, areaName = null;
+  for (const [a, arr] of Object.entries(COMUNI_BY_AREA)) {
+    const found = arr.find(x => x.pc === pc);
+    if (found) { c = found; areaName = a; break; }
+  }
   if (!c) return;
   _navStack.push({level:'comune', pc, areaName});
   const backBtn = `<button class="btn-back" onclick="goBack()">&#8592;</button>`;
-  const areaEsc = areaName.replace(/'/g,"\\'");
   const snaiClass = c.s ? `${c.s} &mdash; ${snaiName(c.s)}` : '&mdash;';
   const accSection = accGrid(ACC_DATA.comuni && ACC_DATA.comuni[pc]);
   document.getElementById('rightPanel').innerHTML = `
     <div class="rp-header">${backBtn}<h3>Comune</h3></div>
     <div class="stats-title">${c.n}</div>
     <div style="font-size:0.7rem;color:#64748b;margin-bottom:10px">
-      Area: <span style="color:#a78bfa;cursor:pointer" onclick="goBack()">${areaName}</span>${c.p ? ` &middot; Prov.&nbsp;${c.p}` : ''}
+      Area: <span style="color:#a78bfa;cursor:pointer" onclick="goBack()">${adn(areaName)}</span>${c.p ? ` &middot; Prov.&nbsp;${c.p}` : ''}
     </div>
     <div class="s-kpi-row">
       <div class="s-kpi"><span class="val">${c.pop ? c.pop.toLocaleString('it') : '&mdash;'}</span><span class="lbl">Pop. 2020</span></div>
