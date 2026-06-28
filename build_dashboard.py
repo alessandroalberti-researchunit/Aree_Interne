@@ -281,6 +281,7 @@ for area_name, grp in df_all.groupby("area_snai"):
             "p":   prov[:2] if prov else "",
             "pop": pop,
             "s":   snai[0] if snai else "",
+            "pc":  procom,
         }
         if km2_v is not None and not pd.isna(km2_v):
             entry["km2"] = round(float(km2_v), 1)
@@ -506,12 +507,14 @@ HTML = r"""<!DOCTYPE html>
   .econ-highlight .val { font-size:1.2rem; font-weight:800; color:#a78bfa; }
   .econ-highlight .lbl { font-size:0.6rem; color:#64748b; margin-top:2px; text-transform:uppercase; letter-spacing:0.06em; }
   .acc-section { margin-top:10px; }
-  .acc-row { display:flex; align-items:center; gap:6px; padding:3px 0; }
-  .acc-lbl { font-size:0.68rem; color:#94a3b8; width:120px; flex-shrink:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .acc-bar-wrap { flex:1; background:#1e293b; border-radius:3px; height:7px; overflow:hidden; }
-  .acc-bar { height:100%; border-radius:3px; transition:width .4s ease; }
-  .acc-val { font-size:0.65rem; color:#64748b; width:32px; text-align:right; flex-shrink:0; }
-  body.light .acc-bar-wrap { background:#e2e8f0; }
+  .acc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin:6px 0 4px; }
+  .acc-card { border:1px solid; border-radius:6px; padding:6px 5px 5px; }
+  .acc-card-val { font-size:1.05rem; font-weight:800; line-height:1; }
+  .acc-card-name { font-size:0.58rem; color:#94a3b8; margin-top:2px; line-height:1.2; }
+  .acc-card-sev { font-size:0.57rem; font-weight:700; margin-top:4px; letter-spacing:0.04em; text-transform:uppercase; }
+  .acc-note { font-size:0.58rem; color:#475569; margin-top:3px; line-height:1.4; }
+  .acc-dots { display:flex; gap:3px; margin-top:4px; }
+  .acc-dot { width:8px; height:8px; border-radius:2px; display:inline-block; flex-shrink:0; cursor:default; }
   body.light .btn-layer { background:#f1f5f9; border-color:#e2e8f0; color:#64748b; }
   body.light .btn-layer.snai-btn.active { color:#15803d; }
   body.light .btn-layer.sll-btn.active  { color:#7c3aed; }
@@ -903,7 +906,7 @@ function showSLLDetail(p) {
       <div class="econ-row"><span class="ek">Valore Aggiunto</span><span class="ev">${invest}</span></div>
       <div class="econ-row"><span class="ek">Retrib./dip.</span><span class="ev">${retDip}</span></div>
     </div>
-    ${accHtml(ACC_DATA.sll[p.cod_sll])}`;
+    ${accGrid(ACC_DATA.sll[p.cod_sll])}`;
 }
 
 function sllVisibleCount() {
@@ -1022,35 +1025,67 @@ function comuneTooltipHTML(c, areaName) {
     rows.map(([k,v]) => `<div class="ct-row"><span>${k}</span><span>${v}</span></div>`).join('');
 }
 
-const ACC_IND_COLORS = {
-  ospedali:   '#f87171',
-  sanita:     '#fb923c',
-  istruzione: '#facc15',
-  trasporti:  '#60a5fa',
-  sport:      '#34d399',
-  cultura:    '#c084fc',
+const SEV_DARK = {
+  critico: {bg:'#2d0505', txt:'#fca5a5', brd:'#7f1d1d'},
+  limitato:{bg:'#2d1b00', txt:'#fcd34d', brd:'#78350f'},
+  ok:      {bg:'#022c16', txt:'#6ee7b7', brd:'#065f46'},
+  nd:      {bg:'#1e293b', txt:'#475569', brd:'#334155'},
 };
+const SEV_LIGHT = {
+  critico: {bg:'#fee2e2', txt:'#b91c1c', brd:'#fca5a5'},
+  limitato:{bg:'#fef3c7', txt:'#b45309', brd:'#fcd34d'},
+  ok:      {bg:'#dcfce7', txt:'#15803d', brd:'#86efac'},
+  nd:      {bg:'#f1f5f9', txt:'#94a3b8', brd:'#e2e8f0'},
+};
+const SEV_LABELS = {critico:'CRITICO', limitato:'LIMITATO', ok:'OK', nd:'N.D.'};
 
-function accHtml(vals) {
+function accSev(k, v) {
+  if (!ACC_DATA || !ACC_DATA.soglie || !ACC_DATA.soglie[k]) return 'nd';
+  if (v === null || v === undefined) return 'nd';
+  const t = ACC_DATA.soglie[k];
+  if (v < t.p33) return 'critico';
+  if (v < t.p67) return 'limitato';
+  return 'ok';
+}
+
+function accGrid(vals) {
   if (!vals || !ACC_DATA || !ACC_DATA.indicatori) return '';
   const inds = ACC_DATA.indicatori;
-  const rows = Object.keys(inds).map(k => {
+  const _light = document.body.classList.contains('light');
+  const SEV = _light ? SEV_LIGHT : SEV_DARK;
+  const cards = Object.keys(inds).map(k => {
     const v = vals[k];
-    if (v === undefined || v === null) return '';
-    const pct = Math.min(100, Math.round(v / inds[k].max * 100));
-    const color = ACC_IND_COLORS[k] || '#94a3b8';
-    return `<div class="acc-row">
-      <div class="acc-lbl" title="${inds[k].label}">${inds[k].label}</div>
-      <div class="acc-bar-wrap"><div class="acc-bar" style="width:${pct}%;background:${color}"></div></div>
-      <div class="acc-val">${v.toFixed(1)}</div>
+    const sev = accSev(k, v);
+    const c = SEV[sev];
+    const valStr = (v !== undefined && v !== null) ? v.toFixed(1) : '—';
+    return `<div class="acc-card" style="background:${c.bg};border-color:${c.brd}">
+      <div class="acc-card-val" style="color:${c.txt}">${valStr}</div>
+      <div class="acc-card-name">${inds[k].label}</div>
+      <div class="acc-card-sev" style="color:${c.txt}">${SEV_LABELS[sev]}</div>
     </div>`;
-  }).filter(Boolean).join('');
-  if (!rows) return '';
+  }).join('');
   return `<div class="acc-section">
-    <div class="econ-title">Accessibilita ai servizi (30 min in auto) &mdash; Lazio</div>
-    ${rows}
-    <div style="font-size:0.6rem;color:#475569;margin-top:6px;line-height:1.5">Valore medio di strutture raggiungibili per cella H3 (~0.7 km2). Fonte: OvertureMaps + Min. Salute, elaborazione IZI.</div>
+    <div class="econ-title">Accessibilita ai servizi &mdash; 30 min in auto</div>
+    <div class="acc-grid">${cards}</div>
+    <div class="acc-note">Media strutture raggiungibili per cella H3 (~0.7 km&sup2;). Fonte: OvertureMaps + Min. Salute, IZI.</div>
   </div>`;
+}
+
+function accDots(procom) {
+  if (!procom || !ACC_DATA || !ACC_DATA.comuni) return '';
+  const vals = ACC_DATA.comuni[procom];
+  if (!vals) return '';
+  const _light = document.body.classList.contains('light');
+  const SEV = _light ? SEV_LIGHT : SEV_DARK;
+  const inds = ACC_DATA.indicatori;
+  const dots = Object.keys(inds).map(k => {
+    const v = vals[k];
+    const sev = accSev(k, v);
+    const col = SEV[sev].txt;
+    const tip = inds[k].label + ': ' + (v !== undefined ? v.toFixed(1) : 'N.D.');
+    return `<span class="acc-dot" style="background:${col}" title="${tip}"></span>`;
+  }).join('');
+  return `<div class="acc-dots">${dots}</div>`;
 }
 
 function showArea(areaName) {
@@ -1119,6 +1154,7 @@ function showArea(areaName) {
         return `<div class="comune-item${isCf?' is-capofila':''}">
         <div class="c-name">${c.n}${isCf?'<span class="capofila-badge">CAPOFILA</span>':''}${c.p?` <span style="color:#475569">(${c.p})</span>`:''}</div>
         <div class="c-meta">${[c.pop?c.pop.toLocaleString('it')+' ab.':null, c.s?snaiName(c.s):null].filter(x=>x).join(' · ')}</div>
+        ${accDots(c.pc)}
       </div>`;
       }).join('')
     : `<div style="font-size:0.7rem;color:#475569;padding:6px 0">Dati comuni non disponibili per questa area.</div>`;
@@ -1130,8 +1166,9 @@ function showArea(areaName) {
       <div class="s-kpi"><span class="val">${comuni.length>0?comuni.length:(m.n||'—')}</span><span class="lbl">Comuni</span></div>
       <div class="s-kpi"><span class="val">${totalPop>0?(totalPop/1000).toFixed(0)+'k':m.pop?(m.pop/1000).toFixed(0)+'k':'—'}</span><span class="lbl">Pop. 2020</span></div>
     </div>
-    ${cfHtml}${snaiHtml}${accHtml(ACC_DATA.snai[areaName])}
+    ${cfHtml}${snaiHtml}
     <div class="s-section-title">Comuni (${comuni.length>0?comuni.length:(m.n||'?')})</div>
+    ${comuni.some(c=>ACC_DATA.comuni&&ACC_DATA.comuni[c.pc])?`<div style="font-size:0.6rem;color:#475569;margin-bottom:4px;display:flex;align-items:center;gap:4px"><span class="acc-dot" style="background:#fca5a5"></span>critico <span class="acc-dot" style="background:#fcd34d;margin-left:4px"></span>limitato <span class="acc-dot" style="background:#6ee7b7;margin-left:4px"></span>ok &nbsp;(accessibilita 30 min)</div>`:''}
     <div class="item-list">${comuniHtml}</div>`;
 }
 

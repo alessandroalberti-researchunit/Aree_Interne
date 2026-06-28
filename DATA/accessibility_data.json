@@ -1,6 +1,6 @@
 {
-  "fonte": "OvertureMaps + Ministero della Salute, isocrone Valhalla. Elaborazione IZI su dati OCPR.",
-  "note": "Valori medi per celle H3 r8 (~0.7 km2) che intersecano ciascuna area/SLL. Modalita: auto con traffico, soglia 30 minuti.",
+  "fonte": "OvertureMaps + Ministero della Salute, isocrone Valhalla 30 min auto. Elaborazione IZI.",
+  "note": "Media di strutture raggiungibili per cella H3 r8 (~0.7 km2) intersecante ciascun comune/SLL.",
   "regioni_coperte": [
     "Lazio"
   ],
@@ -8,116 +8,68 @@
     "ospedali": {
       "label": "Ospedali SSN",
       "max": 4.84,
-      "mean": 0.46
+      "mean": 0.36
     },
     "sanita": {
       "label": "Servizi sanitari",
       "max": 170.82,
-      "mean": 9.79
+      "mean": 5.93
     },
     "istruzione": {
       "label": "Strutture educative",
       "max": 695.33,
-      "mean": 39.33
+      "mean": 24.26
     },
     "trasporti": {
-      "label": "Infrastrutture trasporto",
+      "label": "Trasporti",
       "max": 1553.26,
-      "mean": 71.86
+      "mean": 54.2
     },
     "sport": {
-      "label": "Strutture sportive",
+      "label": "Sport",
       "max": 948.48,
-      "mean": 69.37
+      "mean": 45.72
     },
     "cultura": {
-      "label": "Luoghi culturali",
+      "label": "Cultura",
       "max": 337.48,
-      "mean": 20.79
+      "mean": 15.67
     }
   },
-  "snai": {
-    "Alta Tuscia Antica Città del Castro": {
-      "ospedali": 0.24,
-      "sanita": 2.32,
-      "istruzione": 9.17,
-      "trasporti": 9.16,
-      "sport": 27.14,
-      "cultura": 15.39
+  "soglie": {
+    "ospedali": {
+      "p33": 0.0,
+      "p67": 0.4,
+      "mean": 0.32
     },
-    "Alto Aterno - Gran Sasso Laga": {
-      "ospedali": 0.0,
-      "sanita": 0.0,
-      "istruzione": 0.2,
-      "trasporti": 1.05,
-      "sport": 1.08,
-      "cultura": 1.05
+    "sanita": {
+      "p33": 0.35,
+      "p67": 4.0,
+      "mean": 4.64
     },
-    "Amiata Valdorcia - Amiata Grossetana - Colline del Fiora": {
-      "ospedali": 0.14,
-      "sanita": 0.89,
-      "istruzione": 3.86,
-      "trasporti": 3.05,
-      "sport": 9.93,
-      "cultura": 10.36
+    "istruzione": {
+      "p33": 2.62,
+      "p67": 18.66,
+      "mean": 19.19
     },
-    "Etrusco Cimina": {
-      "ospedali": 0.47,
-      "sanita": 13.94,
-      "istruzione": 49.1,
-      "trasporti": 78.6,
-      "sport": 116.07,
-      "cultura": 37.47
+    "trasporti": {
+      "p33": 5.66,
+      "p67": 37.82,
+      "mean": 47.47
     },
-    "Isernia - Venafro": {
-      "ospedali": 0.25,
-      "sanita": 0.0,
-      "istruzione": 0.0,
-      "trasporti": 0.0,
-      "sport": 0.5,
-      "cultura": 0.25
+    "sport": {
+      "p33": 8.1,
+      "p67": 37.77,
+      "mean": 37.57
     },
-    "Mainarde": {
-      "ospedali": 0.0,
-      "sanita": 0.0,
-      "istruzione": 0.0,
-      "trasporti": 0.0,
-      "sport": 0.12,
-      "cultura": 0.0
-    },
-    "Monti Lepini": {
-      "ospedali": 0.31,
-      "sanita": 12.3,
-      "istruzione": 39.53,
-      "trasporti": 76.85,
-      "sport": 71.81,
-      "cultura": 20.37
-    },
-    "Monti Reatini": {
-      "ospedali": 0.12,
-      "sanita": 2.02,
-      "istruzione": 9.05,
-      "trasporti": 22.96,
-      "sport": 14.8,
-      "cultura": 4.99
-    },
-    "Monti Simbruini": {
-      "ospedali": 0.31,
-      "sanita": 1.65,
-      "istruzione": 7.01,
-      "trasporti": 42.98,
-      "sport": 18.52,
-      "cultura": 8.54
-    },
-    "Piana del Cavaliere - Alto Liri": {
-      "ospedali": 0.16,
-      "sanita": 0.13,
-      "istruzione": 2.22,
-      "trasporti": 20.11,
-      "sport": 10.24,
-      "cultura": 3.0
-    },
-    "Piceno": {
+    "cultura": {
+      "p33": 3.71,
+      "p67": 17.72,
+      "mean": 13.75
+    }
+  },
+  "comuni": {
+    "044006": {
       "ospedali": 0.0,
       "sanita": 0.23,
       "istruzione": 0.77,
@@ -125,61 +77,1509 @@
       "sport": 1.77,
       "cultura": 1.15
     },
-    "Pre.gio": {
-      "ospedali": 0.6,
-      "sanita": 9.88,
-      "istruzione": 47.91,
-      "trasporti": 271.01,
-      "sport": 85.2,
-      "cultura": 26.19
+    "052020": {
+      "ospedali": 1.5,
+      "sanita": 2.0,
+      "istruzione": 6.5,
+      "trasporti": 16.0,
+      "sport": 13.5,
+      "cultura": 8.5
     },
-    "Sud Ovest Orvietano": {
-      "ospedali": 0.35,
-      "sanita": 3.47,
-      "istruzione": 19.97,
-      "trasporti": 37.35,
-      "sport": 41.92,
-      "cultura": 24.52
+    "052027": {
+      "ospedali": 0.92,
+      "sanita": 0.58,
+      "istruzione": 3.92,
+      "trasporti": 6.75,
+      "sport": 9.0,
+      "cultura": 4.75
     },
-    "Val Nerina": {
+    "053014": {
       "ospedali": 0.0,
-      "sanita": 0.07,
-      "istruzione": 1.07,
-      "trasporti": 3.76,
-      "sport": 4.64,
-      "cultura": 2.36
+      "sanita": 0.76,
+      "istruzione": 2.35,
+      "trasporti": 1.12,
+      "sport": 7.71,
+      "cultura": 5.71
     },
-    "Valdichiana Senese": {
+    "053019": {
+      "ospedali": 0.0,
+      "sanita": 0.63,
+      "istruzione": 5.0,
+      "trasporti": 2.79,
+      "sport": 13.68,
+      "cultura": 17.79
+    },
+    "053026": {
+      "ospedali": 0.27,
+      "sanita": 1.2,
+      "istruzione": 4.0,
+      "trasporti": 3.6,
+      "sport": 8.33,
+      "cultura": 7.87
+    },
+    "054007": {
+      "ospedali": 0.0,
+      "sanita": 0.15,
+      "istruzione": 1.38,
+      "trasporti": 4.0,
+      "sport": 5.08,
+      "cultura": 3.08
+    },
+    "054031": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 1.33,
+      "trasporti": 5.44,
+      "sport": 4.78,
+      "cultura": 3.0
+    },
+    "054035": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.25
+    },
+    "055002": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 1.0,
+      "sport": 2.7,
+      "cultura": 2.8
+    },
+    "055003": {
+      "ospedali": 0.0,
+      "sanita": 1.6,
+      "istruzione": 17.0,
+      "trasporti": 47.6,
+      "sport": 47.6,
+      "cultura": 29.0
+    },
+    "055005": {
+      "ospedali": 0.0,
+      "sanita": 0.14,
+      "istruzione": 2.0,
+      "trasporti": 4.71,
+      "sport": 10.71,
+      "cultura": 3.14
+    },
+    "055006": {
+      "ospedali": 0.5,
+      "sanita": 8.0,
+      "istruzione": 54.75,
+      "trasporti": 201.5,
+      "sport": 116.75,
+      "cultura": 51.0
+    },
+    "055009": {
+      "ospedali": 0.75,
+      "sanita": 4.33,
+      "istruzione": 17.08,
+      "trasporti": 9.92,
+      "sport": 37.17,
+      "cultura": 23.25
+    },
+    "055010": {
       "ospedali": 1.0,
-      "sanita": 0.64,
-      "istruzione": 4.27,
-      "trasporti": 7.36,
-      "sport": 9.82,
+      "sanita": 6.0,
+      "istruzione": 32.0,
+      "trasporti": 17.0,
+      "sport": 58.0,
+      "cultura": 44.0
+    },
+    "055012": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 3.5,
+      "sport": 3.5,
+      "cultura": 1.5
+    },
+    "055014": {
+      "ospedali": 0.4,
+      "sanita": 3.8,
+      "istruzione": 32.8,
+      "trasporti": 122.4,
+      "sport": 71.6,
+      "cultura": 35.4
+    },
+    "055015": {
+      "ospedali": 0.33,
+      "sanita": 4.67,
+      "istruzione": 23.33,
+      "trasporti": 17.33,
+      "sport": 47.0,
+      "cultura": 30.0
+    },
+    "055016": {
+      "ospedali": 0.0,
+      "sanita": 1.0,
+      "istruzione": 18.67,
+      "trasporti": 42.33,
+      "sport": 48.0,
+      "cultura": 28.33
+    },
+    "055023": {
+      "ospedali": 0.47,
+      "sanita": 5.18,
+      "istruzione": 24.59,
+      "trasporti": 9.12,
+      "sport": 41.71,
+      "cultura": 29.06
+    },
+    "055026": {
+      "ospedali": 0.0,
+      "sanita": 1.67,
+      "istruzione": 22.67,
+      "trasporti": 100.67,
+      "sport": 51.33,
+      "cultura": 24.0
+    },
+    "055027": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 1.0,
+      "trasporti": 6.8,
+      "sport": 6.4,
+      "cultura": 2.8
+    },
+    "055028": {
+      "ospedali": 0.5,
+      "sanita": 4.0,
+      "istruzione": 13.0,
+      "trasporti": 4.5,
+      "sport": 23.5,
+      "cultura": 13.5
+    },
+    "056001": {
+      "ospedali": 0.7,
+      "sanita": 1.36,
+      "istruzione": 6.94,
+      "trasporti": 6.01,
+      "sport": 16.23,
+      "cultura": 10.24
+    },
+    "056002": {
+      "ospedali": 0.0,
+      "sanita": 2.62,
+      "istruzione": 6.97,
+      "trasporti": 5.41,
+      "sport": 22.03,
+      "cultura": 18.24
+    },
+    "056004": {
+      "ospedali": 0.0,
+      "sanita": 8.06,
+      "istruzione": 12.29,
+      "trasporti": 15.08,
+      "sport": 33.69,
+      "cultura": 14.62
+    },
+    "056005": {
+      "ospedali": 0.23,
+      "sanita": 8.31,
+      "istruzione": 21.98,
+      "trasporti": 33.19,
+      "sport": 61.75,
+      "cultura": 19.54
+    },
+    "056011": {
+      "ospedali": 0.89,
+      "sanita": 15.04,
+      "istruzione": 130.63,
+      "trasporti": 140.67,
+      "sport": 186.0,
+      "cultura": 86.19
+    },
+    "056012": {
+      "ospedali": 0.0,
+      "sanita": 2.24,
+      "istruzione": 6.18,
+      "trasporti": 6.04,
+      "sport": 24.59,
+      "cultura": 13.88
+    },
+    "056013": {
+      "ospedali": 0.0,
+      "sanita": 4.33,
+      "istruzione": 11.7,
+      "trasporti": 8.37,
+      "sport": 40.95,
+      "cultura": 20.56
+    },
+    "056014": {
+      "ospedali": 0.12,
+      "sanita": 12.92,
+      "istruzione": 39.54,
+      "trasporti": 36.62,
+      "sport": 94.79,
+      "cultura": 34.35
+    },
+    "056015": {
+      "ospedali": 0.42,
+      "sanita": 12.36,
+      "istruzione": 62.58,
+      "trasporti": 54.24,
+      "sport": 112.76,
+      "cultura": 45.31
+    },
+    "056016": {
+      "ospedali": 0.57,
+      "sanita": 13.35,
+      "istruzione": 42.74,
+      "trasporti": 58.52,
+      "sport": 117.65,
+      "cultura": 35.26
+    },
+    "056017": {
+      "ospedali": 0.61,
+      "sanita": 7.58,
+      "istruzione": 31.39,
+      "trasporti": 46.13,
+      "sport": 77.06,
+      "cultura": 23.68
+    },
+    "056020": {
+      "ospedali": 0.0,
+      "sanita": 2.44,
+      "istruzione": 5.68,
+      "trasporti": 8.08,
+      "sport": 26.32,
+      "cultura": 17.08
+    },
+    "056023": {
+      "ospedali": 0.57,
+      "sanita": 9.93,
+      "istruzione": 28.43,
+      "trasporti": 77.83,
+      "sport": 69.81,
+      "cultura": 21.43
+    },
+    "056024": {
+      "ospedali": 0.93,
+      "sanita": 14.78,
+      "istruzione": 49.64,
+      "trasporti": 90.47,
+      "sport": 123.53,
+      "cultura": 41.78
+    },
+    "056026": {
+      "ospedali": 0.0,
+      "sanita": 0.81,
+      "istruzione": 2.12,
+      "trasporti": 3.29,
+      "sport": 6.59,
+      "cultura": 6.55
+    },
+    "056027": {
+      "ospedali": 0.82,
+      "sanita": 10.16,
+      "istruzione": 37.38,
+      "trasporti": 92.33,
+      "sport": 71.64,
+      "cultura": 28.16
+    },
+    "056028": {
+      "ospedali": 0.17,
+      "sanita": 2.89,
+      "istruzione": 8.45,
+      "trasporti": 14.57,
+      "sport": 35.02,
+      "cultura": 20.17
+    },
+    "056030": {
+      "ospedali": 0.83,
+      "sanita": 2.9,
+      "istruzione": 12.69,
+      "trasporti": 13.98,
+      "sport": 33.48,
+      "cultura": 22.02
+    },
+    "056031": {
+      "ospedali": 0.0,
+      "sanita": 1.49,
+      "istruzione": 4.49,
+      "trasporti": 4.14,
+      "sport": 13.5,
+      "cultura": 13.63
+    },
+    "056032": {
+      "ospedali": 0.1,
+      "sanita": 2.07,
+      "istruzione": 6.41,
+      "trasporti": 10.14,
+      "sport": 25.48,
+      "cultura": 18.03
+    },
+    "056034": {
+      "ospedali": 0.0,
+      "sanita": 6.07,
+      "istruzione": 32.8,
+      "trasporti": 12.95,
+      "sport": 77.68,
+      "cultura": 27.27
+    },
+    "056035": {
+      "ospedali": 0.34,
+      "sanita": 2.45,
+      "istruzione": 9.98,
+      "trasporti": 13.57,
+      "sport": 34.59,
+      "cultura": 12.91
+    },
+    "056039": {
+      "ospedali": 0.95,
+      "sanita": 28.38,
+      "istruzione": 93.9,
+      "trasporti": 214.9,
+      "sport": 241.22,
+      "cultura": 61.38
+    },
+    "056040": {
+      "ospedali": 0.19,
+      "sanita": 0.97,
+      "istruzione": 4.97,
+      "trasporti": 4.66,
+      "sport": 15.53,
+      "cultura": 10.41
+    },
+    "056041": {
+      "ospedali": 0.73,
+      "sanita": 9.73,
+      "istruzione": 27.19,
+      "trasporti": 42.15,
+      "sport": 63.73,
+      "cultura": 20.15
+    },
+    "056043": {
+      "ospedali": 0.0,
+      "sanita": 3.56,
+      "istruzione": 8.78,
+      "trasporti": 8.38,
+      "sport": 34.75,
+      "cultura": 23.62
+    },
+    "056044": {
+      "ospedali": 0.53,
+      "sanita": 0.93,
+      "istruzione": 3.63,
+      "trasporti": 5.65,
+      "sport": 8.04,
+      "cultura": 4.63
+    },
+    "056045": {
+      "ospedali": 0.38,
+      "sanita": 19.44,
+      "istruzione": 66.43,
+      "trasporti": 60.38,
+      "sport": 154.41,
+      "cultura": 53.37
+    },
+    "056047": {
+      "ospedali": 0.97,
+      "sanita": 3.66,
+      "istruzione": 15.57,
+      "trasporti": 15.06,
+      "sport": 36.17,
+      "cultura": 25.31
+    },
+    "056049": {
+      "ospedali": 0.3,
+      "sanita": 19.72,
+      "istruzione": 56.67,
+      "trasporti": 68.86,
+      "sport": 173.21,
+      "cultura": 49.07
+    },
+    "056051": {
+      "ospedali": 0.0,
+      "sanita": 2.52,
+      "istruzione": 7.86,
+      "trasporti": 7.24,
+      "sport": 22.52,
+      "cultura": 20.1
+    },
+    "056052": {
+      "ospedali": 0.27,
+      "sanita": 2.36,
+      "istruzione": 14.09,
+      "trasporti": 12.8,
+      "sport": 31.7,
+      "cultura": 18.9
+    },
+    "056053": {
+      "ospedali": 0.0,
+      "sanita": 2.25,
+      "istruzione": 5.59,
+      "trasporti": 7.24,
+      "sport": 24.71,
+      "cultura": 15.33
+    },
+    "056055": {
+      "ospedali": 0.03,
+      "sanita": 1.76,
+      "istruzione": 18.46,
+      "trasporti": 77.86,
+      "sport": 42.27,
+      "cultura": 16.3
+    },
+    "056056": {
+      "ospedali": 0.09,
+      "sanita": 4.33,
+      "istruzione": 8.07,
+      "trasporti": 13.74,
+      "sport": 22.59,
+      "cultura": 8.55
+    },
+    "057001": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.62,
+      "trasporti": 1.08,
+      "sport": 1.64,
+      "cultura": 1.5
+    },
+    "057002": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.9,
+      "trasporti": 1.27,
+      "sport": 1.7,
+      "cultura": 1.96
+    },
+    "057003": {
+      "ospedali": 0.13,
+      "sanita": 1.73,
+      "istruzione": 10.9,
+      "trasporti": 26.7,
+      "sport": 15.53,
+      "cultura": 3.36
+    },
+    "057004": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 3.2,
+      "trasporti": 4.2,
+      "sport": 7.27,
+      "cultura": 3.13
+    },
+    "057005": {
+      "ospedali": 0.87,
+      "sanita": 18.81,
+      "istruzione": 72.97,
+      "trasporti": 141.52,
+      "sport": 102.29,
+      "cultura": 26.9
+    },
+    "057006": {
+      "ospedali": 0.0,
+      "sanita": 0.19,
+      "istruzione": 0.29,
+      "trasporti": 2.37,
+      "sport": 1.63,
+      "cultura": 3.3
+    },
+    "057007": {
+      "ospedali": 0.42,
+      "sanita": 3.95,
+      "istruzione": 23.08,
+      "trasporti": 57.01,
+      "sport": 34.49,
+      "cultura": 10.85
+    },
+    "057008": {
+      "ospedali": 0.05,
+      "sanita": 1.5,
+      "istruzione": 5.14,
+      "trasporti": 16.14,
+      "sport": 8.09,
+      "cultura": 2.73
+    },
+    "057013": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 2.5,
+      "trasporti": 2.06,
+      "sport": 6.75,
+      "cultura": 2.25
+    },
+    "057015": {
+      "ospedali": 0.37,
+      "sanita": 6.87,
+      "istruzione": 25.03,
+      "trasporti": 52.95,
+      "sport": 33.39,
+      "cultura": 8.61
+    },
+    "057016": {
+      "ospedali": 0.56,
+      "sanita": 10.65,
+      "istruzione": 40.7,
+      "trasporti": 89.12,
+      "sport": 56.71,
+      "cultura": 13.45
+    },
+    "057017": {
+      "ospedali": 0.0,
+      "sanita": 0.11,
+      "istruzione": 0.56,
+      "trasporti": 1.93,
+      "sport": 2.47,
+      "cultura": 3.91
+    },
+    "057018": {
+      "ospedali": 0.08,
+      "sanita": 0.0,
+      "istruzione": 2.62,
+      "trasporti": 14.04,
+      "sport": 11.69,
+      "cultura": 2.92
+    },
+    "057019": {
+      "ospedali": 0.0,
+      "sanita": 0.35,
+      "istruzione": 4.0,
+      "trasporti": 5.18,
+      "sport": 8.65,
+      "cultura": 4.82
+    },
+    "057020": {
+      "ospedali": 0.13,
+      "sanita": 0.0,
+      "istruzione": 1.4,
+      "trasporti": 10.93,
+      "sport": 5.6,
+      "cultura": 2.07
+    },
+    "057023": {
+      "ospedali": 0.23,
+      "sanita": 5.42,
+      "istruzione": 21.77,
+      "trasporti": 44.58,
+      "sport": 29.38,
+      "cultura": 8.46
+    },
+    "057028": {
+      "ospedali": 0.03,
+      "sanita": 0.53,
+      "istruzione": 2.21,
+      "trasporti": 13.04,
+      "sport": 4.67,
+      "cultura": 0.93
+    },
+    "057033": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.84,
+      "trasporti": 5.37,
+      "sport": 6.77,
+      "cultura": 3.71
+    },
+    "057034": {
+      "ospedali": 0.19,
+      "sanita": 6.1,
+      "istruzione": 25.17,
+      "trasporti": 42.86,
+      "sport": 31.5,
+      "cultura": 10.24
+    },
+    "057036": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.31,
+      "cultura": 0.0
+    },
+    "057037": {
+      "ospedali": 0.11,
+      "sanita": 0.71,
+      "istruzione": 2.6,
+      "trasporti": 12.78,
+      "sport": 5.6,
+      "cultura": 2.53
+    },
+    "057046": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 1.56,
+      "trasporti": 4.44,
+      "sport": 5.33,
+      "cultura": 2.56
+    },
+    "057047": {
+      "ospedali": 0.0,
+      "sanita": 0.23,
+      "istruzione": 1.37,
+      "trasporti": 9.97,
+      "sport": 7.23,
+      "cultura": 4.8
+    },
+    "057048": {
+      "ospedali": 0.1,
+      "sanita": 0.0,
+      "istruzione": 3.6,
+      "trasporti": 13.0,
+      "sport": 11.6,
+      "cultura": 2.2
+    },
+    "057049": {
+      "ospedali": 0.06,
+      "sanita": 0.44,
+      "istruzione": 1.02,
+      "trasporti": 20.94,
+      "sport": 5.1,
+      "cultura": 1.24
+    },
+    "057050": {
+      "ospedali": 0.12,
+      "sanita": 3.22,
+      "istruzione": 11.77,
+      "trasporti": 35.44,
+      "sport": 17.8,
+      "cultura": 3.92
+    },
+    "057057": {
+      "ospedali": 0.0,
+      "sanita": 0.5,
+      "istruzione": 1.2,
+      "trasporti": 7.73,
+      "sport": 5.56,
+      "cultura": 5.31
+    },
+    "057058": {
+      "ospedali": 0.0,
+      "sanita": 0.33,
+      "istruzione": 2.91,
+      "trasporti": 9.85,
+      "sport": 11.76,
       "cultura": 5.09
     },
-    "Valle del Comino": {
-      "ospedali": 0.53,
-      "sanita": 8.02,
-      "istruzione": 31.97,
-      "trasporti": 8.08,
-      "sport": 43.23,
-      "cultura": 12.04
+    "057062": {
+      "ospedali": 0.09,
+      "sanita": 4.37,
+      "istruzione": 19.46,
+      "trasporti": 28.46,
+      "sport": 26.37,
+      "cultura": 9.63
     },
-    "Valle del Giovenco - Valle Roveto": {
-      "ospedali": 0.23,
-      "sanita": 1.37,
-      "istruzione": 4.67,
-      "trasporti": 1.97,
-      "sport": 8.23,
-      "cultura": 1.77
-    },
-    "Valle del Sagittario e dell'Alto Sangro": {
-      "ospedali": 0.05,
+    "057071": {
+      "ospedali": 0.42,
       "sanita": 0.0,
-      "istruzione": 0.2,
-      "trasporti": 1.8,
-      "sport": 1.15,
-      "cultura": 0.35
+      "istruzione": 4.75,
+      "trasporti": 37.83,
+      "sport": 22.5,
+      "cultura": 5.67
+    },
+    "057073": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.07,
+      "sport": 2.31,
+      "cultura": 0.97
+    },
+    "058001": {
+      "ospedali": 0.81,
+      "sanita": 4.24,
+      "istruzione": 15.43,
+      "trasporti": 133.05,
+      "sport": 34.71,
+      "cultura": 21.43
+    },
+    "058002": {
+      "ospedali": 1.0,
+      "sanita": 3.0,
+      "istruzione": 10.33,
+      "trasporti": 75.17,
+      "sport": 41.83,
+      "cultura": 21.58
+    },
+    "058006": {
+      "ospedali": 0.35,
+      "sanita": 1.5,
+      "istruzione": 9.3,
+      "trasporti": 56.45,
+      "sport": 28.7,
+      "cultura": 10.7
+    },
+    "058008": {
+      "ospedali": 0.36,
+      "sanita": 2.94,
+      "istruzione": 11.61,
+      "trasporti": 88.42,
+      "sport": 25.17,
+      "cultura": 17.83
+    },
+    "058010": {
+      "ospedali": 0.67,
+      "sanita": 1.83,
+      "istruzione": 11.78,
+      "trasporti": 75.89,
+      "sport": 45.17,
+      "cultura": 18.39
+    },
+    "058012": {
+      "ospedali": 0.12,
+      "sanita": 3.84,
+      "istruzione": 21.28,
+      "trasporti": 216.48,
+      "sport": 46.4,
+      "cultura": 20.76
+    },
+    "058014": {
+      "ospedali": 0.0,
+      "sanita": 0.06,
+      "istruzione": 0.4,
+      "trasporti": 8.77,
+      "sport": 2.42,
+      "cultura": 0.69
+    },
+    "058017": {
+      "ospedali": 0.82,
+      "sanita": 2.73,
+      "istruzione": 9.09,
+      "trasporti": 59.64,
+      "sport": 23.45,
+      "cultura": 15.64
+    },
+    "058019": {
+      "ospedali": 0.17,
+      "sanita": 2.21,
+      "istruzione": 14.12,
+      "trasporti": 117.46,
+      "sport": 27.75,
+      "cultura": 13.96
+    },
+    "058020": {
+      "ospedali": 0.04,
+      "sanita": 0.69,
+      "istruzione": 4.22,
+      "trasporti": 9.97,
+      "sport": 9.81,
+      "cultura": 5.81
+    },
+    "058025": {
+      "ospedali": 0.9,
+      "sanita": 15.35,
+      "istruzione": 62.85,
+      "trasporti": 304.05,
+      "sport": 100.1,
+      "cultura": 30.45
+    },
+    "058026": {
+      "ospedali": 1.5,
+      "sanita": 26.46,
+      "istruzione": 107.92,
+      "trasporti": 510.38,
+      "sport": 188.17,
+      "cultura": 50.33
+    },
+    "058027": {
+      "ospedali": 0.53,
+      "sanita": 3.59,
+      "istruzione": 21.53,
+      "trasporti": 88.0,
+      "sport": 43.94,
+      "cultura": 12.59
+    },
+    "058028": {
+      "ospedali": 0.56,
+      "sanita": 1.49,
+      "istruzione": 4.23,
+      "trasporti": 25.97,
+      "sport": 15.28,
+      "cultura": 9.64
+    },
+    "058030": {
+      "ospedali": 0.71,
+      "sanita": 13.33,
+      "istruzione": 71.75,
+      "trasporti": 227.21,
+      "sport": 115.12,
+      "cultura": 27.79
+    },
+    "058031": {
+      "ospedali": 0.57,
+      "sanita": 3.86,
+      "istruzione": 25.07,
+      "trasporti": 99.64,
+      "sport": 51.93,
+      "cultura": 14.57
+    },
+    "058042": {
+      "ospedali": 1.12,
+      "sanita": 16.88,
+      "istruzione": 77.4,
+      "trasporti": 437.85,
+      "sport": 134.82,
+      "cultura": 38.3
+    },
+    "058044": {
+      "ospedali": 0.5,
+      "sanita": 4.0,
+      "istruzione": 24.58,
+      "trasporti": 122.58,
+      "sport": 54.75,
+      "cultura": 17.0
+    },
+    "058045": {
+      "ospedali": 0.12,
+      "sanita": 3.45,
+      "istruzione": 11.58,
+      "trasporti": 17.45,
+      "sport": 21.61,
+      "cultura": 5.73
+    },
+    "058048": {
+      "ospedali": 0.18,
+      "sanita": 1.45,
+      "istruzione": 2.22,
+      "trasporti": 7.02,
+      "sport": 6.6,
+      "cultura": 3.85
+    },
+    "058055": {
+      "ospedali": 0.9,
+      "sanita": 2.5,
+      "istruzione": 9.1,
+      "trasporti": 64.1,
+      "sport": 36.1,
+      "cultura": 18.2
+    },
+    "058062": {
+      "ospedali": 0.56,
+      "sanita": 5.93,
+      "istruzione": 26.28,
+      "trasporti": 33.37,
+      "sport": 44.58,
+      "cultura": 15.02
+    },
+    "058073": {
+      "ospedali": 0.34,
+      "sanita": 8.34,
+      "istruzione": 45.34,
+      "trasporti": 339.41,
+      "sport": 85.88,
+      "cultura": 25.09
+    },
+    "058076": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.36,
+      "trasporti": 13.95,
+      "sport": 4.23,
+      "cultura": 2.09
+    },
+    "058077": {
+      "ospedali": 0.18,
+      "sanita": 2.35,
+      "istruzione": 23.76,
+      "trasporti": 175.76,
+      "sport": 53.82,
+      "cultura": 17.12
+    },
+    "058078": {
+      "ospedali": 0.71,
+      "sanita": 10.07,
+      "istruzione": 43.96,
+      "trasporti": 208.64,
+      "sport": 66.93,
+      "cultura": 23.96
+    },
+    "058083": {
+      "ospedali": 0.13,
+      "sanita": 0.2,
+      "istruzione": 6.13,
+      "trasporti": 73.2,
+      "sport": 32.73,
+      "cultura": 11.93
+    },
+    "058084": {
+      "ospedali": 0.55,
+      "sanita": 1.5,
+      "istruzione": 6.5,
+      "trasporti": 41.35,
+      "sport": 19.6,
+      "cultura": 10.95
+    },
+    "058085": {
+      "ospedali": 0.62,
+      "sanita": 7.08,
+      "istruzione": 36.92,
+      "trasporti": 224.69,
+      "sport": 65.08,
+      "cultura": 23.77
+    },
+    "058089": {
+      "ospedali": 0.91,
+      "sanita": 3.64,
+      "istruzione": 13.55,
+      "trasporti": 95.45,
+      "sport": 32.0,
+      "cultura": 17.73
+    },
+    "058090": {
+      "ospedali": 0.08,
+      "sanita": 3.25,
+      "istruzione": 14.83,
+      "trasporti": 197.75,
+      "sport": 36.33,
+      "cultura": 16.08
+    },
+    "058092": {
+      "ospedali": 1.0,
+      "sanita": 9.55,
+      "istruzione": 48.27,
+      "trasporti": 150.09,
+      "sport": 93.73,
+      "cultura": 25.73
+    },
+    "058094": {
+      "ospedali": 0.64,
+      "sanita": 5.18,
+      "istruzione": 33.64,
+      "trasporti": 116.64,
+      "sport": 67.55,
+      "cultura": 19.0
+    },
+    "058100": {
+      "ospedali": 0.06,
+      "sanita": 2.76,
+      "istruzione": 25.94,
+      "trasporti": 255.53,
+      "sport": 56.47,
+      "cultura": 22.47
+    },
+    "058101": {
+      "ospedali": 0.46,
+      "sanita": 11.54,
+      "istruzione": 57.46,
+      "trasporti": 171.54,
+      "sport": 94.08,
+      "cultura": 20.54
+    },
+    "058102": {
+      "ospedali": 0.76,
+      "sanita": 10.05,
+      "istruzione": 43.14,
+      "trasporti": 77.21,
+      "sport": 73.47,
+      "cultura": 20.71
+    },
+    "058103": {
+      "ospedali": 0.75,
+      "sanita": 2.99,
+      "istruzione": 6.61,
+      "trasporti": 30.26,
+      "sport": 18.85,
+      "cultura": 11.64
+    },
+    "058108": {
+      "ospedali": 0.0,
+      "sanita": 0.1,
+      "istruzione": 0.3,
+      "trasporti": 6.64,
+      "sport": 2.25,
+      "cultura": 0.91
+    },
+    "058109": {
+      "ospedali": 0.1,
+      "sanita": 0.0,
+      "istruzione": 3.55,
+      "trasporti": 35.45,
+      "sport": 16.7,
+      "cultura": 6.25
+    },
+    "058113": {
+      "ospedali": 0.35,
+      "sanita": 0.06,
+      "istruzione": 3.76,
+      "trasporti": 33.18,
+      "sport": 18.71,
+      "cultura": 5.41
+    },
+    "059002": {
+      "ospedali": 0.02,
+      "sanita": 10.17,
+      "istruzione": 21.95,
+      "trasporti": 63.32,
+      "sport": 48.56,
+      "cultura": 17.41
+    },
+    "059006": {
+      "ospedali": 0.35,
+      "sanita": 16.92,
+      "istruzione": 47.12,
+      "trasporti": 68.38,
+      "sport": 87.74,
+      "cultura": 23.32
+    },
+    "059013": {
+      "ospedali": 0.06,
+      "sanita": 6.09,
+      "istruzione": 17.96,
+      "trasporti": 76.06,
+      "sport": 37.79,
+      "cultura": 14.19
+    },
+    "059016": {
+      "ospedali": 0.03,
+      "sanita": 5.54,
+      "istruzione": 13.1,
+      "trasporti": 37.54,
+      "sport": 35.18,
+      "cultura": 11.49
+    },
+    "059019": {
+      "ospedali": 0.4,
+      "sanita": 16.46,
+      "istruzione": 48.16,
+      "trasporti": 167.96,
+      "sport": 96.03,
+      "cultura": 26.31
+    },
+    "059021": {
+      "ospedali": 0.0,
+      "sanita": 5.6,
+      "istruzione": 12.8,
+      "trasporti": 68.83,
+      "sport": 30.67,
+      "cultura": 13.93
+    },
+    "059022": {
+      "ospedali": 0.26,
+      "sanita": 7.7,
+      "istruzione": 23.26,
+      "trasporti": 45.61,
+      "sport": 47.3,
+      "cultura": 15.35
+    },
+    "059023": {
+      "ospedali": 0.45,
+      "sanita": 12.38,
+      "istruzione": 35.28,
+      "trasporti": 113.48,
+      "sport": 74.62,
+      "cultura": 16.31
+    },
+    "059027": {
+      "ospedali": 0.8,
+      "sanita": 53.47,
+      "istruzione": 185.58,
+      "trasporti": 223.64,
+      "sport": 295.38,
+      "cultura": 72.56
+    },
+    "060001": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "060004": {
+      "ospedali": 0.89,
+      "sanita": 10.71,
+      "istruzione": 39.71,
+      "trasporti": 9.86,
+      "sport": 69.92,
+      "cultura": 18.6
+    },
+    "060011": {
+      "ospedali": 1.59,
+      "sanita": 21.41,
+      "istruzione": 95.89,
+      "trasporti": 19.57,
+      "sport": 117.11,
+      "cultura": 30.19
+    },
+    "060013": {
+      "ospedali": 1.87,
+      "sanita": 27.13,
+      "istruzione": 125.47,
+      "trasporti": 23.27,
+      "sport": 146.2,
+      "cultura": 38.73
+    },
+    "060018": {
+      "ospedali": 1.54,
+      "sanita": 22.6,
+      "istruzione": 92.11,
+      "trasporti": 26.23,
+      "sport": 133.43,
+      "cultura": 34.17
+    },
+    "060029": {
+      "ospedali": 0.03,
+      "sanita": 9.24,
+      "istruzione": 23.64,
+      "trasporti": 12.64,
+      "sport": 26.78,
+      "cultura": 9.03
+    },
+    "060034": {
+      "ospedali": 0.0,
+      "sanita": 0.01,
+      "istruzione": 0.02,
+      "trasporti": 16.69,
+      "sport": 2.26,
+      "cultura": 1.32
+    },
+    "060040": {
+      "ospedali": 1.68,
+      "sanita": 19.36,
+      "istruzione": 78.77,
+      "trasporti": 13.95,
+      "sport": 102.64,
+      "cultura": 27.32
+    },
+    "060050": {
+      "ospedali": 0.08,
+      "sanita": 1.22,
+      "istruzione": 3.3,
+      "trasporti": 1.78,
+      "sport": 9.55,
+      "cultura": 3.74
+    },
+    "060061": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.1,
+      "trasporti": 0.56,
+      "sport": 1.13,
+      "cultura": 0.44
+    },
+    "060062": {
+      "ospedali": 0.74,
+      "sanita": 4.79,
+      "istruzione": 16.93,
+      "trasporti": 5.0,
+      "sport": 37.91,
+      "cultura": 12.02
+    },
+    "060068": {
+      "ospedali": 0.88,
+      "sanita": 16.12,
+      "istruzione": 71.34,
+      "trasporti": 15.54,
+      "sport": 77.06,
+      "cultura": 22.1
+    },
+    "060072": {
+      "ospedali": 0.13,
+      "sanita": 1.32,
+      "istruzione": 3.56,
+      "trasporti": 1.55,
+      "sport": 12.02,
+      "cultura": 4.27
+    },
+    "060077": {
+      "ospedali": 0.23,
+      "sanita": 6.31,
+      "istruzione": 22.87,
+      "trasporti": 5.0,
+      "sport": 24.59,
+      "cultura": 8.36
+    },
+    "060080": {
+      "ospedali": 0.0,
+      "sanita": 0.62,
+      "istruzione": 4.08,
+      "trasporti": 50.55,
+      "sport": 11.99,
+      "cultura": 7.87
+    },
+    "060084": {
+      "ospedali": 0.14,
+      "sanita": 2.47,
+      "istruzione": 12.49,
+      "trasporti": 2.19,
+      "sport": 10.45,
+      "cultura": 2.23
+    },
+    "060086": {
+      "ospedali": 1.8,
+      "sanita": 27.1,
+      "istruzione": 107.0,
+      "trasporti": 30.6,
+      "sport": 152.0,
+      "cultura": 37.8
+    },
+    "060088": {
+      "ospedali": 0.67,
+      "sanita": 7.86,
+      "istruzione": 29.14,
+      "trasporti": 7.38,
+      "sport": 44.24,
+      "cultura": 12.29
+    },
+    "060091": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.54,
+      "trasporti": 0.0,
+      "sport": 0.18,
+      "cultura": 0.14
+    },
+    "066003": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "066007": {
+      "ospedali": 0.56,
+      "sanita": 4.56,
+      "istruzione": 15.56,
+      "trasporti": 5.0,
+      "sport": 26.67,
+      "cultura": 5.44
+    },
+    "066010": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "066013": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.8,
+      "sport": 1.8,
+      "cultura": 0.0
+    },
+    "066016": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.25,
+      "trasporti": 0.25,
+      "sport": 1.5,
+      "cultura": 0.25
+    },
+    "066017": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 13.0,
+      "sport": 1.0,
+      "cultura": 0.0
+    },
+    "066020": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 3.67,
+      "sport": 1.0,
+      "cultura": 0.0
+    },
+    "066023": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.5,
+      "cultura": 0.0
+    },
+    "066025": {
+      "ospedali": 0.29,
+      "sanita": 0.0,
+      "istruzione": 2.71,
+      "trasporti": 25.0,
+      "sport": 13.12,
+      "cultura": 3.71
+    },
+    "066029": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "066035": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "066036": {
+      "ospedali": 0.0,
+      "sanita": 0.5,
+      "istruzione": 0.0,
+      "trasporti": 0.67,
+      "sport": 1.0,
+      "cultura": 0.83
+    },
+    "066056": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.11,
+      "trasporti": 1.78,
+      "sport": 1.17,
+      "cultura": 2.11
+    },
+    "066057": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.18,
+      "sport": 0.18,
+      "cultura": 0.0
+    },
+    "066061": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 2.0,
+      "sport": 1.0,
+      "cultura": 0.0
+    },
+    "066062": {
+      "ospedali": 0.88,
+      "sanita": 3.25,
+      "istruzione": 23.38,
+      "trasporti": 114.25,
+      "sport": 58.5,
+      "cultura": 17.12
+    },
+    "066068": {
+      "ospedali": 0.11,
+      "sanita": 0.22,
+      "istruzione": 0.56,
+      "trasporti": 2.67,
+      "sport": 1.67,
+      "cultura": 0.89
+    },
+    "066080": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 2.3,
+      "trasporti": 28.1,
+      "sport": 11.0,
+      "cultura": 3.1
+    },
+    "066089": {
+      "ospedali": 0.0,
+      "sanita": 0.4,
+      "istruzione": 2.0,
+      "trasporti": 5.2,
+      "sport": 7.8,
+      "cultura": 2.2
+    },
+    "066092": {
+      "ospedali": 0.5,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 3.0,
+      "sport": 1.0,
+      "cultura": 0.0
+    },
+    "066106": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.17,
+      "cultura": 0.67
+    },
+    "067022": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "067023": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.33,
+      "cultura": 0.0
+    },
+    "067036": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.67,
+      "trasporti": 0.67,
+      "sport": 0.67,
+      "cultura": 0.33
+    },
+    "067046": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.4,
+      "trasporti": 0.4,
+      "sport": 0.2,
+      "cultura": 0.4
+    },
+    "094012": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "094018": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "094019": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.25,
+      "cultura": 0.0
+    },
+    "094036": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "094038": {
+      "ospedali": 0.33,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "094042": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "094052": {
+      "ospedali": 1.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 4.0,
+      "cultura": 2.0
     }
   },
   "sll": {
