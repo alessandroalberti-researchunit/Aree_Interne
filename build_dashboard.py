@@ -760,25 +760,32 @@ function fmt(n, dec=0) {
   return Number(n).toLocaleString('it', {maximumFractionDigits:dec});
 }
 
+const SLL_CLASS_COLORS = {A:'#f59e0b', B:'#3b82f6', C:'#10b981', D:'#94a3b8'};
+const SLL_CLASS_LABELS = {
+  A:'Made in Italy',
+  B:'Manifatturiero pesante',
+  C:'Non manifatturiero',
+  D:'Non specializzato'
+};
+
+function sllClassColor(cod) { return SLL_CLASS_COLORS[cod] || '#a78bfa'; }
+
 function buildSLLLayer() {
   if (sllLayer) { map.removeLayer(sllLayer); sllLayer=null; }
   if (!_showSLL) return;
-  const _light = document.body.classList.contains('light');
   sllLayer = L.geoJSON(SLL_GEO, {
-    style: {
-      fillColor: '#a78bfa',
-      fillOpacity: 0.10,
-      color: '#a78bfa',
-      weight: 1.2,
-      dashArray: '4,5',
-      opacity: 0.7
+    style: f => {
+      const c = sllClassColor(f.properties.cod_classe);
+      return {fillColor:c, fillOpacity:0.13, color:c, weight:1.2, dashArray:'4,5', opacity:0.75};
     },
     onEachFeature(f, layer) {
       const p = f.properties;
+      const classLabel = p.cod_classe ? `${p.cod_classe} — ${SLL_CLASS_LABELS[p.cod_classe]||''}` : '—';
       layer.bindTooltip(
         `<div class="ct-name">${p.nome_sll}</div>
          <div class="ct-row"><span>Regione</span><span>${p.regione}</span></div>
          <div class="ct-row"><span>Capoluogo</span><span>${p.capoluogo||'—'}</span></div>
+         <div class="ct-row"><span>Specializ.</span><span>${classLabel}</span></div>
          <div class="ct-row"><span>Pop. 2021</span><span>${fmt(p.pop_2021)} ab.</span></div>
          <div class="ct-row"><span>Addetti</span><span>${fmt(p.addetti)}</span></div>
          <div class="ct-row"><span>VA/addetto</span><span>${fmt(p.va_per_addetto,1)} k€</span></div>`,
@@ -786,7 +793,8 @@ function buildSLLLayer() {
       );
       layer.on('click', () => showSLLDetail(p));
       layer.on('mouseover', e => {
-        e.target.setStyle({fillOpacity:0.28, weight:2, dashArray:null, opacity:1});
+        const c = sllClassColor(e.target.feature.properties.cod_classe);
+        e.target.setStyle({fillOpacity:0.35, weight:2, dashArray:null, opacity:1, color:c});
         e.target.bringToFront();
       });
       layer.on('mouseout', e => { sllLayer.resetStyle(e.target); });
@@ -830,6 +838,18 @@ function showSLLDetail(p) {
   const invest = p.valore_aggiunto ? `${fmt(Math.round(p.valore_aggiunto/1000))} M€` : '—';
   const vaAdd  = p.va_per_addetto  ? `${fmt(p.va_per_addetto,1)} k€`  : '—';
   const retDip = p.retrib_per_dip  ? `${fmt(p.retrib_per_dip,1)} k€`  : '—';
+  const clColor = sllClassColor(p.cod_classe);
+  const specHtml = p.cod_classe ? `
+    <div class="econ-section" style="border-color:${clColor}33">
+      <div class="econ-title">Specializzazione produttiva — ISTAT 2021</div>
+      <div style="display:flex;align-items:center;gap:8px;margin:8px 0">
+        <div style="width:12px;height:12px;border-radius:3px;background:${clColor};flex-shrink:0"></div>
+        <div>
+          <div style="font-size:0.7rem;font-weight:700;color:${clColor}">Classe ${p.cod_classe} — ${SLL_CLASS_LABELS[p.cod_classe]||''}</div>
+          <div style="font-size:0.65rem;color:#94a3b8;margin-top:2px">${p.cod_gruppo||''} — ${p.den_gruppo||''}</div>
+        </div>
+      </div>
+    </div>` : '';
   document.getElementById('rightPanel').innerHTML = `
     <div class="rp-header"><h3>SLL 2021</h3></div>
     <div class="sll-title">${p.nome_sll}</div>
@@ -842,6 +862,7 @@ function showSLLDetail(p) {
       <div class="s-kpi"><span class="val">${fmt(p.sup_kmq,0)} km²</span><span class="lbl">Superficie</span></div>
       <div class="s-kpi"><span class="val">${fmt(p.unita_locali)}</span><span class="lbl">Unità loc.</span></div>
     </div>
+    ${specHtml}
     <div class="econ-section">
       <div class="econ-title">Risultati economici 2023 — fonte ISTAT</div>
       <div class="econ-highlight">
@@ -856,12 +877,19 @@ function showSLLDetail(p) {
 }
 
 function showLegendSLL() {
+  const classRows = Object.entries(SLL_CLASS_LABELS).map(([k,v]) =>
+    `<div class="legend-item"><div class="legend-dot" style="background:${SLL_CLASS_COLORS[k]}"></div><strong>${k}</strong> — ${v}</div>`
+  ).join('');
   document.getElementById('rightPanel').innerHTML = `
-    <div class="rp-header"><h3>Legenda</h3></div>
+    <div class="rp-header"><h3>Legenda SLL</h3></div>
     <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#a78bfa;opacity:.7"></div>Sistemi Locali del Lavoro 2021 (515)</div>
+      ${classRows}
     </div>
-    <div style="font-size:0.65rem;color:#475569;margin-top:12px;line-height:1.6">I SLL sono aggregazioni di comuni definite da ISTAT sulla base dei flussi pendolari casa-lavoro (Censimento 2021). Clicca su un SLL per vedere i dati economici ISTAT 2023.<br><br>Fonte: ISTAT — Tavola 42, <em>Risultati economici delle imprese a livello territoriale</em>, anno 2023.</div>`;
+    <div style="font-size:0.65rem;color:#475569;margin-top:12px;line-height:1.6">
+      Specializzazione produttiva prevalente per SLL secondo la tassonomia ISTAT 2021 (4 classi, 17 gruppi). I SLL sono aggregazioni di comuni definite sulla base dei flussi pendolari casa-lavoro (Censimento 2021).<br><br>
+      Clicca su un SLL per i dettagli.<br><br>
+      Fonti: ISTAT — <em>Specializzazione produttiva prevalente dei SLL</em>, feb. 2026; <em>Risultati economici delle imprese</em>, Tavola 42, anno 2023.
+    </div>`;
 }
 
 function buildPolygons(aree) {

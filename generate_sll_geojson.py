@@ -10,6 +10,7 @@ import json, os, sys
 
 SHP_PATH  = "SLL_2021.shp"
 ECON_XLS  = "DATA/tavole_istat_2023/Tavole/1. Appendice Statistica Frame territoriale.xlsx"
+SPEC_XLS  = "DATA/Specializzazione_produttiva_SLL_2021.xlsx"
 COMP_JSON = "Sistemi Locali del Lavoro (SLL) 2021 _ Composizione Data Indagine 28-06-2026 Stampa 28062026191300.json"
 OUT_PATH  = "sll-perimetri.geojson"
 SIMPLIFY_TOL = 0.005   # gradi decimali ≈ 400-500 m
@@ -78,7 +79,18 @@ df = df[df["cod_sll_econ"].astype(str).str.match(r"^\d{4}$")]
 df["cod_sll_econ"] = df["cod_sll_econ"].astype(str).str.zfill(4)
 print(f"  {len(df)} SLL con dati economici")
 
-# ── 3. Capoluogo per SLL dal JSON di composizione ──────────────────────────────
+# ── 3. Specializzazione produttiva (ISTAT, feb 2026) ──────────────────────────
+print("Lettura specializzazione produttiva...", flush=True)
+raw_spec = pd.read_excel(SPEC_XLS, sheet_name="class", header=0)
+raw_spec.columns = ["cod_sll_spec","cod_sll_n","den_sll_spec",
+                    "cod_classe","den_classe","cod_gruppo","den_gruppo",
+                    "pop_spec","sup_spec"]
+raw_spec = raw_spec.dropna(subset=["cod_sll_spec"])
+raw_spec = raw_spec[raw_spec["cod_classe"].isin(["A","B","C","D"])]
+raw_spec["cod_sll_spec"] = raw_spec["cod_sll_spec"].astype(str).str.zfill(4)
+print(f"  {len(raw_spec)} SLL con specializzazione")
+
+# ── 4. Capoluogo per SLL dal JSON di composizione ──────────────────────────────
 print("Lettura capoluoghi dal JSON composizione...", flush=True)
 with open(COMP_JSON, encoding="utf-8") as f:
     comp = json.load(f)["resultset"]
@@ -92,11 +104,14 @@ capoluoghi = (
 )
 print(f"  {len(capoluoghi)} capoluoghi trovati")
 
-# ── 4. Join ────────────────────────────────────────────────────────────────────
+# ── 5. Join ────────────────────────────────────────────────────────────────────
 econ_cols = ["cod_sll_econ", "ripartizione", "unita_locali", "addetti", "dipendenti",
              "valore_aggiunto", "fatturato", "va_per_addetto", "retrib_per_dip"]
-gdf = gdf.merge(df[econ_cols], left_on=cod_col, right_on="cod_sll_econ", how="left")
-gdf = gdf.merge(capoluoghi,    left_on=cod_col, right_on="cod_sll_cap",  how="left")
+spec_cols = ["cod_sll_spec", "cod_classe", "den_classe", "cod_gruppo", "den_gruppo"]
+
+gdf = gdf.merge(df[econ_cols],          left_on=cod_col, right_on="cod_sll_econ",  how="left")
+gdf = gdf.merge(raw_spec[spec_cols],    left_on=cod_col, right_on="cod_sll_spec",  how="left")
+gdf = gdf.merge(capoluoghi,             left_on=cod_col, right_on="cod_sll_cap",   how="left")
 
 # ── 5. Rinomina + seleziona colonne ────────────────────────────────────────────
 rename = {
@@ -114,6 +129,7 @@ keep = ["cod_sll", "nome_sll", "regione", "ripartizione", "capoluogo",
         "pop_2021", "n_comuni", "sup_kmq",
         "unita_locali", "addetti", "dipendenti",
         "valore_aggiunto", "fatturato", "va_per_addetto", "retrib_per_dip",
+        "cod_classe", "den_classe", "cod_gruppo", "den_gruppo",
         "geometry"]
 keep = [c for c in keep if c in gdf.columns]
 gdf = gdf[keep]
