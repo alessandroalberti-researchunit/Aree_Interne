@@ -87,7 +87,7 @@ raw_spec.columns = ["cod_sll_spec","cod_sll_n","den_sll_spec",
                     "pop_spec","sup_spec"]
 raw_spec = raw_spec.dropna(subset=["cod_sll_spec"])
 raw_spec = raw_spec[raw_spec["cod_classe"].isin(["A","B","C","D"])]
-raw_spec["cod_sll_spec"] = raw_spec["cod_sll_spec"].astype(str).str.zfill(4)
+raw_spec["cod_sll_spec"] = raw_spec["cod_sll_spec"].astype(float).astype(int).astype(str).str.zfill(4)
 print(f"  {len(raw_spec)} SLL con specializzazione")
 
 # ── 4. Capoluogo per SLL dal JSON di composizione ──────────────────────────────
