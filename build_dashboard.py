@@ -8,6 +8,7 @@ import pandas as pd
 GEOJSON_PATH        = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\aree-snai-perimetri.geojson'
 COMUNI_GEOJSON_PATH = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\comuni-snai-perimetri.geojson'
 SLL_GEOJSON_PATH    = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\sll-perimetri.geojson'
+ACC_JSON_PATH       = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\accessibility_data.json'
 EXCEL_08            = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\08_elenco-aree-comuni.xlsx'
 EXCEL_MAPPA         = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\mappa-ai-2020-elenco-classificazione-comuni.xlsx'
 OUT_HTML            = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\dashboard-aree-interne.html'
@@ -22,6 +23,9 @@ with open(COMUNI_GEOJSON_PATH, encoding='utf-8') as f:
 
 with open(SLL_GEOJSON_PATH, encoding='utf-8') as f:
     sll_geojson_str = f.read().strip()
+
+with open(ACC_JSON_PATH, encoding='utf-8') as f:
+    acc_json_str = f.read().strip()
 
 # ── Per-area stats from Excel ──────────────────────────────────────────────────
 def load_sheet_totale():
@@ -501,6 +505,13 @@ HTML = r"""<!DOCTYPE html>
   .econ-highlight { background:#0f172a; border:1px solid #334155; border-radius:6px; padding:8px; margin-bottom:6px; text-align:center; }
   .econ-highlight .val { font-size:1.2rem; font-weight:800; color:#a78bfa; }
   .econ-highlight .lbl { font-size:0.6rem; color:#64748b; margin-top:2px; text-transform:uppercase; letter-spacing:0.06em; }
+  .acc-section { margin-top:10px; }
+  .acc-row { display:flex; align-items:center; gap:6px; padding:3px 0; }
+  .acc-lbl { font-size:0.68rem; color:#94a3b8; width:120px; flex-shrink:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .acc-bar-wrap { flex:1; background:#1e293b; border-radius:3px; height:7px; overflow:hidden; }
+  .acc-bar { height:100%; border-radius:3px; transition:width .4s ease; }
+  .acc-val { font-size:0.65rem; color:#64748b; width:32px; text-align:right; flex-shrink:0; }
+  body.light .acc-bar-wrap { background:#e2e8f0; }
   body.light .btn-layer { background:#f1f5f9; border-color:#e2e8f0; color:#64748b; }
   body.light .btn-layer.snai-btn.active { color:#15803d; }
   body.light .btn-layer.sll-btn.active  { color:#7c3aed; }
@@ -744,6 +755,7 @@ fetch('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/
 const SNAI_GEO   = SNAI_GEOJSON_PLACEHOLDER;
 const COMUNI_GEO = COMUNI_GEO_PLACEHOLDER;
 const SLL_GEO    = SLL_GEOJSON_PLACEHOLDER;
+const ACC_DATA   = ACC_DATA_PLACEHOLDER;
 let snaiLayer   = null;
 let comuniLayer = null;
 let sllLayer    = null;
@@ -890,7 +902,8 @@ function showSLLDetail(p) {
       <div class="econ-row"><span class="ek">Dipendenti</span><span class="ev">${fmt(p.dipendenti)}</span></div>
       <div class="econ-row"><span class="ek">Valore Aggiunto</span><span class="ev">${invest}</span></div>
       <div class="econ-row"><span class="ek">Retrib./dip.</span><span class="ev">${retDip}</span></div>
-    </div>`;
+    </div>
+    ${accHtml(ACC_DATA.sll[p.cod_sll])}`;
 }
 
 function sllVisibleCount() {
@@ -1009,6 +1022,37 @@ function comuneTooltipHTML(c, areaName) {
     rows.map(([k,v]) => `<div class="ct-row"><span>${k}</span><span>${v}</span></div>`).join('');
 }
 
+const ACC_IND_COLORS = {
+  ospedali:   '#f87171',
+  sanita:     '#fb923c',
+  istruzione: '#facc15',
+  trasporti:  '#60a5fa',
+  sport:      '#34d399',
+  cultura:    '#c084fc',
+};
+
+function accHtml(vals) {
+  if (!vals || !ACC_DATA || !ACC_DATA.indicatori) return '';
+  const inds = ACC_DATA.indicatori;
+  const rows = Object.keys(inds).map(k => {
+    const v = vals[k];
+    if (v === undefined || v === null) return '';
+    const pct = Math.min(100, Math.round(v / inds[k].max * 100));
+    const color = ACC_IND_COLORS[k] || '#94a3b8';
+    return `<div class="acc-row">
+      <div class="acc-lbl" title="${inds[k].label}">${inds[k].label}</div>
+      <div class="acc-bar-wrap"><div class="acc-bar" style="width:${pct}%;background:${color}"></div></div>
+      <div class="acc-val">${v.toFixed(1)}</div>
+    </div>`;
+  }).filter(Boolean).join('');
+  if (!rows) return '';
+  return `<div class="acc-section">
+    <div class="econ-title">Accessibilita ai servizi (30 min in auto) &mdash; Lazio</div>
+    ${rows}
+    <div style="font-size:0.6rem;color:#475569;margin-top:6px;line-height:1.5">Valore medio di strutture raggiungibili per cella H3 (~0.7 km2). Fonte: OvertureMaps + Min. Salute, elaborazione IZI.</div>
+  </div>`;
+}
+
 function showArea(areaName) {
   map.closePopup();
   clearComuniLayer();
@@ -1086,7 +1130,7 @@ function showArea(areaName) {
       <div class="s-kpi"><span class="val">${comuni.length>0?comuni.length:(m.n||'—')}</span><span class="lbl">Comuni</span></div>
       <div class="s-kpi"><span class="val">${totalPop>0?(totalPop/1000).toFixed(0)+'k':m.pop?(m.pop/1000).toFixed(0)+'k':'—'}</span><span class="lbl">Pop. 2020</span></div>
     </div>
-    ${cfHtml}${snaiHtml}
+    ${cfHtml}${snaiHtml}${accHtml(ACC_DATA.snai[areaName])}
     <div class="s-section-title">Comuni (${comuni.length>0?comuni.length:(m.n||'?')})</div>
     <div class="item-list">${comuniHtml}</div>`;
 }
@@ -1208,6 +1252,7 @@ HTML = HTML.replace('// AREA_INV_JS_PLACEHOLDER', AREA_INV_JS)
 HTML = HTML.replace('SNAI_GEOJSON_PLACEHOLDER', geojson_str)
 HTML = HTML.replace('COMUNI_GEO_PLACEHOLDER',   comuni_geojson_str)
 HTML = HTML.replace('SLL_GEOJSON_PLACEHOLDER',  sll_geojson_str)
+HTML = HTML.replace('ACC_DATA_PLACEHOLDER',     acc_json_str)
 HTML = HTML.replace('KPI_KNOWN_N+', fmt_n(known_n) + '+')
 HTML = HTML.replace('KPI_SI_INT',   str(si_n))
 HTML = HTML.replace('KPI_CONF_INT', str(conf_n))

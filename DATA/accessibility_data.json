@@ -1,0 +1,443 @@
+{
+  "fonte": "OvertureMaps + Ministero della Salute, isocrone Valhalla. Elaborazione IZI su dati OCPR.",
+  "note": "Valori medi per celle H3 r8 (~0.7 km2) che intersecano ciascuna area/SLL. Modalita: auto con traffico, soglia 30 minuti.",
+  "regioni_coperte": [
+    "Lazio"
+  ],
+  "indicatori": {
+    "ospedali": {
+      "label": "Ospedali SSN",
+      "max": 4.84,
+      "mean": 0.46
+    },
+    "sanita": {
+      "label": "Servizi sanitari",
+      "max": 170.82,
+      "mean": 9.79
+    },
+    "istruzione": {
+      "label": "Strutture educative",
+      "max": 695.33,
+      "mean": 39.33
+    },
+    "trasporti": {
+      "label": "Infrastrutture trasporto",
+      "max": 1553.26,
+      "mean": 71.86
+    },
+    "sport": {
+      "label": "Strutture sportive",
+      "max": 948.48,
+      "mean": 69.37
+    },
+    "cultura": {
+      "label": "Luoghi culturali",
+      "max": 337.48,
+      "mean": 20.79
+    }
+  },
+  "snai": {
+    "Alta Tuscia Antica Città del Castro": {
+      "ospedali": 0.24,
+      "sanita": 2.32,
+      "istruzione": 9.17,
+      "trasporti": 9.16,
+      "sport": 27.14,
+      "cultura": 15.39
+    },
+    "Alto Aterno - Gran Sasso Laga": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.2,
+      "trasporti": 1.05,
+      "sport": 1.08,
+      "cultura": 1.05
+    },
+    "Amiata Valdorcia - Amiata Grossetana - Colline del Fiora": {
+      "ospedali": 0.14,
+      "sanita": 0.89,
+      "istruzione": 3.86,
+      "trasporti": 3.05,
+      "sport": 9.93,
+      "cultura": 10.36
+    },
+    "Etrusco Cimina": {
+      "ospedali": 0.47,
+      "sanita": 13.94,
+      "istruzione": 49.1,
+      "trasporti": 78.6,
+      "sport": 116.07,
+      "cultura": 37.47
+    },
+    "Isernia - Venafro": {
+      "ospedali": 0.25,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.5,
+      "cultura": 0.25
+    },
+    "Mainarde": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.12,
+      "cultura": 0.0
+    },
+    "Monti Lepini": {
+      "ospedali": 0.31,
+      "sanita": 12.3,
+      "istruzione": 39.53,
+      "trasporti": 76.85,
+      "sport": 71.81,
+      "cultura": 20.37
+    },
+    "Monti Reatini": {
+      "ospedali": 0.12,
+      "sanita": 2.02,
+      "istruzione": 9.05,
+      "trasporti": 22.96,
+      "sport": 14.8,
+      "cultura": 4.99
+    },
+    "Monti Simbruini": {
+      "ospedali": 0.31,
+      "sanita": 1.65,
+      "istruzione": 7.01,
+      "trasporti": 42.98,
+      "sport": 18.52,
+      "cultura": 8.54
+    },
+    "Piana del Cavaliere - Alto Liri": {
+      "ospedali": 0.16,
+      "sanita": 0.13,
+      "istruzione": 2.22,
+      "trasporti": 20.11,
+      "sport": 10.24,
+      "cultura": 3.0
+    },
+    "Piceno": {
+      "ospedali": 0.0,
+      "sanita": 0.23,
+      "istruzione": 0.77,
+      "trasporti": 1.23,
+      "sport": 1.77,
+      "cultura": 1.15
+    },
+    "Pre.gio": {
+      "ospedali": 0.6,
+      "sanita": 9.88,
+      "istruzione": 47.91,
+      "trasporti": 271.01,
+      "sport": 85.2,
+      "cultura": 26.19
+    },
+    "Sud Ovest Orvietano": {
+      "ospedali": 0.35,
+      "sanita": 3.47,
+      "istruzione": 19.97,
+      "trasporti": 37.35,
+      "sport": 41.92,
+      "cultura": 24.52
+    },
+    "Val Nerina": {
+      "ospedali": 0.0,
+      "sanita": 0.07,
+      "istruzione": 1.07,
+      "trasporti": 3.76,
+      "sport": 4.64,
+      "cultura": 2.36
+    },
+    "Valdichiana Senese": {
+      "ospedali": 1.0,
+      "sanita": 0.64,
+      "istruzione": 4.27,
+      "trasporti": 7.36,
+      "sport": 9.82,
+      "cultura": 5.09
+    },
+    "Valle del Comino": {
+      "ospedali": 0.53,
+      "sanita": 8.02,
+      "istruzione": 31.97,
+      "trasporti": 8.08,
+      "sport": 43.23,
+      "cultura": 12.04
+    },
+    "Valle del Giovenco - Valle Roveto": {
+      "ospedali": 0.23,
+      "sanita": 1.37,
+      "istruzione": 4.67,
+      "trasporti": 1.97,
+      "sport": 8.23,
+      "cultura": 1.77
+    },
+    "Valle del Sagittario e dell'Alto Sangro": {
+      "ospedali": 0.05,
+      "sanita": 0.0,
+      "istruzione": 0.2,
+      "trasporti": 1.8,
+      "sport": 1.15,
+      "cultura": 0.35
+    }
+  },
+  "sll": {
+    "0928": {
+      "ospedali": 0.57,
+      "sanita": 1.89,
+      "istruzione": 7.87,
+      "trasporti": 8.87,
+      "sport": 21.55,
+      "cultura": 13.83
+    },
+    "0929": {
+      "ospedali": 1.0,
+      "sanita": 0.6,
+      "istruzione": 4.1,
+      "trasporti": 7.3,
+      "sport": 9.8,
+      "cultura": 4.9
+    },
+    "0936": {
+      "ospedali": 0.0,
+      "sanita": 0.72,
+      "istruzione": 2.22,
+      "trasporti": 1.06,
+      "sport": 7.28,
+      "cultura": 5.39
+    },
+    "0938": {
+      "ospedali": 0.5,
+      "sanita": 1.0,
+      "istruzione": 4.83,
+      "trasporti": 2.0,
+      "sport": 22.17,
+      "cultura": 5.33
+    },
+    "0939": {
+      "ospedali": 0.11,
+      "sanita": 0.89,
+      "istruzione": 4.53,
+      "trasporti": 3.06,
+      "sport": 11.08,
+      "cultura": 13.28
+    },
+    "1002": {
+      "ospedali": 0.0,
+      "sanita": 0.01,
+      "istruzione": 0.87,
+      "trasporti": 5.29,
+      "sport": 6.64,
+      "cultura": 3.65
+    },
+    "1007": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.25
+    },
+    "1011": {
+      "ospedali": 0.44,
+      "sanita": 4.15,
+      "istruzione": 22.55,
+      "trasporti": 12.55,
+      "sport": 41.71,
+      "cultura": 26.87
+    },
+    "1012": {
+      "ospedali": 0.42,
+      "sanita": 5.97,
+      "istruzione": 27.63,
+      "trasporti": 44.92,
+      "sport": 51.56,
+      "cultura": 19.87
+    },
+    "1114": {
+      "ospedali": 0.0,
+      "sanita": 0.18,
+      "istruzione": 0.65,
+      "trasporti": 1.0,
+      "sport": 1.35,
+      "cultura": 0.94
+    },
+    "1201": {
+      "ospedali": 0.76,
+      "sanita": 14.85,
+      "istruzione": 50.59,
+      "trasporti": 104.52,
+      "sport": 115.13,
+      "cultura": 36.67
+    },
+    "1202": {
+      "ospedali": 0.12,
+      "sanita": 2.06,
+      "istruzione": 6.86,
+      "trasporti": 8.3,
+      "sport": 24.37,
+      "cultura": 13.28
+    },
+    "1203": {
+      "ospedali": 1.08,
+      "sanita": 8.03,
+      "istruzione": 32.56,
+      "trasporti": 54.22,
+      "sport": 81.43,
+      "cultura": 25.51
+    },
+    "1204": {
+      "ospedali": 0.34,
+      "sanita": 8.58,
+      "istruzione": 58.97,
+      "trasporti": 57.96,
+      "sport": 98.0,
+      "cultura": 42.22
+    },
+    "1205": {
+      "ospedali": 0.23,
+      "sanita": 6.69,
+      "istruzione": 24.33,
+      "trasporti": 44.26,
+      "sport": 39.15,
+      "cultura": 13.17
+    },
+    "1206": {
+      "ospedali": 0.61,
+      "sanita": 11.33,
+      "istruzione": 35.06,
+      "trasporti": 65.67,
+      "sport": 105.16,
+      "cultura": 19.97
+    },
+    "1207": {
+      "ospedali": 4.84,
+      "sanita": 170.82,
+      "istruzione": 695.33,
+      "trasporti": 1553.26,
+      "sport": 948.48,
+      "cultura": 337.48
+    },
+    "1208": {
+      "ospedali": 0.39,
+      "sanita": 11.15,
+      "istruzione": 42.66,
+      "trasporti": 95.05,
+      "sport": 99.02,
+      "cultura": 18.79
+    },
+    "1209": {
+      "ospedali": 0.61,
+      "sanita": 13.19,
+      "istruzione": 55.35,
+      "trasporti": 64.17,
+      "sport": 126.92,
+      "cultura": 21.95
+    },
+    "1210": {
+      "ospedali": 1.27,
+      "sanita": 54.5,
+      "istruzione": 217.05,
+      "trasporti": 208.5,
+      "sport": 371.34,
+      "cultura": 66.67
+    },
+    "1211": {
+      "ospedali": 0.95,
+      "sanita": 26.5,
+      "istruzione": 94.18,
+      "trasporti": 252.76,
+      "sport": 219.59,
+      "cultura": 38.24
+    },
+    "1212": {
+      "ospedali": 0.58,
+      "sanita": 12.6,
+      "istruzione": 51.63,
+      "trasporti": 132.61,
+      "sport": 91.33,
+      "cultura": 24.77
+    },
+    "1213": {
+      "ospedali": 0.49,
+      "sanita": 18.46,
+      "istruzione": 60.77,
+      "trasporti": 27.4,
+      "sport": 77.46,
+      "cultura": 21.87
+    },
+    "1214": {
+      "ospedali": 0.49,
+      "sanita": 22.47,
+      "istruzione": 85.25,
+      "trasporti": 76.55,
+      "sport": 139.15,
+      "cultura": 32.21
+    },
+    "1215": {
+      "ospedali": 0.69,
+      "sanita": 13.08,
+      "istruzione": 46.24,
+      "trasporti": 25.52,
+      "sport": 83.78,
+      "cultura": 19.44
+    },
+    "1301": {
+      "ospedali": 0.26,
+      "sanita": 1.71,
+      "istruzione": 10.93,
+      "trasporti": 36.33,
+      "sport": 21.09,
+      "cultura": 6.72
+    },
+    "1302": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "1303": {
+      "ospedali": 0.15,
+      "sanita": 1.49,
+      "istruzione": 12.06,
+      "trasporti": 29.4,
+      "sport": 17.62,
+      "cultura": 5.23
+    },
+    "1307": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.29,
+      "trasporti": 0.29,
+      "sport": 0.43,
+      "cultura": 0.14
+    },
+    "1404": {
+      "ospedali": 0.0,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.0,
+      "cultura": 0.0
+    },
+    "1405": {
+      "ospedali": 0.04,
+      "sanita": 0.0,
+      "istruzione": 0.0,
+      "trasporti": 0.0,
+      "sport": 0.13,
+      "cultura": 0.04
+    },
+    "1505": {
+      "ospedali": 1.53,
+      "sanita": 19.65,
+      "istruzione": 79.94,
+      "trasporti": 83.0,
+      "sport": 169.47,
+      "cultura": 25.82
+    }
+  }
+}
