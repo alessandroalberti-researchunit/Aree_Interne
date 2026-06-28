@@ -576,6 +576,17 @@ HTML = r"""<!DOCTYPE html>
       </div>
       <div class="fg"><label>Cerca area</label><input type="text" id="searchArea" placeholder="es. Appennino&#8230;"></div>
       <div class="fg"><label>Cerca comune</label><input type="text" id="searchComune" placeholder="es. Fanano&#8230;"></div>
+      <div class="fg sll-filter-group" id="sllFilterGroup" style="display:none">
+        <div style="width:1px;height:20px;background:#334155;margin-right:12px"></div>
+        <label style="color:#a78bfa">Classe SLL</label>
+        <select id="filtroSLLClasse">
+          <option value="">Tutte</option>
+          <option value="A">A — Made in Italy</option>
+          <option value="B">B — Manifatturiero pesante</option>
+          <option value="C">C — Non manifatturiero</option>
+          <option value="D">D — Non specializzato</option>
+        </select>
+      </div>
       <button class="btn-reset" onclick="resetFiltri()">&#8635; Azzera</button>
     </div>
     <div id="map"></div>
@@ -773,7 +784,11 @@ function sllClassColor(cod) { return SLL_CLASS_COLORS[cod] || '#a78bfa'; }
 function buildSLLLayer() {
   if (sllLayer) { map.removeLayer(sllLayer); sllLayer=null; }
   if (!_showSLL) return;
-  sllLayer = L.geoJSON(SLL_GEO, {
+  const _sllClasse = document.getElementById('filtroSLLClasse').value;
+  const features = _sllClasse
+    ? SLL_GEO.features.filter(f => f.properties.cod_classe === _sllClasse)
+    : SLL_GEO.features;
+  sllLayer = L.geoJSON({type:'FeatureCollection', features}, {
     style: f => {
       const c = sllClassColor(f.properties.cod_classe);
       return {fillColor:c, fillOpacity:0.13, color:c, weight:1.2, dashArray:'4,5', opacity:0.75};
@@ -828,6 +843,7 @@ function toggleLayerSNAI() {
 function toggleLayerSLL() {
   _showSLL = !_showSLL;
   document.getElementById('btnLayerSLL').classList.toggle('active', _showSLL);
+  document.getElementById('sllFilterGroup').style.display = _showSLL ? 'flex' : 'none';
   buildSLLLayer();
   if (_showSLL && !_showSNAI) showLegendSLL();
   else if (!_showSLL && !_showSNAI) showLegend();
@@ -1113,12 +1129,13 @@ function applicaFiltri(){
   else { showRegion(f, reg, fin, q||qc); }
 }
 function resetFiltri(){
-  ['filtroRegione','filtroFin','searchArea','searchComune'].forEach(id=>{document.getElementById(id).value='';});
+  ['filtroRegione','filtroFin','searchArea','searchComune','filtroSLLClasse'].forEach(id=>{document.getElementById(id).value='';});
   buildPolygons(AREE); renderTable(AREE); map.setView([42.5,12.5],6);
   document.getElementById('tableCount').textContent='Tutte le 128 aree — clicca per espandere';
   showLegend();
 }
 ['filtroRegione','filtroFin'].forEach(id=>document.getElementById(id).addEventListener('change',applicaFiltri));
+document.getElementById('filtroSLLClasse').addEventListener('change', buildSLLLayer);
 document.getElementById('searchArea').addEventListener('input',applicaFiltri);
 document.getElementById('searchComune').addEventListener('input',applicaFiltri);
 
