@@ -816,6 +816,7 @@ function buildSLLLayer() {
     }
   }).addTo(map);
   if (_showSNAI && snaiLayer) snaiLayer.bringToFront();
+  updateSLLLegendCount();
 }
 
 function toggleLayerSNAI() {
@@ -892,12 +893,22 @@ function showSLLDetail(p) {
     </div>`;
 }
 
+function sllVisibleCount() {
+  const cl = document.getElementById('filtroSLLClasse').value;
+  return cl ? SLL_GEO.features.filter(f => f.properties.cod_classe === cl).length
+            : SLL_GEO.features.length;
+}
+
 function showLegendSLL() {
-  const classRows = Object.entries(SLL_CLASS_LABELS).map(([k,v]) =>
-    `<div class="legend-item"><div class="legend-dot" style="background:${SLL_CLASS_COLORS[k]}"></div><strong>${k}</strong> — ${v}</div>`
-  ).join('');
+  const n = sllVisibleCount();
+  const cl = document.getElementById('filtroSLLClasse').value;
+  const classRows = Object.entries(SLL_CLASS_LABELS).map(([k,v]) => {
+    const cnt = SLL_GEO.features.filter(f => f.properties.cod_classe === k).length;
+    const dimmed = cl && cl !== k ? 'opacity:0.35;' : '';
+    return `<div class="legend-item" style="${dimmed}"><div class="legend-dot" style="background:${SLL_CLASS_COLORS[k]}"></div><strong>${k}</strong> — ${v} <span style="color:#64748b">(${cnt})</span></div>`;
+  }).join('');
   document.getElementById('rightPanel').innerHTML = `
-    <div class="rp-header"><h3>Legenda SLL</h3></div>
+    <div class="rp-header"><h3>Legenda SLL <span id="sllLegendCount" style="font-size:0.75rem;font-weight:400;color:#94a3b8">${n} SLL${cl ? ' — classe '+cl : ''}</span></h3></div>
     <div class="legend">
       ${classRows}
     </div>
@@ -906,6 +917,19 @@ function showLegendSLL() {
       Clicca su un SLL per i dettagli.<br><br>
       Fonti: ISTAT — <em>Specializzazione produttiva prevalente dei SLL</em>, feb. 2026; <em>Risultati economici delle imprese</em>, Tavola 42, anno 2023.
     </div>`;
+}
+
+function updateSLLLegendCount() {
+  const el = document.getElementById('sllLegendCount');
+  if (!el) return;
+  const n = sllVisibleCount();
+  const cl = document.getElementById('filtroSLLClasse').value;
+  el.textContent = `${n} SLL${cl ? ' — classe '+cl : ''}`;
+  // aggiorna opacità righe
+  el.closest('.rp-header').parentElement.querySelectorAll('.legend-item').forEach((row, i) => {
+    const k = Object.keys(SLL_CLASS_LABELS)[i];
+    row.style.opacity = (cl && cl !== k) ? '0.35' : '1';
+  });
 }
 
 function buildPolygons(aree) {
