@@ -360,7 +360,8 @@ HTML = r"""<!DOCTYPE html>
   .list-item.clickable:hover { border-color:#334155; }
   .list-item .i-name { font-size:0.73rem; font-weight:500; line-height:1.3; }
   .list-item .i-meta { font-size:0.63rem; color:#64748b; margin-top:1px; }
-  .comune-item { background:#0f172a; border-radius:4px; padding:5px 8px; }
+  .comune-item { background:#0f172a; border-radius:4px; padding:5px 8px; cursor:pointer; border:1px solid transparent; }
+  .comune-item:hover { border-color:#334155; background:#1e293b; }
   .comune-item .c-name { font-size:0.72rem; color:#e2e8f0; }
   .comune-item .c-meta { font-size:0.62rem; color:#64748b; margin-top:1px; }
   .table-panel { background:#1e293b; border-top:1px solid #334155; max-height:220px; overflow-y:auto; }
@@ -1117,6 +1118,10 @@ function showArea(areaName) {
           e.target.bringToFront();
         });
         layer.on('mouseout', e => { comuniLayer.resetStyle(e.target); });
+        layer.on('click', e => {
+          L.DomEvent.stopPropagation(e);
+          showComuneDetail(c.pc, areaName);
+        });
       }
     }).addTo(map);
     const bounds = comuniLayer.getBounds();
@@ -1151,7 +1156,8 @@ function showArea(areaName) {
   const comuniHtml = sortedComuni.length > 0
     ? sortedComuni.map(c => {
         const isCf = cfComune && c.n === cfComune;
-        return `<div class="comune-item${isCf?' is-capofila':''}">
+        const aEsc = areaName.replace(/'/g,"\\'");
+        return `<div class="comune-item${isCf?' is-capofila':''}" onclick="showComuneDetail('${c.pc}','${aEsc}')">
         <div class="c-name">${c.n}${isCf?'<span class="capofila-badge">CAPOFILA</span>':''}${c.p?` <span style="color:#475569">(${c.p})</span>`:''}</div>
         <div class="c-meta">${[c.pop?c.pop.toLocaleString('it')+' ab.':null, c.s?snaiName(c.s):null].filter(x=>x).join(' · ')}</div>
         ${accDots(c.pc)}
@@ -1172,8 +1178,33 @@ function showArea(areaName) {
     <div class="item-list">${comuniHtml}</div>`;
 }
 
+function showComuneDetail(pc, areaName) {
+  const c = (COMUNI_BY_AREA[areaName] || []).find(x => x.pc === pc);
+  if (!c) return;
+  _navStack.push({level:'comune', pc, areaName});
+  const backBtn = `<button class="btn-back" onclick="goBack()">&#8592;</button>`;
+  const areaEsc = areaName.replace(/'/g,"\\'");
+  const snaiClass = c.s ? `${c.s} &mdash; ${snaiName(c.s)}` : '&mdash;';
+  const accSection = accGrid(ACC_DATA.comuni && ACC_DATA.comuni[pc]);
+  document.getElementById('rightPanel').innerHTML = `
+    <div class="rp-header">${backBtn}<h3>Comune</h3></div>
+    <div class="stats-title">${c.n}</div>
+    <div style="font-size:0.7rem;color:#64748b;margin-bottom:10px">
+      Area: <span style="color:#a78bfa;cursor:pointer" onclick="goBack()">${areaName}</span>${c.p ? ` &middot; Prov.&nbsp;${c.p}` : ''}
+    </div>
+    <div class="s-kpi-row">
+      <div class="s-kpi"><span class="val">${c.pop ? c.pop.toLocaleString('it') : '&mdash;'}</span><span class="lbl">Pop. 2020</span></div>
+      <div class="s-kpi"><span class="val">${c.km2 != null ? c.km2.toLocaleString('it') + ' km&sup2;' : '&mdash;'}</span><span class="lbl">Superficie</span></div>
+    </div>
+    <div class="s-kpi-row">
+      <div class="s-kpi"><span class="val">${c.min != null ? c.min + ' min' : '&mdash;'}</span><span class="lbl">Polo pi&ugrave; vicino</span></div>
+      <div class="s-kpi" style="min-width:0"><span class="val" style="font-size:0.72rem;white-space:normal;line-height:1.3">${snaiClass}</span><span class="lbl">Classe ISTAT AI</span></div>
+    </div>
+    ${accSection || '<div style="font-size:0.65rem;color:#475569;margin-top:10px">Dati accessibilit&agrave; non disponibili per questo comune.</div>'}`;
+}
+
 function goBack() {
-  _navStack.pop(); // remove current area level
+  _navStack.pop();
   if (_navStack.length === 0) {
     const reg=document.getElementById('filtroRegione').value;
     const fin=document.getElementById('filtroFin').value;
@@ -1184,7 +1215,11 @@ function goBack() {
   } else {
     const ctx = _navStack[_navStack.length-1];
     _navStack.pop();
-    showRegion(ctx.aree, ctx.reg, ctx.fin, ctx.q);
+    if (ctx.level === 'area') {
+      showArea(ctx.areaName);
+    } else {
+      showRegion(ctx.aree, ctx.reg, ctx.fin, ctx.q);
+    }
   }
 }
 
