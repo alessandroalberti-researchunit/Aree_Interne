@@ -1,0 +1,24 @@
+<!-- @dsCard group="Brand" viewport="700x220" name="Backgrounds" subtitle="Aurora blooms + technical lines" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 16px; background: var(--bg-surface); font-family: var(--font-body); }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .t { height: 170px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); background-size: cover; background-position: center; position: relative; overflow: hidden; }
+  .cap { position: absolute; bottom: 8px; left: 8px; font-size: 10px; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+  .cap.dk { color: var(--blanche-900); text-shadow: none; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="t" style="background-image:url(../assets/backgrounds/bg-dark-aurora.png)"><span class="cap">dark aurora</span></div>
+    <div class="t" style="background-image:url(../assets/backgrounds/bg-dark-bloom.png)"><span class="cap">dark bloom</span></div>
+    <div class="t" style="background-image:url(../assets/backgrounds/bg-light-aqua.png)"><span class="cap dk">light aqua</span></div>
+    <div class="t" style="background-image:url(../assets/backgrounds/bg-light-violet.png)"><span class="cap dk">light violet</span></div>
+    <div class="t izi-bg-aurora izi-bg-grid"><span class="cap">CSS aurora + grid</span></div>
+  </div>
+</body>
+</html>

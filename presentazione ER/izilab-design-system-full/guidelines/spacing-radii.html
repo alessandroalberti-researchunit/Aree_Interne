@@ -1,0 +1,23 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Radii" subtitle="Crisp, restrained — xs → pill" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px 24px; background: var(--bg-surface); font-family: var(--font-body); }
+  .row { display: flex; gap: 16px; align-items: flex-start; }
+  .item { text-align: center; }
+  .box { width: 72px; height: 72px; background: var(--surface-raised); border: 1px solid var(--border-strong); border-top: 3px solid var(--color-accent); }
+  .tok { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="row" id="row"></div>
+  <script>
+    const items = [['xs','4px'],['sm','8px'],['md','12px'],['lg','16px'],['xl','24px'],['2xl','32px'],['pill','999px']];
+    document.getElementById('row').innerHTML = items.map(([n,v]) =>
+      `<div class="item"><div class="box" style="border-radius:${v}"></div><div class="tok">radius-${n}</div></div>`).join('');
+  </script>
+</body>
+</html>

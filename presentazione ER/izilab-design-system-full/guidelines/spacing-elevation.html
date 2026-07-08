@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x200" name="Elevation" subtitle="Dark = glow · Light = soft shadow" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; font-family: var(--font-body); display: grid; grid-template-columns: 1fr 1fr; }
+  .pane { padding: 26px 24px; display: flex; gap: 22px; }
+  .pane.dark { background: var(--bg-page); }
+  .card { width: 110px; height: 90px; border-radius: var(--radius-md); background: var(--surface-card); border: 1px solid var(--border-subtle); display: flex; align-items: flex-end; padding: 10px; }
+  .tok { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+  .glowV { box-shadow: var(--glow-violet); }
+  .glowA { box-shadow: var(--glow-aqua); }
+</style>
+</head>
+<body>
+  <div class="pane dark">
+    <div class="card glowV"><span class="tok">glow-violet</span></div>
+    <div class="card glowA"><span class="tok">glow-aqua</span></div>
+  </div>
+  <div class="pane light" data-theme="light" style="background:var(--bg-page)">
+    <div class="card glowV"><span class="tok">glow-violet</span></div>
+    <div class="card glowA"><span class="tok">glow-aqua</span></div>
+  </div>
+</body>
+</html>

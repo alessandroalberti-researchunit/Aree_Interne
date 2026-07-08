@@ -1,0 +1,46 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Title slide" subtitle="Dark · aurora · payoff" -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html,body { margin:0; }
+  .slide { position:relative; width:1280px; height:720px; overflow:hidden; background:#0F0830;
+    background-image:url(../assets/backgrounds/bg-dark-bloom.png); background-size:cover; background-position:center;
+    font-family:var(--font-body); color:var(--text-body); }
+  .veil { position:absolute; inset:0; background:linear-gradient(115deg, rgba(15,8,48,0.72) 0%, rgba(15,8,48,0.30) 55%, rgba(15,8,48,0.65) 100%); }
+  .grid { position:absolute; inset:0; background-image:linear-gradient(var(--line-technical) 1px,transparent 1px),linear-gradient(90deg,var(--line-technical) 1px,transparent 1px); background-size:64px 64px; opacity:0.5; }
+  .inner { position:absolute; inset:0; padding:72px 80px; display:flex; flex-direction:column; justify-content:space-between; z-index:2; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .logo { background:#FDFDFF; border-radius:10px; padding:9px 13px; display:flex; }
+  .logo img { height:26px; }
+  .meta { font-family:var(--font-mono); font-size:13px; color:var(--blanche-600); letter-spacing:0.04em; }
+  .kicker { font-size:14px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--violet-300); }
+  h1 { font-family:var(--font-display); font-weight:500; font-size:80px; line-height:1.0; letter-spacing:-0.02em; color:#ECECFF; margin:22px 0 0; max-width:16ch; }
+  .rule { width:64px; height:4px; background:var(--color-accent); border-radius:999px; margin:34px 0 0; }
+  .foot { display:flex; justify-content:space-between; align-items:flex-end; }
+  .sub { font-size:19px; color:var(--blanche-400); max-width:42ch; }
+</style>
+</head>
+<body>
+<div class="slide" data-screen-label="Title">
+  <div class="veil"></div><div class="grid"></div>
+  <div class="inner">
+    <div class="top">
+      <div class="logo"><img src="../assets/logo/logo-izilab.png" alt="IZILab"></div>
+      <div class="meta">Foresight Report — 2035</div>
+    </div>
+    <div>
+      <div class="kicker">Laboratorio di ricerca e foresight</div>
+      <h1>Il futuro non si aspetta, si anticipa.</h1>
+      <div class="rule"></div>
+    </div>
+    <div class="foot">
+      <p class="sub">Guidiamo aziende e istituzioni attraverso l'incertezza del futuro con un approccio solido e basato sui dati.</p>
+      <div class="meta">01</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

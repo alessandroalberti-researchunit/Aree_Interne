@@ -1,0 +1,26 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Brand roles" subtitle="Primary · Accent · Neutral" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--bg-surface); font-family: var(--font-body); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .role { border-radius: var(--radius-md); padding: 16px; height: 110px; display: flex; flex-direction: column; justify-content: space-between; }
+  .name { font-family: var(--font-body); font-weight: 600; font-size: 13px; }
+  .hex { font-family: var(--font-mono); font-size: 12px; opacity: 0.9; }
+  .tag { font-size: 11px; opacity: 0.85; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="role" style="background:var(--color-primary);color:var(--text-on-primary)">
+      <div class="tag">PRIMARY</div><div><div class="name">Violet / 500</div><div class="hex">#6422E8</div></div></div>
+    <div class="role" style="background:var(--color-accent);color:var(--text-on-accent)">
+      <div class="tag">ACCENT</div><div><div class="name">Aqua / 500</div><div class="hex">#49E1C0</div></div></div>
+    <div class="role" style="background:var(--blanche-500);color:var(--blanche-900)">
+      <div class="tag">NEUTRAL</div><div><div class="name">Blanche / 500</div><div class="hex">#ECEBFE</div></div></div>
+  </div>
+</body>
+</html>

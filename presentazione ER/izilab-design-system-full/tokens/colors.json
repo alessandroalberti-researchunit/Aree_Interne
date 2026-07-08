@@ -1,0 +1,312 @@
+{
+  "meta": {
+    "brand": "IZILab",
+    "system": "Sistema visivo IZI Lab",
+    "version": "Marzo 2025",
+    "note": "Token primitivi e semantici estratti da Palette.pdf / Theme.pdf (Figma variables). Per ogni step: valori Dark e Light.",
+    "primary": {
+      "violet": "#6422E8 (Violet/500)",
+      "aqua": "#49E1C0 (Aqua/500, dark)",
+      "blanche": "#ECEBFE (Blanche/500)"
+    },
+    "payoff": "Il futuro non si aspetta, si anticipa."
+  },
+  "primitives": {
+    "violet": {
+      "100": {
+        "dark": "#ECECFF",
+        "light": "#ECECFF"
+      },
+      "200": {
+        "dark": "#D7D5FF",
+        "light": "#D7D5FF"
+      },
+      "300": {
+        "dark": "#B1AAFC",
+        "light": "#B1AAFC"
+      },
+      "400": {
+        "dark": "#8E7DF6",
+        "light": "#8E7DF6"
+      },
+      "500": {
+        "dark": "#6422E8",
+        "light": "#6422E8"
+      },
+      "600": {
+        "dark": "#541BC6",
+        "light": "#541BC6"
+      },
+      "700": {
+        "dark": "#370F86",
+        "light": "#370F86"
+      },
+      "800": {
+        "dark": "#1B054B",
+        "light": "#1B054B"
+      },
+      "900": {
+        "dark": "#0F0830",
+        "light": "#050117"
+      }
+    },
+    "aqua": {
+      "100": {
+        "dark": "#F0FCF9",
+        "light": "#F1FCF9"
+      },
+      "200": {
+        "dark": "#DEF9F1",
+        "light": "#E0F9F1"
+      },
+      "300": {
+        "dark": "#BCF3E3",
+        "light": "#C0F2E4"
+      },
+      "400": {
+        "dark": "#96ECD5",
+        "light": "#9DEBD7"
+      },
+      "500": {
+        "dark": "#49E1C0",
+        "light": "#5CE0C3"
+      },
+      "600": {
+        "dark": "#3DC0A4",
+        "light": "#4DBFA6"
+      },
+      "700": {
+        "dark": "#26826E",
+        "light": "#328170"
+      },
+      "800": {
+        "dark": "#12493D",
+        "light": "#18483E"
+      },
+      "900": {
+        "dark": "#05231C",
+        "light": "#041612"
+      }
+    },
+    "blanche": {
+      "100": {
+        "dark": "#FDFDFF",
+        "light": "#FDFDFF"
+      },
+      "200": {
+        "dark": "#FBFBFF",
+        "light": "#FBFBFF"
+      },
+      "300": {
+        "dark": "#F7F6FF",
+        "light": "#F7F6FF"
+      },
+      "400": {
+        "dark": "#F2F2FE",
+        "light": "#F2F2FE"
+      },
+      "500": {
+        "dark": "#ECEBFE",
+        "light": "#ECEBFE"
+      },
+      "600": {
+        "dark": "#CECDE0",
+        "light": "#CECDE0"
+      },
+      "700": {
+        "dark": "#9695A7",
+        "light": "#9695A7"
+      },
+      "800": {
+        "dark": "#575767",
+        "light": "#575767"
+      },
+      "900": {
+        "dark": "#272735",
+        "light": "#272735"
+      }
+    }
+  },
+  "theme": {
+    "bg-surface": {
+      "role": "Bg/Surface background",
+      "dark": {
+        "alias": "violet-800",
+        "value": "#1B054B"
+      },
+      "light": {
+        "alias": "blanche-200",
+        "value": "#FBFBFF"
+      }
+    },
+    "bg-green-surface": {
+      "role": "Bg/Green Surface",
+      "dark": {
+        "alias": "aqua-500",
+        "value": "#49E1C0"
+      },
+      "light": {
+        "alias": "aqua-500",
+        "value": "#49E1C0"
+      }
+    },
+    "bg-mono-1": {
+      "role": "Bg/Mono First Color",
+      "dark": {
+        "alias": "violet-800",
+        "value": "#1B054B"
+      },
+      "light": {
+        "alias": "violet-200",
+        "value": "#D7D5FF"
+      }
+    },
+    "bg-mono-2": {
+      "role": "Bg/Mono Second Color",
+      "dark": {
+        "alias": "violet-500",
+        "value": "#6422E8"
+      },
+      "light": {
+        "alias": "violet-100",
+        "value": "#ECECFF"
+      }
+    },
+    "bg-duo-1": {
+      "role": "Bg/Duo First Color",
+      "dark": {
+        "alias": "violet-500",
+        "value": "#6422E8"
+      },
+      "light": {
+        "alias": "aqua-500",
+        "value": "#49E1C0"
+      }
+    },
+    "bg-duo-2": {
+      "role": "Bg/Duo Second Color",
+      "dark": {
+        "alias": "aqua-500",
+        "value": "#49E1C0"
+      },
+      "light": {
+        "alias": "violet-500",
+        "value": "#6422E8"
+      }
+    },
+    "bg-radial-first": {
+      "role": "Bg/Radial First",
+      "dark": {
+        "alias": "aqua-500",
+        "value": "#49E1C0"
+      },
+      "light": {
+        "alias": "violet-400",
+        "value": "#8E7DF6"
+      }
+    },
+    "bg-radial-middle": {
+      "role": "Bg/Radial Middle",
+      "dark": {
+        "alias": "violet-500",
+        "value": "#6422E8"
+      },
+      "light": {
+        "alias": "aqua-400",
+        "value": "#96ECD5"
+      }
+    },
+    "bg-radial-last": {
+      "role": "Bg/Radial Last",
+      "dark": {
+        "alias": "violet-800",
+        "value": "#1B054B"
+      },
+      "light": {
+        "alias": "aqua-100",
+        "value": "#F0FCF9"
+      }
+    },
+    "text-body": {
+      "role": "Text/Body",
+      "dark": {
+        "alias": "blanche-400",
+        "value": "#F2F2FE"
+      },
+      "light": {
+        "alias": "blanche-900",
+        "value": "#272735"
+      }
+    },
+    "text-heading": {
+      "role": "Text/Heading",
+      "dark": {
+        "alias": "violet-100",
+        "value": "#ECECFF"
+      },
+      "light": {
+        "alias": "violet-600",
+        "value": "#541BC6"
+      }
+    }
+  },
+  "typography": {
+    "display": {
+      "font": "Cirka",
+      "fallback_google": "Domine",
+      "foundry": "Pangram Pangram",
+      "license": "a pagamento",
+      "use": "titoli, display, sentence case"
+    },
+    "body": {
+      "font": "Instrument Sans",
+      "source": "Google Fonts",
+      "license": "free (OFL)",
+      "use": "kicker, body, CTA, label"
+    },
+    "data": {
+      "font": "Chivo Mono",
+      "source": "Google Fonts",
+      "license": "free (OFL)",
+      "use": "numeri, percentuali, dati, tabelle"
+    },
+    "weights": {
+      "extrabold": 800,
+      "bold": 700,
+      "semibold": 600,
+      "medium": 500,
+      "regular": 400
+    }
+  },
+  "gradients": {
+    "brand": "linear-gradient(135deg, #6422E8 0%, #49E1C0 100%)",
+    "chart-violet-dark": "linear-gradient(180deg, #6422E8 0%, #1B054B 100%)",
+    "chart-aqua-dark": "linear-gradient(180deg, #1B054B 0%, #49E1C0 100%)",
+    "chart-violet-light": "linear-gradient(180deg, #6422E8 0%, rgba(255,255,255,0) 100%)",
+    "chart-aqua-light": "linear-gradient(180deg, #DEF9F1 0%, #49E1C0 100%)"
+  },
+  "usage": {
+    "light": {
+      "kicker": "#575767",
+      "heading": "#541BC6",
+      "body": "#272735",
+      "cta": "#3DC0A4"
+    },
+    "dark": {
+      "kicker": "#D7D5FF",
+      "heading": "#ECECFF",
+      "body": "#F2F2FE",
+      "cta": "#3DC0A4"
+    },
+    "social_carousel_dark": {
+      "kicker": "#B1AAFC",
+      "title": "#DEF9F1",
+      "text": "#F2F2FE"
+    },
+    "social_carousel_light": {
+      "kicker": "#575767",
+      "title": "#541BC6",
+      "text": "#272735"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Stat slide" subtitle="Dark · Chivo Mono metrics" -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html,body { margin:0; }
+  .slide { position:relative; width:1280px; height:720px; overflow:hidden; background:var(--bg-page);
+    font-family:var(--font-body); color:var(--text-body); }
+  .grid { position:absolute; inset:0; background-image:linear-gradient(var(--line-technical) 1px,transparent 1px),linear-gradient(90deg,var(--line-technical) 1px,transparent 1px); background-size:64px 64px; opacity:0.4; }
+  .inner { position:absolute; inset:0; padding:72px 80px; display:flex; flex-direction:column; z-index:2; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .logo { background:#FDFDFF; border-radius:10px; padding:9px 13px; display:flex; } .logo img { height:24px; }
+  .meta { font-family:var(--font-mono); font-size:13px; color:var(--blanche-600); }
+  .kicker { font-size:14px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--violet-300); margin-top:34px; }
+  h2 { font-family:var(--font-display); font-weight:500; font-size:42px; line-height:1.05; color:#ECECFF; margin:14px 0 0; max-width:22ch; }
+  .stats { margin-top:auto; display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .stat { border-top:2px solid var(--border-strong); padding-top:18px; }
+  .stat .n { font-family:var(--font-mono); font-size:72px; font-weight:500; line-height:1; letter-spacing:-0.02em; color:#ECECFF; }
+  .stat .n .u { color:var(--color-accent); font-size:44px; }
+  .stat .l { font-size:16px; color:var(--text-muted); margin-top:12px; }
+  .stat.hl { border-top-color:var(--color-accent); }
+</style>
+</head>
+<body>
+<div class="slide" data-screen-label="Stat">
+  <div class="grid"></div>
+  <div class="inner">
+    <div class="top">
+      <div class="logo"><img src="../assets/logo/logo-izilab.png" alt="IZILab"></div>
+      <div class="meta">03 / 05</div>
+    </div>
+    <div class="kicker">L'impatto in numeri</div>
+    <h2>I segnali deboli che diventeranno mainstream</h2>
+    <div class="stats">
+      <div class="stat hl"><div class="n">+247<span class="u">%</span></div><div class="l">crescita prevista degli investimenti GenAI al 2030</div></div>
+      <div class="stat"><div class="n">12</div><div class="l">metropoli europee nello scenario Newrbania</div></div>
+      <div class="stat"><div class="n">0.92</div><div class="l">indice di certezza del modello previsionale</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

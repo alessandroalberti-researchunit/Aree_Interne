@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Convegno RER — IZILab" description="Deck IZILab 16:9 — Assemblea Legislativa Emilia-Romagna, 14 luglio 2026, 17 slide pronte da editare" -->
+<helmet>
+<script src="./ds-base.js"></script>
+</helmet>
+<div style="position:fixed;inset:0;background:#0A0420;display:flex;align-items:center;justify-content:center;overflow:hidden">
+
+  <div ref="{{ stageRef }}" style="width:1280px;height:720px;position:relative;flex:none;transform:scale(1);box-shadow:0 40px 120px rgba(0,0,0,.55)">
+
+    <!-- 01 · TITLE -->
+    <section ref="{{ r0 }}" data-screen-label="01 · Copertina" style="position:absolute;inset:0;overflow:hidden;background:#0F0830 url(../../assets/backgrounds/bg-dark-bloom.png) center/cover;font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:1;visibility:visible">
+      <div style="position:absolute;inset:0;background:linear-gradient(115deg,rgba(15,8,48,.74),rgba(15,8,48,.32) 55%,rgba(15,8,48,.68))"></div>
+      <div style="position:absolute;inset:0;background-image:linear-gradient(var(--line-technical) 1px,transparent 1px),linear-gradient(90deg,var(--line-technical) 1px,transparent 1px);background-size:64px 64px;opacity:.5"></div>
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:26px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600);letter-spacing:.04em">Assemblea Legislativa Regione Emilia-Romagna · 14 luglio 2026</div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300)">Laboratorio di ricerca e foresight</div>
+          <h1 style="font-family:var(--font-display);font-weight:500;font-size:84px;line-height:1;letter-spacing:-.02em;color:#ECECFF;margin:22px 0 0;max-width:18ch">Orientare il futuro</h1>
+          <div style="width:64px;height:4px;background:var(--color-accent);border-radius:999px;margin:34px 0 0"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+          <p style="font-size:20px;color:var(--blanche-400);max-width:46ch;margin:0;line-height:1.4">Ridurre i divari è una possibilità che prende forma attraverso le scelte di oggi.</p>
+          <div style="text-align:right">
+            <div style="font-size:15px;color:var(--blanche-500);font-weight:600">Martino Bellincampi — IZILab</div>
+            <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600);margin-top:4px">01 / 17</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · STAT — fallimento pianificazione lineare -->
+    <section ref="{{ r1 }}" data-screen-label="02 · Perché il futuro non si può improvvisare" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(var(--line-technical) 1px,transparent 1px),linear-gradient(90deg,var(--line-technical) 1px,transparent 1px);background-size:64px 64px;opacity:.4"></div>
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">02 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Perché il futuro non si può improvvisare</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:44px;line-height:1.05;color:#ECECFF;margin:14px 0 0;max-width:24ch">Il futuro non si può improvvisare</h2>
+        <div style="margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+          <div style="border-top:2px solid var(--color-accent);padding-top:18px">
+            <div style="font-family:var(--font-mono);font-size:64px;font-weight:500;line-height:1;letter-spacing:-.02em;color:#ECECFF">&gt;50%</div>
+            <div style="font-size:16px;color:var(--text-muted);margin-top:12px;line-height:1.35">delle aziende, negli Stati Uniti e nell'Unione Europea, chiude o fallisce entro 10 anni</div>
+          </div>
+          <div style="border-top:2px solid var(--border-strong);padding-top:18px">
+            <div style="font-family:var(--font-mono);font-size:64px;font-weight:500;line-height:1;letter-spacing:-.02em;color:#ECECFF">&gt;80%</div>
+            <div style="font-size:16px;color:var(--text-muted);margin-top:12px;line-height:1.35">delle imprese sociali chiude entro 3 anni</div>
+          </div>
+          <div style="border-top:2px solid var(--border-strong);padding-top:18px">
+            <div style="font-family:var(--font-mono);font-size:64px;font-weight:500;line-height:1;letter-spacing:-.02em;color:#ECECFF">&gt;40%</div>
+            <div style="font-size:16px;color:var(--text-muted);margin-top:12px;line-height:1.35">dei nuovi prodotti o servizi lanciati sul mercato non suscita un interesse significativo</div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:22px">Fonte: Simeone et al., 2023</div>
+      </div>
+    </section>
+
+    <!-- 03 · KODAK -->
+    <section ref="{{ r2 }}" data-screen-label="03 · Kodak" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">03 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Fallire a guardare avanti</div>
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:56px;margin-top:26px;flex:1;align-items:center">
+          <div>
+            <h2 style="font-family:var(--font-display);font-weight:500;font-size:52px;line-height:1;color:#ECECFF;margin:0">Kodak</h2>
+            <div style="width:48px;height:4px;background:var(--color-accent);border-radius:999px;margin:24px 0"></div>
+            <p style="font-size:18px;line-height:1.55;color:var(--blanche-400);max-width:42ch;margin:0">Il fatturato annuo raggiunse il picco di 16 miliardi di dollari nel 1996; gli utili, 2,5 miliardi nel 1999. Fu tra le prime aziende a brevettare tecnologie per le immagini digitali — e decise di non svilupparle, per non cannibalizzare i profitti dei prodotti analogici.</p>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:36px;box-shadow:var(--glow-violet)">
+            <div style="font-family:var(--font-mono);font-size:56px;font-weight:500;color:var(--color-accent);line-height:1">2012</div>
+            <div style="font-size:16px;color:var(--blanche-400);margin-top:14px;line-height:1.4">Anno della bancarotta</div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:20px">Fonte: Corporate Foresight Benchmarking Report, 2018 — Aarhus University</div>
+      </div>
+    </section>
+
+    <!-- 04 · LEGO -->
+    <section ref="{{ r3 }}" data-screen-label="04 · Lego" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">04 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Guardare avanti per sopravvivere</div>
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:56px;margin-top:26px;flex:1;align-items:center">
+          <div>
+            <h2 style="font-family:var(--font-display);font-weight:500;font-size:52px;line-height:1;color:#ECECFF;margin:0">Lego</h2>
+            <div style="width:48px;height:4px;background:var(--color-accent);border-radius:999px;margin:24px 0"></div>
+            <p style="font-size:18px;line-height:1.55;color:var(--blanche-400);max-width:42ch;margin:0">Nel 2003 l'azienda è a un passo dalla bancarotta. Decide di istituire un Future Lab, coinvolgendo bambini, progettisti di giocattoli e scrittori di fantascienza.</p>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-accent);border-radius:var(--radius-lg);padding:36px;box-shadow:var(--glow-aqua)">
+            <div style="font-size:20px;line-height:1.4;color:var(--aqua-300);font-weight:600">Le loro idee generano prodotti di enorme successo.</div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:20px">Fonte: Corporate Foresight Benchmarking Report, 2018 — Aarhus University</div>
+      </div>
+    </section>
+
+    <!-- 05 · STAT — 90% -->
+    <section ref="{{ r4 }}" data-screen-label="05 · Il 90% lo fa già" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(var(--line-technical) 1px,transparent 1px),linear-gradient(90deg,var(--line-technical) 1px,transparent 1px);background-size:64px 64px;opacity:.4"></div>
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">05 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Non è un'eccezione, è la norma</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:44px;line-height:1.05;color:#ECECFF;margin:14px 0 0;max-width:24ch">Il 90% lo fa già</h2>
+        <div style="margin-top:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:820px">
+          <div style="border-top:2px solid var(--color-accent);padding-top:18px">
+            <div style="font-family:var(--font-mono);font-size:80px;font-weight:500;line-height:1;letter-spacing:-.02em;color:#ECECFF">90<span style="color:var(--color-accent);font-size:48px">%</span></div>
+            <div style="font-size:17px;color:var(--text-muted);margin-top:12px;line-height:1.35">delle più grandi aziende europee e statunitensi utilizza regolarmente il futures thinking</div>
+          </div>
+          <div style="border-top:2px solid var(--border-strong);padding-top:18px">
+            <div style="font-family:var(--font-mono);font-size:80px;font-weight:500;line-height:1;letter-spacing:-.02em;color:#ECECFF">1/3</div>
+            <div style="font-size:17px;color:var(--text-muted);margin-top:12px;line-height:1.35">di queste aziende ha una funzione aziendale dedicata al futures thinking</div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:22px">Fonte: Nuremberg Institute of Market Decisions</div>
+      </div>
+    </section>
+
+    <!-- 06 · QUOTE — Berkhout (light) -->
+    <section ref="{{ r5 }}" data-screen-label="06 · Cos'è il foresight" style="position:absolute;inset:0;overflow:hidden;background:#FDFDFF url(../../assets/backgrounds/bg-light-violet.png) center/cover;font-family:var(--font-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(253,253,255,.55),rgba(253,253,255,.92))"></div>
+      <div style="position:absolute;inset:0;padding:80px;display:flex;flex-direction:column;justify-content:space-between;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:28px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-800)">06 / 17</div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blanche-800);margin-bottom:18px">Cos'è il foresight</div>
+          <div style="font-family:var(--font-display);font-size:110px;line-height:.6;color:var(--color-accent)">&ldquo;</div>
+          <blockquote style="font-family:var(--font-display);font-weight:500;font-size:42px;line-height:1.18;letter-spacing:-.015em;color:#541BC6;margin:8px 0 0;max-width:34ch">La scienza e l'arte di descrivere, spiegare, esplorare, prevedere e/o interpretare gli sviluppi futuri, nonché di valutarne le conseguenze per le decisioni e le azioni nel presente.</blockquote>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="width:48px;height:3px;background:var(--color-primary);border-radius:999px"></span>
+          <div><div style="font-size:17px;color:var(--blanche-900);font-weight:600">Berkhout, Van der Duin, Hartmann &amp; Ortt</div><div style="font-size:14px;color:var(--blanche-800)">2007, p. 74</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · QUOTE — HBR (dark) -->
+    <section ref="{{ r6 }}" data-screen-label="07 · Prevedere vs guardare in modo razionale" style="position:absolute;inset:0;overflow:hidden;background:#0F0830 url(../../assets/backgrounds/bg-dark-aurora.png) center/cover;font-family:var(--font-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(15,8,48,.55),rgba(15,8,48,.90))"></div>
+      <div style="position:absolute;inset:0;padding:80px;display:flex;flex-direction:column;justify-content:space-between;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">07 / 17</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-size:110px;line-height:.6;color:var(--color-accent)">&ldquo;</div>
+          <blockquote style="font-family:var(--font-display);font-weight:500;font-size:46px;line-height:1.18;letter-spacing:-.015em;color:#ECECFF;margin:8px 0 0;max-width:32ch">Prevedere il futuro è scientificamente impossibile. Guardare al futuro in modo razionale e scientifico non lo è.</blockquote>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="width:48px;height:3px;background:var(--color-accent);border-radius:999px"></span>
+          <div style="font-size:16px;color:var(--blanche-500);font-weight:600">Harvard Business Review Italia</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · DELTA -->
+    <section ref="{{ r7 }}" data-screen-label="08 · Programma Delta" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">08 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Un esempio</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:42px;line-height:1.08;color:#ECECFF;margin:14px 0 0;max-width:28ch">Investire oggi contro un rischio che arriva tra decenni</h2>
+        <p style="font-size:18px;line-height:1.55;color:var(--blanche-400);max-width:64ch;margin:22px 0 0">Il Programma Delta del governo olandese destina 1,4 miliardi di euro, fino al 2034, a opere e manutenzione per mantenere il Paese sicuro, vivibile e prospero. Il livello del mare nei Paesi Bassi potrebbe superare quello attuale, tra 50 e 100 anni, di una misura stimata fra 1 e 5 metri.</p>
+        <div style="margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+          <div style="border-top:2px solid var(--color-accent);padding-top:16px">
+            <div style="font-family:var(--font-mono);font-size:40px;font-weight:500;color:#ECECFF">€1,4B</div>
+            <div style="font-size:14px;color:var(--text-muted);margin-top:8px">investiti fino al 2034</div>
+          </div>
+          <div style="border-top:2px solid var(--border-strong);padding-top:16px">
+            <div style="font-family:var(--font-mono);font-size:40px;font-weight:500;color:#ECECFF">50–100</div>
+            <div style="font-size:14px;color:var(--text-muted);margin-top:8px">anni di orizzonte del rischio</div>
+          </div>
+          <div style="border-top:2px solid var(--border-strong);padding-top:16px">
+            <div style="font-family:var(--font-mono);font-size:40px;font-weight:500;color:#ECECFF">1–5 m</div>
+            <div style="font-size:14px;color:var(--text-muted);margin-top:8px">innalzamento del mare stimato</div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:20px">Fonte: Programma Delta, Governo Olandese</div>
+      </div>
+    </section>
+
+    <!-- 09 · METODOLOGIA — 4 tipi di dato -->
+    <section ref="{{ r8 }}" data-screen-label="09 · Un solo tipo di dato non basta" style="position:absolute;inset:0;overflow:hidden;background:#FBFBFF;font-family:var(--font-body);color:#272735;transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-default);padding-bottom:20px">
+          <div style="display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-800)">09 / 17 · La nostra metodologia</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:64px;margin-top:44px;flex:1">
+          <div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blanche-800)">La nostra metodologia</div>
+            <h2 style="font-family:var(--font-display);font-weight:500;font-size:42px;line-height:1.08;letter-spacing:-.015em;color:#541BC6;margin:14px 0 0">Un solo tipo di dato non basta</h2>
+            <div style="width:48px;height:4px;background:var(--color-accent);border-radius:999px;margin:26px 0"></div>
+            <p style="font-size:17px;line-height:1.55;color:#272735;max-width:36ch;margin:0">I metodi di foresight tradizionali rischiano di restare astratti, senza indicazioni chiare per l'azione. La nostra risposta: integrare quattro tipologie di dato.</p>
+          </div>
+          <ul style="list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:16px">
+            <li style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:44px;height:44px;flex:none;background:#fff;border:1px solid var(--border-default);border-radius:10px;display:flex;align-items:center;justify-content:center"><img src="../../assets/icons/icon-seed.png" alt="" style="height:32px"></span>
+              <div><div style="font-weight:600;font-size:18px;color:#272735">Thick Data</div><div style="font-size:15px;color:var(--blanche-800);margin-top:2px">Storie, interviste, motivazioni, comportamenti.</div></div>
+            </li>
+            <li style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:44px;height:44px;flex:none;background:#fff;border:1px solid var(--border-default);border-radius:10px;display:flex;align-items:center;justify-content:center"><img src="../../assets/icons/icon-concentric.png" alt="" style="height:32px"></span>
+              <div><div style="font-weight:600;font-size:18px;color:#272735">Big Data</div><div style="font-size:15px;color:var(--blanche-800);margin-top:2px">Dati digitali su larga scala, sensori, tracce online.</div></div>
+            </li>
+            <li style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:44px;height:44px;flex:none;background:#fff;border:1px solid var(--border-default);border-radius:10px;display:flex;align-items:center;justify-content:center"><img src="../../assets/icons/icon-lens-arrow.png" alt="" style="height:32px"></span>
+              <div><div style="font-weight:600;font-size:18px;color:#272735">Forward-Looking Data</div><div style="font-size:15px;color:var(--blanche-800);margin-top:2px">Trend, scenari, backcasting.</div></div>
+            </li>
+            <li style="display:flex;gap:14px;align-items:flex-start">
+              <span style="width:44px;height:44px;flex:none;background:#fff;border:1px solid var(--border-default);border-radius:10px;display:flex;align-items:center;justify-content:center"><img src="../../assets/icons/icon-overlap-circle.png" alt="" style="height:32px"></span>
+              <div><div style="font-weight:600;font-size:18px;color:#272735">Participatory Data</div><div style="font-size:15px;color:var(--blanche-800);margin-top:2px">Workshop, co-progettazione, hackathon.</div></div>
+            </li>
+          </ul>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:12px">Bellincampi et al., Futures Thinking — Cap. 1 e 4</div>
+      </div>
+    </section>
+
+    <!-- 10 · CASO LIBRO — piccolo comune d'Appennino -->
+    <section ref="{{ r9 }}" data-screen-label="10 · Un piccolo comune dell'Appennino" style="position:absolute;inset:0;overflow:hidden;background:#FBFBFF;font-family:var(--font-body);color:#272735;transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-default);padding-bottom:20px">
+          <div style="display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-800)">10 / 17 · Lo abbiamo già fatto</div>
+        </div>
+        <div style="margin-top:34px">
+          <div style="font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blanche-800)">Lo abbiamo già fatto</div>
+          <h2 style="font-family:var(--font-display);font-weight:500;font-size:38px;line-height:1.1;letter-spacing:-.015em;color:#541BC6;margin:14px 0 0;max-width:38ch">Un piccolo comune dell'Appennino, una visione a 30 anni</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:30px;flex:1">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <p style="font-size:16px;line-height:1.5;color:#272735;margin:0;max-width:42ch">Una nuova sindaca, eletta con un patto chiaro: non gestire l'ordinario, ma costruire una visione di lungo periodo per la propria comunità di montagna.</p>
+            <ul style="list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:12px">
+              <li style="display:flex;gap:12px;align-items:flex-start;font-size:16px;color:#272735"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary);margin-top:8px;flex:none"></span>Horizon scanning e framework PESTEL</li>
+              <li style="display:flex;gap:12px;align-items:flex-start;font-size:16px;color:#272735"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary);margin-top:8px;flex:none"></span>Metodo Delphi e assemblee pubbliche</li>
+              <li style="display:flex;gap:12px;align-items:flex-start;font-size:16px;color:#272735"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary);margin-top:8px;flex:none"></span>Futures workshop con cittadini ed esperti</li>
+            </ul>
+            <p style="font-size:16px;line-height:1.5;color:#541BC6;font-weight:600;margin:8px 0 0;max-width:42ch">Esito: politiche su lavoro remoto in montagna, coworking ad alta connettività, turismo di rigenerazione. Prima esperienza italiana di questo tipo, con risonanza nazionale.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="background:#fff;border:1px solid var(--border-default);border-radius:12px;padding:16px 20px"><div style="font-weight:600;font-size:15px;color:#541BC6">Thick Data</div><div style="font-size:14px;color:var(--blanche-800);margin-top:2px">Sondaggi ai cittadini</div></div>
+            <div style="background:#fff;border:1px solid var(--border-default);border-radius:12px;padding:16px 20px"><div style="font-weight:600;font-size:15px;color:#541BC6">Big Data</div><div style="font-size:14px;color:var(--blanche-800);margin-top:2px">Social media su vissuto turisti e residenti</div></div>
+            <div style="background:#fff;border:1px solid var(--border-default);border-radius:12px;padding:16px 20px"><div style="font-weight:600;font-size:15px;color:#541BC6">Forward-Looking Data</div><div style="font-size:14px;color:var(--blanche-800);margin-top:2px">Insight degli esperti di foresight</div></div>
+            <div style="background:#fff;border:1px solid var(--border-default);border-radius:12px;padding:16px 20px"><div style="font-weight:600;font-size:15px;color:#541BC6">Participatory Data</div><div style="font-size:14px;color:var(--blanche-800);margin-top:2px">Workshop per scenari e policy condivise</div></div>
+          </div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--blanche-700);margin-top:8px">Bellincampi et al., Futures Thinking — Cap. 7.2 (Tabella 7.2)</div>
+      </div>
+    </section>
+
+    <!-- 11 · CHOREMA COS'È (section-style statement) -->
+    <section ref="{{ r10 }}" data-screen-label="11 · Chorema non è una dashboard" style="position:absolute;inset:0;overflow:hidden;background:var(--gradient-mono);font-family:var(--font-body);color:#ECECFF;transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;right:-120px;top:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(73,225,192,.40) 0%,transparent 65%)"></div>
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">11 / 17</div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--aqua-300)">Da un comune a centinaia di territori</div>
+          <h1 style="font-family:var(--font-display);font-weight:500;font-size:54px;line-height:1.1;letter-spacing:-.02em;color:#FDFDFF;margin:20px 0 0;max-width:22ch">Chorema non è una dashboard, è un research environment</h1>
+          <div style="width:64px;height:4px;background:var(--color-accent);border-radius:999px;margin-top:30px"></div>
+          <p style="font-size:19px;line-height:1.55;color:var(--blanche-300);max-width:56ch;margin-top:28px">Si distingue da GIS tradizionali (Esri, QGIS), location intelligence (CARTO) e consulenza (Deloitte, McKinsey) combinando foresight di lungo periodo e intelligenza agentica su indici territoriali validati scientificamente.</p>
+        </div>
+        <div style="background:rgba(253,253,255,.08);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:24px 30px;max-width:820px">
+          <div style="font-size:19px;color:var(--aqua-300);font-weight:600;line-height:1.4">Gli stessi quattro tipi di dato del metodo, ora integrati e aggiornati in continuo.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · CHOREMA COME FUNZIONA -->
+    <section ref="{{ r11 }}" data-screen-label="12 · Indici validati + intelligenza agentica" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">12 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Come funziona</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:42px;line-height:1.05;color:#ECECFF;margin:14px 0 0;max-width:26ch">Indici validati + intelligenza agentica</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:auto">
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px">
+            <img src="../../assets/icons/icon-stack-diamond.png" alt="" style="height:38px">
+            <div style="font-size:20px;font-weight:600;color:#ECECFF;margin-top:18px">Data Lake</div>
+            <p style="font-size:15px;line-height:1.5;color:var(--text-muted);margin:10px 0 0">80.000+ indicatori geospaziali e 500+ report, da fonti istituzionali e scientifiche.</p>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px">
+            <img src="../../assets/icons/icon-diamond-square.png" alt="" style="height:38px">
+            <div style="font-size:20px;font-weight:600;color:#ECECFF;margin-top:18px">Indici validati</div>
+            <p style="font-size:15px;line-height:1.5;color:var(--text-muted);margin:10px 0 0">Sviluppati con Politecnico di Milano, Aalborg University, LUM.</p>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px">
+            <img src="../../assets/icons/icon-sunburst.png" alt="" style="height:38px">
+            <div style="font-size:20px;font-weight:600;color:#ECECFF;margin-top:18px">Architettura multi-agente</div>
+            <p style="font-size:15px;line-height:1.5;color:var(--text-muted);margin:10px 0 0">Coordinatore, agenti esperti di dominio, agente critico anti-hallucination.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · PERCHÉ NON BASTA UN CHATBOT -->
+    <section ref="{{ r12 }}" data-screen-label="13 · Stessa domanda, risposte diverse" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">13 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Perché non basta un chatbot generico</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:40px;line-height:1.05;color:#ECECFF;margin:14px 0 0;max-width:26ch">Stessa domanda, risposte diverse</h2>
+        <p style="font-size:16px;line-height:1.5;color:var(--blanche-400);font-style:italic;max-width:70ch;margin:20px 0 0">"In quali provincie la domanda di competenze crescerà di più, e quali corridoi migratori saranno più praticabili nei prossimi anni?"</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:auto">
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:30px">
+            <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blanche-700)">Generalisti</div>
+            <div style="font-size:15px;color:var(--text-muted);margin-top:6px">ChatGPT · Gemini · Claude</div>
+            <ul style="list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px">
+              <li style="display:flex;gap:10px;font-size:16px;color:var(--blanche-400)"><span style="width:7px;height:7px;border-radius:50%;background:var(--blanche-700);margin-top:9px;flex:none"></span>Nessun dato realmente granulare</li>
+              <li style="display:flex;gap:10px;font-size:16px;color:var(--blanche-400)"><span style="width:7px;height:7px;border-radius:50%;background:var(--blanche-700);margin-top:9px;flex:none"></span>Fonti generiche o non verificabili</li>
+              <li style="display:flex;gap:10px;font-size:16px;color:var(--blanche-400)"><span style="width:7px;height:7px;border-radius:50%;background:var(--blanche-700);margin-top:9px;flex:none"></span>Nessuna indicazione operativa</li>
+            </ul>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-accent);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--glow-aqua)">
+            <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--aqua-300)">ForeSkill (su Chorema)</div>
+            <div style="font-size:15px;color:var(--text-muted);margin-top:6px">Verticale Chorema per il mercato del lavoro</div>
+            <ul style="list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:12px">
+              <li style="display:flex;gap:10px;font-size:16px;color:#ECECFF"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent);margin-top:9px;flex:none"></span>Dati granulari per provincia e orizzonte temporale</li>
+              <li style="display:flex;gap:10px;font-size:16px;color:#ECECFF"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent);margin-top:9px;flex:none"></span>18 fonti curate e tracciabili</li>
+              <li style="display:flex;gap:10px;font-size:16px;color:#ECECFF"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-accent);margin-top:9px;flex:none"></span>Indicazioni pienamente azionabili</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · BERCETO — chi è + il paradosso -->
+    <section ref="{{ r13 }}" data-screen-label="14 · Berceto, Appennino Parma Est" style="position:absolute;inset:0;overflow:hidden;background:#FBFBFF;font-family:var(--font-body);color:#272735;transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:64px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-default);padding-bottom:18px">
+          <div style="display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-800)">14 / 17 · Caso studio</div>
+        </div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:38px;line-height:1.1;letter-spacing:-.015em;color:#541BC6;margin:22px 0 0">Berceto, Appennino Parma Est</h2>
+        <div style="display:grid;grid-template-columns:1fr 1.05fr;gap:44px;margin-top:22px;flex:1;min-height:0">
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px">
+            <li style="font-size:16px;line-height:1.4;color:#272735"><b>Area SNAI</b> — Appennino Parma Est, finanziata ciclo 2021-2027</li>
+            <li style="font-size:16px;line-height:1.4;color:#272735"><b>Classificazione ISTAT</b> — E, Periferico, 44,7 minuti dal polo urbano</li>
+            <li style="font-size:16px;line-height:1.4;color:#272735"><b>Popolazione</b> — <span style="font-family:var(--font-mono)">-25,7%</span> in 30 anni (1991-2021)</li>
+            <li style="font-size:16px;line-height:1.4;color:#272735"><b>Struttura demografica</b> — over 65 oltre 4 volte gli under 15</li>
+          </ul>
+          <img src="./assets/berceto-radar-ui.png" alt="Chorema — profilo Berceto" style="width:100%;border-radius:var(--radius-md);border:1px solid var(--border-default);object-fit:cover;max-height:100%">
+        </div>
+        <div style="background:#F2F2FE;border-radius:var(--radius-lg);padding:20px 28px;margin-top:14px">
+          <div style="font-size:18px;font-weight:600;color:#541BC6;line-height:1.4">Zero ospedali raggiungibili in 30 minuti. Il dominio più accessibile in assoluto: la ristorazione.</div>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--blanche-700);margin-top:10px">Fonte: Chorema — Aree Interne Intelligence, Urban Intelligence (Hex)</div>
+      </div>
+    </section>
+
+    <!-- 15 · SCENARI AL 2030 -->
+    <section ref="{{ r14 }}" data-screen-label="15 · Due traiettorie, a partire da oggi" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:64px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">15 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:30px">Scenari</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:40px;line-height:1.05;color:#ECECFF;margin:14px 0 0">Due traiettorie, a partire da oggi</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:26px;flex:1;min-height:0">
+          <img src="./assets/berceto-hexmaps.png" alt="Mappe H3 — Berceto" style="width:100%;border-radius:var(--radius-md);border:1px solid var(--border-default);object-fit:contain;background:#fff;align-self:center">
+          <div style="display:flex;flex-direction:column;gap:20px;justify-content:center">
+            <div style="background:var(--surface-card);border:1px solid var(--border-default);border-left:4px solid #F2657D;border-radius:var(--radius-lg);padding:24px 28px">
+              <div style="font-size:20px;font-weight:600;color:#ECECFF">Inerzia strutturale</div>
+              <p style="font-size:15px;line-height:1.5;color:var(--text-muted);margin:10px 0 0">Il trend attuale continua: connettività e telemedicina non arrivano in tempo. La popolazione scende sotto la soglia critica entro il 2030.</p>
+            </div>
+            <div style="background:var(--surface-card);border:1px solid var(--border-accent);border-left:4px solid var(--color-accent);border-radius:var(--radius-lg);padding:24px 28px;box-shadow:var(--glow-aqua)">
+              <div style="font-size:20px;font-weight:600;color:#ECECFF">Rigenerazione connessa</div>
+              <p style="font-size:15px;line-height:1.5;color:var(--text-muted);margin:10px 0 0">Telemedicina, mobilità a chiamata e residenzialità digitale, attivate nel ciclo SNAI in corso, invertono parzialmente la traiettoria di declino.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · RACCOMANDAZIONI STRATEGICHE -->
+    <section ref="{{ r15 }}" data-screen-label="16 · Le scelte che possono cambiare la traiettoria" style="position:absolute;inset:0;overflow:hidden;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:24px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">16 / 17</div>
+        </div>
+        <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300);margin-top:34px">Raccomandazioni strategiche</div>
+        <h2 style="font-family:var(--font-display);font-weight:500;font-size:38px;line-height:1.08;color:#ECECFF;margin:14px 0 0;max-width:30ch">Le scelte che possono cambiare la traiettoria</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:auto">
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:var(--font-mono);font-size:30px;color:var(--color-accent);font-weight:500">01</div>
+            <div style="font-size:19px;font-weight:600;color:#ECECFF">Telemedicina intercomunale</div>
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-300);margin-top:6px">Destinatario</div>
+            <div style="font-size:14px;color:var(--text-muted)">AUSL Parma / Unione dei Comuni</div>
+            <p style="font-size:14px;line-height:1.45;color:var(--text-muted);margin-top:8px">Presidio h24 con teleconsulto e telemonitoraggio per le cronicità, attivo entro il 2026.</p>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:var(--font-mono);font-size:30px;color:var(--color-accent);font-weight:500">02</div>
+            <div style="font-size:19px;font-weight:600;color:#ECECFF">Mobilità a chiamata sovracomunale</div>
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-300);margin-top:6px">Destinatario</div>
+            <div style="font-size:14px;color:var(--text-muted)">Agenzia TPL Emilia-Romagna</div>
+            <p style="font-size:14px;line-height:1.45;color:var(--text-muted);margin-top:8px">Trasporto a chiamata tra i 9 comuni dell'area, operativo entro il 2027.</p>
+          </div>
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--radius-lg);padding:28px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-family:var(--font-mono);font-size:30px;color:var(--color-accent);font-weight:500">03</div>
+            <div style="font-size:19px;font-weight:600;color:#ECECFF">Residenzialità digitale</div>
+            <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-300);margin-top:6px">Destinatario</div>
+            <div style="font-size:14px;color:var(--text-muted)">Comune di Berceto / GAL Appennino Parmense</div>
+            <p style="font-size:14px;line-height:1.45;color:var(--text-muted);margin-top:8px">Incentivi abitativi e coworking per lavoratori remoti, su strutture ricettive esistenti.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · CHIUSURA -->
+    <section ref="{{ r16 }}" data-screen-label="17 · Le scelte di oggi" style="position:absolute;inset:0;overflow:hidden;background:#0F0830 url(../../assets/backgrounds/bg-dark-wisp.png) center/cover;font-family:var(--font-body);color:var(--text-body);transition:opacity .45s ease;opacity:0;visibility:hidden">
+      <div style="position:absolute;inset:0;background:linear-gradient(115deg,rgba(15,8,48,.78),rgba(15,8,48,.40) 55%,rgba(15,8,48,.72))"></div>
+      <div style="position:absolute;inset:0;padding:72px 80px;display:flex;flex-direction:column;justify-content:space-between;z-index:2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="background:#FDFDFF;border-radius:10px;padding:9px 13px;display:flex"><img src="../../assets/logo/logo-izilab.png" alt="IZILab" style="height:26px"></div>
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--blanche-600)">17 / 17</div>
+        </div>
+        <div>
+          <div style="font-size:14px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-300)">In chiusura</div>
+          <h1 style="font-family:var(--font-display);font-weight:500;font-size:72px;line-height:1;letter-spacing:-.02em;color:#ECECFF;margin:22px 0 0;max-width:16ch">Le scelte di oggi</h1>
+          <div style="width:64px;height:4px;background:var(--color-accent);border-radius:999px;margin:34px 0 0"></div>
+          <p style="font-size:19px;color:var(--blanche-400);max-width:56ch;margin-top:28px;line-height:1.5">Il ciclo SNAI 2021-2027 è aperto. Le tecnologie per leggere e anticipare i divari territoriali esistono già. Quello che ridurrà davvero le disuguaglianze tra i luoghi non è un nuovo dato: è la scelta di usarlo, ora.</p>
+        </div>
+        <div style="font-size:16px;color:var(--aqua-300);font-weight:600">Martino Bellincampi — IZILab · www.izilab.it</div>
+      </div>
+    </section>
+
+  </div>
+
+  <div style="position:fixed;left:0;right:0;bottom:20px;display:flex;align-items:center;justify-content:center;gap:18px;z-index:10">
+    <button onClick="{{ prev }}" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(236,235,254,.25);background:rgba(20,12,56,.7);color:#ECEBFE;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(100,34,232,.6)">‹</button>
+    <div style="font-family:var(--font-mono);font-size:13px;color:#9C93D8;letter-spacing:.06em;min-width:64px;text-align:center">{{ counter }}</div>
+    <button onClick="{{ next }}" style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(236,235,254,.25);background:rgba(20,12,56,.7);color:#ECEBFE;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:rgba(100,34,232,.6)">›</button>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { i: 0, scale: 1 };
+
+  stageRef = React.createRef();
+  slideRefs = Array.from({ length: 17 }, () => React.createRef());
+
+  apply() {
+    const st = this.stageRef.current;
+    if (st) st.style.transform = `scale(${this.state.scale})`;
+    this.slideRefs.forEach((r, n) => {
+      const el = r.current;
+      if (!el) return;
+      const on = n === this.state.i;
+      el.style.opacity = on ? '1' : '0';
+      el.style.visibility = on ? 'visible' : 'hidden';
+    });
+  }
+
+  componentDidMount() {
+    this.fit = () => {
+      const vw = window.innerWidth - 64;
+      const vh = window.innerHeight - 64 - 56;
+      const s = Math.min(vw / 1280, vh / 720);
+      this.setState({ scale: s > 0 ? s : 1 });
+    };
+    this.fit();
+    window.addEventListener('resize', this.fit);
+    this.key = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') this.next();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.prev();
+    };
+    window.addEventListener('keydown', this.key);
+    this.apply();
+  }
+
+  componentDidUpdate() {
+    this.apply();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.fit);
+    window.removeEventListener('keydown', this.key);
+  }
+
+  next = () => this.setState(s => ({ i: Math.min(s.i + 1, 16) }));
+  prev = () => this.setState(s => ({ i: Math.max(s.i - 1, 0) }));
+
+  renderVals() {
+    const vals = {
+      stageRef: this.stageRef,
+      next: this.next,
+      prev: this.prev,
+      counter: `${String(this.state.i + 1).padStart(2, '0')} / 17`,
+    };
+    this.slideRefs.forEach((r, n) => { vals['r' + n] = r; });
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

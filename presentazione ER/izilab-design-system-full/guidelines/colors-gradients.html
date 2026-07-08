@@ -1,0 +1,22 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Gradients" subtitle="Brand · radial · chart" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--bg-surface); font-family: var(--font-body); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .g { height: 100px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: flex; align-items: flex-end; padding: 10px; }
+  .cap { font-size: 11px; color: #fff; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="g" style="background:var(--gradient-brand)"><span class="cap">brand 135°</span></div>
+    <div class="g" style="background:var(--gradient-radial)"><span class="cap">radial</span></div>
+    <div class="g" style="background:var(--gradient-chart-violet)"><span class="cap">chart violet</span></div>
+    <div class="g" style="background:var(--gradient-chart-aqua)"><span class="cap">chart aqua</span></div>
+  </div>
+</body>
+</html>

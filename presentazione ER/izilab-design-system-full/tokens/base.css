@@ -1,0 +1,90 @@
+/* ============================================================
+   IZILab — base element defaults + brand utility helpers
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings — Cirka/Domine, sentence case */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-heading);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-4);
+  text-wrap: balance;
+}
+h1 { font-size: var(--text-h1); line-height: var(--lh-display); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+
+p { margin: 0 0 var(--space-4); text-wrap: pretty; }
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Numbers / data always Chivo Mono */
+.num, [data-numeric] {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+  letter-spacing: var(--ls-mono);
+}
+
+/* ---- Brand utility helpers ---- */
+.izi-display    { font-family: var(--font-display); font-size: var(--text-display-1); line-height: var(--lh-display); letter-spacing: var(--ls-display); color: var(--text-heading); }
+
+.izi-kicker {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-kicker);
+  color: var(--text-kicker);
+}
+
+/* Short aqua divider used under kickers/titles in carousels + slides */
+.izi-rule {
+  width: 40px; height: 3px; border: 0; border-radius: var(--radius-pill);
+  background: var(--color-accent); margin: var(--space-3) 0;
+}
+
+.izi-gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+/* Aurora background washes (recreate the "Background" gradients in CSS) */
+.izi-bg-aurora {
+  background:
+    radial-gradient(60% 80% at 75% 15%, rgba(100,34,232,0.55) 0%, transparent 60%),
+    radial-gradient(50% 60% at 20% 85%, rgba(73,225,192,0.30) 0%, transparent 60%),
+    var(--bg-page);
+}
+
+/* Technical line overlay (the "Linee" motif) */
+.izi-bg-grid {
+  background-image:
+    linear-gradient(var(--line-technical) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-technical) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .izi-animate-in { animation: izi-fade-up var(--dur-slow) var(--ease-emphasis) both; }
+}
+@keyframes izi-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}

@@ -1,0 +1,44 @@
+/* ============================================================
+   IZILab — Fonts
+   Display: Cirka (proprietary, Pangram Pangram) → fallback Domine (Google).
+   Body:    Instrument Sans (Google, OFL).
+   Data:    Chivo Mono (Google, OFL).
+   Cirka licensed files are embedded (Pangram Pangram). Domine remains the
+   fallback stack for any environment where the files are unavailable.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Chivo+Mono:wght@300;400;500;600;700&display=swap');
+
+/* --- Cirka (proprietary display face, Pangram Pangram) --- */
+@font-face {
+  font-family: "Cirka";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Cirka-Regular.woff2") format("woff2"),
+       url("../assets/fonts/Cirka-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Cirka";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Cirka-Medium.woff2") format("woff2"),
+       url("../assets/fonts/Cirka-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: "Cirka";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Cirka-Semibold.woff2") format("woff2"),
+       url("../assets/fonts/Cirka-Semibold.woff") format("woff");
+}
+@font-face {
+  font-family: "Cirka";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("../assets/fonts/Cirka-Bold.woff2") format("woff2"),
+       url("../assets/fonts/Cirka-Bold.woff") format("woff");
+}

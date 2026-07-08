@@ -1,0 +1,25 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Spacing scale" subtitle="8px grid · space-1 → space-9" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px 24px; background: var(--bg-surface); font-family: var(--font-body); }
+  .row { display: flex; align-items: flex-end; gap: 14px; }
+  .item { text-align: center; }
+  .bar { background: var(--color-primary); border-radius: var(--radius-xs); width: 100%; }
+  .tok { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-top: 6px; }
+  .px { font-family: var(--font-mono); font-size: 11px; color: var(--text-heading); }
+</style>
+</head>
+<body>
+  <div class="row" id="row"></div>
+  <script>
+    const items = [['1','4'],['2','8'],['3','12'],['4','16'],['5','24'],['6','32'],['7','48'],['8','64'],['9','96']];
+    document.getElementById('row').innerHTML = items.map(([n,px]) =>
+      `<div class="item" style="width:${px}px;min-width:24px"><div class="bar" style="height:${px}px"></div>
+       <div class="px">${px}</div><div class="tok">space-${n}</div></div>`).join('');
+  </script>
+</body>
+</html>

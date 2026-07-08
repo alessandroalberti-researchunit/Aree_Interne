@@ -1,0 +1,29 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Blanche scale" subtitle="Neutral family · 100–900 (violet-tinted)" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--bg-surface); font-family: var(--font-body); }
+  .row { display: grid; grid-template-columns: repeat(9, 1fr); gap: 6px; }
+  .sw { border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle); }
+  .chip { height: 64px; }
+  .meta { padding: 6px 8px; background: var(--surface-raised); }
+  .step { font-family: var(--font-mono); font-size: 12px; color: var(--text-heading); }
+  .hex { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0; }
+</style>
+</head>
+<body>
+  <div class="row" id="row"></div>
+  <script>
+    const steps = [100,200,300,400,500,600,700,800,900];
+    const root = getComputedStyle(document.documentElement);
+    document.getElementById('row').innerHTML = steps.map(s => {
+      const v = root.getPropertyValue('--blanche-'+s).trim();
+      return `<div class="sw"><div class="chip" style="background:${v}"></div>
+        <div class="meta"><div class="step">${s}</div><div class="hex">${v.toUpperCase()}</div></div></div>`;
+    }).join('');
+  </script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chorema — Investor Deck (Follow-up · Indaco SGR)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  deck-stage:not(:defined){visibility:hidden}
+  :root{
+    --bg:#0A1024; --bg2:#0D1117; --ink:#F0F4F8; --muted:#8B9AA7; --dim:#5C6B7A;
+    --teal:#3EE8D6; --mag:#D45CA6; --line:rgba(240,244,248,.12); --line2:rgba(240,244,248,.07);
+    --card:rgba(255,255,255,.035); --grad:linear-gradient(90deg,var(--teal),var(--mag));
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  deck-stage{background:#05070f}
+  section.s{ background:var(--bg); color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif; -webkit-font-smoothing:antialiased; overflow:hidden; }
+  section.s::before{ /* subtle depth glow */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(120% 80% at 85% -10%, rgba(62,232,214,.10), transparent 55%),
+               radial-gradient(90% 70% at -10% 110%, rgba(212,92,166,.10), transparent 55%); }
+  .s--img::before{display:none}
+  .s--img{ background-size:cover; background-position:center; }
+  .veil{ position:absolute; inset:0; }
+
+  .frame{ position:relative; z-index:2; height:100%; padding:78px 116px 64px; display:flex; flex-direction:column; }
+  .top{ display:flex; justify-content:space-between; align-items:center; }
+  .wm{ height:30px; opacity:.95; }
+  .sec{ font-size:19px; letter-spacing:.18em; color:var(--muted); font-weight:500; }
+  .sec b{ color:var(--teal); font-weight:600; }
+  .body{ flex:1; min-height:0; display:flex; flex-direction:column; }
+  .foot{ display:flex; justify-content:space-between; align-items:center; font-size:16px; color:var(--dim); letter-spacing:.04em; border-top:1px solid var(--line2); padding-top:18px; }
+  .foot .pg{ font-variant-numeric:tabular-nums; }
+
+  .kicker{ font-size:20px; letter-spacing:.2em; text-transform:uppercase; color:var(--teal); font-weight:600; }
+  h1.t{ font-weight:300; font-size:128px; line-height:.98; letter-spacing:-.03em; margin:0; }
+  h2.t{ font-weight:300; font-size:64px; line-height:1.02; letter-spacing:-.02em; margin:0; }
+  h2.t b{ font-weight:600; }
+  .lead{ font-size:27px; line-height:1.5; color:var(--muted); max-width:30ch; font-weight:300; }
+  .rule{ height:4px; width:88px; background:var(--grad); border-radius:999px; }
+  .em{ color:var(--ink); }
+  .teal{ color:var(--teal); } .mag{ color:var(--mag); }
+  .num{ font-weight:300; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+
+  /* generic layout helpers */
+  .cols{ display:grid; gap:54px; }
+  .c2{ grid-template-columns:1fr 1fr; }
+  .c3{ grid-template-columns:repeat(3,1fr); }
+  .c4{ grid-template-columns:repeat(4,1fr); }
+  .stack{ display:flex; flex-direction:column; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:32px 34px; }
+  .lbl{ font-size:16px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); font-weight:600; }
+  .idx{ font-size:18px; color:var(--teal); font-weight:600; letter-spacing:.1em; }
+
+  ul.bul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:18px; }
+  ul.bul li{ display:flex; gap:16px; font-size:23px; line-height:1.4; color:var(--ink); }
+  ul.bul li::before{ content:""; flex:none; width:9px; height:9px; margin-top:11px; border-radius:50%; background:var(--teal); }
+  ul.bul.q li::before{ background:var(--mag); }
+
+  table.cmp{ width:100%; border-collapse:collapse; font-size:21px; }
+  table.cmp th,table.cmp td{ text-align:left; padding:15px 18px; border-bottom:1px solid var(--line2); }
+  table.cmp th{ font-size:15px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); font-weight:600; }
+  table.cmp td{ color:var(--muted); }
+  table.cmp td.k{ color:var(--ink); font-weight:500; }
+  table.cmp .yes{ color:var(--teal); font-weight:600; }
+  table.cmp .no{ color:#6A4960; }
+  table.cmp tr.hl td{ background:rgba(62,232,214,.07); color:var(--ink); }
+
+  .pill{ display:inline-flex; align-items:center; gap:9px; padding:8px 16px; border:1px solid var(--line); border-radius:999px; font-size:17px; color:var(--muted); }
+  .dotg{ width:8px;height:8px;border-radius:50%; }
+
+  /* entrance — transform-only so content is always visible (preview iframes
+     pause animations at frame 0; opacity fades would leave slides blank) */
+  @media (prefers-reduced-motion:no-preference){
+    [data-deck-active] .anim{ animation:fu .55s cubic-bezier(.2,.7,.2,1) both; }
+    [data-deck-active] .anim.d1{animation-delay:.06s} [data-deck-active] .anim.d2{animation-delay:.12s}
+    [data-deck-active] .anim.d3{animation-delay:.18s} [data-deck-active] .anim.d4{animation-delay:.24s}
+    @keyframes fu{ from{transform:translateY(14px)} to{transform:none} }
+  }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <rect width="400" height="400" fill="#0A1024"/>
+    <rect x="120" y="120" width="160" height="160" rx="14" fill="none" stroke="#3EE8D6" stroke-width="6"/>
+    <circle cx="200" cy="200" r="40" fill="none" stroke="#D45CA6" stroke-width="6"/>
+    <text x="200" y="320" text-anchor="middle" fill="#F0F4F8" font-family="Inter,sans-serif" font-size="34" font-weight="600">Chorema</text>
+  </svg>
+</template>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section class="s s--img" data-label="Title" style="background-image:url(assets/bg-particles.png)">
+    <div class="veil" style="background:linear-gradient(105deg, rgba(7,10,22,.86) 0%, rgba(7,10,22,.45) 52%, rgba(7,10,22,.72) 100%)"></div>
+    <div class="frame">
+      <div class="top">
+        <img class="wm" src="assets/wordmark-izilab.png" alt="IZILab">
+        <div class="sec">INVESTOR DECK&nbsp;&nbsp;·&nbsp;&nbsp;FOLLOW-UP&nbsp;&nbsp;·&nbsp;&nbsp;2026</div>
+      </div>
+      <div class="body" style="justify-content:center; gap:30px">
+        <div class="kicker anim">Geospatial Futures Economics</div>
+        <h1 class="t anim d1">Chorema</h1>
+        <div class="rule anim d1"></div>
+        <p class="lead anim d2" style="max-width:38ch; font-size:30px">The Knowledge-as-a-Service platform that makes territorial economic futures <span class="em">navigable, measurable, and actionable.</span></p>
+      </div>
+      <div class="top anim d3" style="align-items:flex-end">
+        <div style="display:flex; gap:64px">
+          <div><div style="font-size:24px; font-weight:600">Martino Bellincampi</div><div style="font-size:18px; color:var(--muted); letter-spacing:.08em">CEO &amp; CO-FOUNDER</div></div>
+          <div><div style="font-size:24px; font-weight:600">Luca Simeone</div><div style="font-size:18px; color:var(--muted); letter-spacing:.08em">CSO &amp; CO-FOUNDER</div></div>
+        </div>
+        <div class="sec" style="color:var(--muted)">Napoli · Roma · Bari · Copenhagen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · CHALLENGE -->
+  <section class="s" data-label="The challenge">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec">THE&nbsp;CHALLENGE</div></div>
+      <div class="body" style="justify-content:center; gap:36px">
+        <div class="kicker anim">The challenge we address</div>
+        <h2 class="t anim d1" style="font-size:66px; max-width:26ch">Organizations face unprecedented volumes of complex geospatial data — <b>without the tools to act on it.</b></h2>
+        <div class="rule anim d1"></div>
+        <p class="lead anim d2" style="max-width:62ch; font-size:26px">The lack of integrated predictive models limits the ability to anticipate future scenarios. Traditional GIS delivers only historical analysis and static maps — <span class="em">no predictive capability.</span></p>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">02 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · CONTEXT -->
+  <section class="s" data-label="Problems & questions">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>01</b>&nbsp;·&nbsp;THE&nbsp;CONTEXT</div></div>
+      <div class="body" style="gap:40px; padding-top:30px">
+        <div class="stack" style="gap:14px">
+          <h2 class="t anim">Problems and key questions</h2>
+          <p class="lead anim d1" style="max-width:70ch; font-size:24px">Where decision-makers get stuck today — and what Chorema makes decidable.</p>
+        </div>
+        <div class="cols c2 anim d2" style="flex:1; gap:64px; align-content:start; margin-top:8px">
+          <div class="stack" style="gap:22px">
+            <div class="lbl">Where decision-makers get stuck</div>
+            <ul class="bul">
+              <li>Strategic decisions made under deep uncertainty and rapid change.</li>
+              <li>Fragmented signals that fail to translate into actionable insight.</li>
+              <li>Over-reliance on short-term planning and linear forecasts.</li>
+              <li>Lack of internal foresight capability and shared sense-making.</li>
+              <li>Difficulty aligning strategy, policy, and investment to long-term goals.</li>
+            </ul>
+          </div>
+          <div class="stack" style="gap:22px">
+            <div class="lbl" style="color:var(--mag)">What Chorema helps decide</div>
+            <ul class="bul q">
+              <li>How can cities build policies resilient to climate, demographics, and migration?</li>
+              <li>Which weak signals will disrupt specific sectors in the next 5–15 years?</li>
+              <li>How robust is a company's strategy across different plausible futures?</li>
+              <li>Where to invest today to stay competitive tomorrow?</li>
+              <li>Which early indicators to monitor to anticipate systemic risks?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">03 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 4 · PROBLEM -->
+  <section class="s" data-label="Three classes of tools">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>02</b>&nbsp;·&nbsp;THE&nbsp;PROBLEM</div></div>
+      <div class="body" style="gap:34px; padding-top:28px">
+        <div class="stack" style="gap:14px">
+          <h2 class="t anim">Three classes of tools. None solves the whole problem</h2>
+          <p class="lead anim d1" style="max-width:78ch; font-size:24px">Decision-makers' questions cut across space, time, and economics. Each tool covers only one dimension.</p>
+        </div>
+        <div class="cols c3 anim d2" style="flex:1; align-items:stretch">
+          <div class="card stack" style="gap:16px">
+            <div class="idx">01</div>
+            <div style="font-size:30px; font-weight:600">Traditional GIS</div>
+            <div class="lbl" style="color:var(--dim)">ESRI · QGIS · CARTO</div>
+            <div class="mag" style="font-size:21px; font-weight:600">They don't project the future.</div>
+            <p style="margin:0; font-size:20px; color:var(--muted); line-height:1.45">Static visualizations, rigid administrative boundaries, no predictive capability. They snapshot the past.</p>
+          </div>
+          <div class="card stack" style="gap:16px">
+            <div class="idx">02</div>
+            <div style="font-size:30px; font-weight:600">Foresight consulting</div>
+            <div class="lbl" style="color:var(--dim)">DELOITTE · MCKINSEY · OXFORD</div>
+            <div class="mag" style="font-size:21px; font-weight:600">Don't scale, don't integrate.</div>
+            <p style="margin:0; font-size:20px; color:var(--muted); line-height:1.45">One-shot PDFs, annual reports, high cost, not updatable in real time, no sub-municipal granularity.</p>
+          </div>
+          <div class="card stack" style="gap:16px">
+            <div class="idx">03</div>
+            <div style="font-size:30px; font-weight:600">Generalist LLMs</div>
+            <div class="lbl" style="color:var(--dim)">CHATGPT · GEMINI · CLAUDE</div>
+            <div class="mag" style="font-size:21px; font-weight:600">Not reliable on real data.</div>
+            <p style="margin:0; font-size:20px; color:var(--muted); line-height:1.45">No territorial granularity, untraceable sources, high hallucination risk on vertical domains.</p>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">04 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 5 · SOLUTION -->
+  <section class="s" data-label="Chorema solution">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>03</b>&nbsp;·&nbsp;THE&nbsp;SOLUTION</div></div>
+      <div class="body" style="gap:34px; padding-top:28px">
+        <div class="stack" style="gap:14px">
+          <h2 class="t anim">Chorema — a Knowledge-as-a-Service platform</h2>
+          <p class="lead anim d1" style="max-width:80ch; font-size:24px">To plan the economic futures of territories. Answers anchored to a proprietary Data Lake — not LLM memory.</p>
+        </div>
+        <div class="cols c3 anim d2" style="align-items:stretch">
+          <div class="card stack" style="gap:10px">
+            <div class="num teal" style="font-size:74px">8+</div>
+            <div style="font-size:23px; font-weight:600">Intelligence domains</div>
+            <p style="margin:0; font-size:19px; color:var(--muted); line-height:1.45">Urban, climate, health, migration, hydrogeological risk, air quality, transport, biodiversity — each with dedicated AI agents and curated data.</p>
+          </div>
+          <div class="card stack" style="gap:10px; border-color:rgba(62,232,214,.35)">
+            <div class="num teal" style="font-size:74px">80+</div>
+            <div style="font-size:23px; font-weight:600">Validated indices</div>
+            <p style="margin:0; font-size:19px; color:var(--muted); line-height:1.45">Built on 84,000+ geospatial indicators. A co-developed subset is scientifically validated with universities — Aalborg, LUM, Università di Bari, Politecnico di Milano. Custom indices via Index Crafter.</p>
+          </div>
+          <div class="card stack" style="gap:10px">
+            <div class="num teal" style="font-size:74px">13</div>
+            <div style="font-size:23px; font-weight:600">Specialized AI agents</div>
+            <p style="margin:0; font-size:19px; color:var(--muted); line-height:1.45">Coordinator → vertical experts → critic agent flagging gaps and hallucinations. Grounded in the proprietary Data Lake.</p>
+          </div>
+        </div>
+        <div class="cols c4 anim d3" style="gap:0; border-top:1px solid var(--line2); padding-top:26px">
+          <div class="stack" style="gap:4px"><div class="num em" style="font-size:46px">84,000<span class="teal">+</span></div><div class="lbl">Geospatial indicators</div></div>
+          <div class="stack" style="gap:4px"><div class="num em" style="font-size:46px">131</div><div class="lbl">Specialized tools</div></div>
+          <div class="stack" style="gap:4px"><div class="num em" style="font-size:46px">29,000</div><div class="lbl">Indexed patents</div></div>
+          <div class="stack" style="gap:4px"><div class="num em" style="font-size:46px">4,700</div><div class="lbl">Health indicators</div></div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">05 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 6 · ARCHITECTURE -->
+  <section class="s" data-label="Architecture">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>04</b>&nbsp;·&nbsp;PRODUCT&nbsp;ARCHITECTURE</div></div>
+      <div class="body" style="gap:30px; padding-top:28px">
+        <div class="stack" style="gap:14px">
+          <h2 class="t anim">One platform. Vertical channels</h2>
+          <p class="lead anim d1" style="max-width:82ch; font-size:24px">Verticals share the same engine and Data Lake. Every new vertical makes the whole platform denser for everyone.</p>
+        </div>
+        <div class="card anim d2" style="display:flex; align-items:center; gap:28px; padding:24px 32px; background:linear-gradient(90deg, rgba(62,232,214,.10), rgba(212,92,166,.10)); border-color:rgba(62,232,214,.3)">
+          <div style="font-size:22px; font-weight:700; letter-spacing:.04em; white-space:nowrap">CHOREMA<br><span style="color:var(--teal); font-size:15px; letter-spacing:.16em">CORE PLATFORM</span></div>
+          <div style="display:flex; flex-wrap:wrap; gap:12px">
+            <span class="pill">H3 map</span><span class="pill">Time slider</span><span class="pill">AI agents</span><span class="pill">Data Lake</span><span class="pill">Curated indices</span><span class="pill">Report generation</span><span class="pill">Marketplace</span>
+          </div>
+        </div>
+        <div class="cols c3 anim d3" style="flex:1; align-items:stretch">
+          <div class="card stack" style="gap:12px">
+            <div style="font-size:27px; font-weight:600">ForeSkill</div>
+            <div class="lbl teal">Labour &amp; Migration</div>
+            <p style="margin:0; font-size:19px; color:var(--muted); line-height:1.45">European KaaS for medium-term labour-mismatch forecasting. Migration corridors Colombia–Italy, Tunisia–Italy. CEDEFOP, Eurostat, Excelsior data.</p>
+            <div class="pill" style="align-self:flex-start; border-color:rgba(62,232,214,.4); color:var(--teal)">Active pilots with public bodies</div>
+          </div>
+          <div class="card stack" style="gap:12px">
+            <div style="font-size:27px; font-weight:600">GeoSentinel</div>
+            <div class="lbl teal">Critical Infrastructure</div>
+            <p style="margin:0; font-size:19px; color:var(--muted); line-height:1.45">Predictive IIoT intelligence, early warning &lt; 60 seconds. Sensors integrated with geospatial data for territorial resilience and environmental monitoring.</p>
+            <div class="pill" style="align-self:flex-start; border-color:rgba(62,232,214,.4); color:var(--teal)">STEP Lazio €381k · Terna pipeline</div>
+          </div>
+          <div class="card stack" style="gap:12px">
+            <div style="font-size:27px; font-weight:600">StratoHealth</div>
+            <div class="lbl teal">Health &amp; Environment</div>
+            <p style="margin:0; font-size:19px; color:var(--muted); line-height:1.45">4,700+ health indicators (Health4All) cross-referenced with Copernicus. Health profile by address at sub-municipal scale.</p>
+            <div class="pill" style="align-self:flex-start; border-color:var(--line); color:var(--muted)">In development</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">06 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 7 · PROOF — DEMO SEQUENCE -->
+  <section class="s" data-label="Same question">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>05</b>&nbsp;·&nbsp;THE&nbsp;PROOF&nbsp;POINT</div></div>
+      <div class="body" style="gap:26px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim">Same question. Three generalist answers. One curated answer</h2>
+        </div>
+        <div class="card anim d1" style="border-left:4px solid var(--teal); padding:22px 30px">
+          <div class="lbl teal" style="margin-bottom:8px">The query</div>
+          <p style="margin:0; font-size:23px; line-height:1.45; color:var(--ink)">"In which Piedmont provinces will demand for IT technicians be highest in 2025–29, and which Colombia–Italy corridors are most feasible in terms of qualification recognition?"</p>
+        </div>
+        <div class="cols anim d2" style="grid-template-columns:1fr 1fr; flex:1; gap:40px; align-items:stretch">
+          <div class="card stack" style="gap:16px">
+            <div class="lbl" style="color:var(--mag)">Generalist LLMs → surface answers</div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap">
+              <span class="pill">ChatGPT</span><span class="pill">Gemini</span><span class="pill">Claude</span>
+            </div>
+            <ul class="bul q" style="gap:12px">
+              <li style="font-size:20px">No sub-municipal granularity on skill demand</li>
+              <li style="font-size:20px">Generic or uncertain, untraceable sources</li>
+              <li style="font-size:20px">No corridor feasibility or diaspora data</li>
+              <li style="font-size:20px">High hallucination risk → not actionable</li>
+            </ul>
+          </div>
+          <div class="card stack" style="gap:16px; border-color:rgba(62,232,214,.4); background:rgba(62,232,214,.06)">
+            <div class="lbl teal">Chorema → curated knowledge</div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap">
+              <span class="pill" style="border-color:rgba(62,232,214,.5); color:var(--teal)">18 curated sources</span><span class="pill" style="border-color:rgba(62,232,214,.5); color:var(--teal)">Data Lake-anchored</span>
+            </div>
+            <ul class="bul" style="gap:12px">
+              <li style="font-size:20px">Province-level demand, ranked, 2025–29 horizon</li>
+              <li style="font-size:20px">Expansion vs replacement — negative intelligence</li>
+              <li style="font-size:20px">Corridor time horizons + diaspora data</li>
+              <li style="font-size:20px">Traceable sources, contained hallucination → fully actionable</li>
+            </ul>
+          </div>
+        </div>
+        <p class="lead anim d3" style="max-width:none; font-size:22px; color:var(--ink)">→ The difference isn't in the model. It's in the <span class="teal">underlying knowledge infrastructure.</span></p>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">07 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 8 · PROOF — CONFIDENCE TAGGING -->
+  <section class="s" data-label="Confidence tagging">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>06</b>&nbsp;·&nbsp;THE&nbsp;PROOF&nbsp;POINT</div></div>
+      <div class="body" style="gap:28px; padding-top:28px">
+        <div class="stack" style="gap:14px">
+          <h2 class="t anim">Every figure carries its provenance and a confidence level</h2>
+          <p class="lead anim d1" style="max-width:84ch; font-size:24px">Each datapoint is tagged by source and reliability — auditable in due diligence and in production. This is what separates curated knowledge from a confident guess.</p>
+        </div>
+        <div class="card anim d2" style="padding:8px 30px; flex:1; display:flex; align-items:center">
+          <table class="cmp">
+            <thead><tr><th>Datapoint</th><th>Primary sources</th><th>Method</th><th style="text-align:right">Confidence</th></tr></thead>
+            <tbody>
+              <tr><td class="k">IT-technician skill demand · 2025–29</td><td>CEDEFOP · Excelsior · Eurostat</td><td>Observed + trend model</td><td style="text-align:right"><span class="pill" style="border-color:rgba(62,232,214,.5);color:var(--teal)"><span class="dotg" style="background:var(--teal)"></span>High</span></td></tr>
+              <tr><td class="k">Corridor feasibility · Colombia–Italy</td><td>IOM · diaspora registries</td><td>Qualification-recognition mapping</td><td style="text-align:right"><span class="pill" style="color:#E8C24C;border-color:rgba(232,194,76,.5)"><span class="dotg" style="background:#E8C24C"></span>Medium</span></td></tr>
+              <tr><td class="k">Expansion vs replacement demand</td><td>Chorema labour model</td><td>Negative intelligence (modeled)</td><td style="text-align:right"><span class="pill"><span class="dotg" style="background:var(--muted)"></span>Modeled</span></td></tr>
+              <tr><td class="k">Hydrogeological risk · sub-municipal</td><td>Copernicus · ISPRA</td><td>Observed geospatial</td><td style="text-align:right"><span class="pill" style="border-color:rgba(62,232,214,.5);color:var(--teal)"><span class="dotg" style="background:var(--teal)"></span>High</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="lead anim d3" style="max-width:none; font-size:21px; color:var(--ink)">→ A critic agent flags gaps before they reach the user. <span class="teal">Reliability is a first-class output, not an afterthought.</span></p>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">08 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 9 · DEFENSIBILITY -->
+  <section class="s" data-label="Defensibility">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>07</b>&nbsp;·&nbsp;DEFENSIBILITY</div></div>
+      <div class="body" style="gap:30px; padding-top:28px">
+        <div class="stack" style="gap:14px">
+          <h2 class="t anim">Four cumulative, compounding assets</h2>
+          <p class="lead anim d1" style="max-width:86ch; font-size:24px">The edge isn't in the LLM — those converge. It's in the knowledge infrastructure beneath them.</p>
+        </div>
+        <div class="cols c4 anim d2" style="flex:1; align-items:stretch; gap:30px">
+          <div class="card stack" style="gap:12px"><div class="idx">01</div><div style="font-size:24px; font-weight:600">Proprietary Data Lake</div><p style="margin:0; font-size:18px; color:var(--muted); line-height:1.45">84,000+ curated geospatial indicators, GeoParquet/Parquet, continuous ETL. 5+ years of editorial curation, not replicable in 6 months.</p><div class="lbl teal" style="margin-top:auto">~9 GB · monthly growth</div></div>
+          <div class="card stack" style="gap:12px"><div class="idx">02</div><div style="font-size:24px; font-weight:600">Proprietary indices &amp; algorithms</div><p style="margin:0; font-size:18px; color:var(--muted); line-height:1.45">80+ indices, a co-developed subset validated with universities. Each index is IP: domain expertise + scientific validation.</p><div class="lbl teal" style="margin-top:auto">Index Crafter · continuous generation</div></div>
+          <div class="card stack" style="gap:12px"><div class="idx">03</div><div style="font-size:24px; font-weight:600">Locked-in academic network</div><p style="margin:0; font-size:18px; color:var(--muted); line-height:1.45">Structural partnerships with Aalborg, LUM, Università di Bari, Politecnico di Milano. The research pipeline feeds the product pipeline.</p><div class="lbl teal" style="margin-top:auto">4 universities · 2 countries</div></div>
+          <div class="card stack" style="gap:12px"><div class="idx">04</div><div style="font-size:24px; font-weight:600">Vertical multi-agent architecture</div><p style="margin:0; font-size:18px; color:var(--muted); line-height:1.45">13 agents with curated tools. Each agent is a vertical LLM "trained" on Chorema data. Not replicable with a prompt.</p><div class="lbl teal" style="margin-top:auto">131 tools · 12 domain modules</div></div>
+        </div>
+        <div class="card anim d3" style="background:linear-gradient(90deg, rgba(62,232,214,.10), rgba(212,92,166,.08)); border-color:rgba(62,232,214,.3); padding:20px 30px">
+          <p style="margin:0; font-size:22px; color:var(--ink)">⇢ &nbsp;Every asset compounds: <span class="teal">more data → better indices → more precise answers → more clients → more data.</span></p>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">09 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 10 · TRACTION -->
+  <section class="s" data-label="Traction">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>08</b>&nbsp;·&nbsp;TRACTION</div></div>
+      <div class="body" style="gap:26px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim"><b class="teal">+246% YoY</b> revenue · profitable in 2025</h2>
+          <p class="lead anim d1" style="max-width:84ch; font-size:23px">Not a prototype: already in production with national institutions and energy operators — on audited, filed financials.</p>
+        </div>
+        <div class="cols anim d2" style="grid-template-columns:1.05fr .95fr; gap:48px; flex:1; align-items:stretch">
+          <div class="stack" style="gap:20px">
+            <div class="cols" style="grid-template-columns:1fr 1fr; gap:18px">
+              <div class="card stack" style="gap:4px"><div class="num em" style="font-size:50px">€563K</div><div class="lbl">Revenue 2025 · +246% YoY</div><div style="font-size:16px;color:var(--dim)">from €162.5K in 2024</div></div>
+              <div class="card stack" style="gap:4px"><div class="num em" style="font-size:50px">~€42K</div><div class="lbl">Statutory EBITDA · ~7%</div><div style="font-size:16px;color:var(--dim)">FY2025 in profit</div></div>
+              <div class="card stack" style="gap:4px"><div class="num em" style="font-size:50px">€310K</div><div class="lbl">R&amp;D investment</div><div style="font-size:16px;color:var(--dim)">55% of revenue</div></div>
+              <div class="card stack" style="gap:4px; border-color:rgba(62,232,214,.3)"><div class="num teal" style="font-size:50px">€180K</div><div class="lbl">Adjusted EBITDA</div><div style="font-size:16px;color:var(--dim)">pre-R&amp;D investment</div></div>
+            </div>
+            <div class="card" style="border-left:4px solid var(--mag); padding:20px 28px">
+              <div class="lbl" style="color:var(--mag); margin-bottom:8px">Build once, sell many — this is product, not consulting</div>
+              <p style="margin:0; font-size:20px; line-height:1.45; color:var(--ink)">PNRR intelligence built for the <span class="em">Ministry of Infrastructure &amp; Transport (MIT)</span> — €40B, ~1,600 projects — resold to <span class="em">Regione Puglia</span> on a different question with near-zero marginal setup.</p>
+            </div>
+          </div>
+          <div class="card stack" style="gap:0; padding:14px 30px">
+            <div class="lbl" style="padding:14px 0">Clients in production</div>
+            <div style="display:flex; flex-direction:column">
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line2)"><div><div style="font-size:20px;font-weight:600">MIT — Ministry of Infrastructure &amp; Transport</div><div style="font-size:16px;color:var(--muted)">PNRR intelligence dashboard</div></div><div class="lbl teal" style="white-space:nowrap; align-self:center">€40B · 1,600</div></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line2)"><div><div style="font-size:20px;font-weight:600">Sorgenia</div><div style="font-size:16px;color:var(--muted)">Innovation Observatory — energy foresight</div></div></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line2)"><div><div style="font-size:20px;font-weight:600">Roma Capitale · Zètema</div><div style="font-size:16px;color:var(--muted)">Metropolitan cultural observatory</div></div></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line2)"><div><div style="font-size:20px;font-weight:600">ARTI Puglia</div><div style="font-size:16px;color:var(--muted)">Regional S3 observatory — aerospace &amp; ICT</div></div></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line2)"><div><div style="font-size:20px;font-weight:600">Parmigiano Reggiano</div><div style="font-size:16px;color:var(--muted)">Supply-chain territorial intelligence</div></div></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:13px 0; border-top:1px solid var(--line2)"><div><div style="font-size:20px;font-weight:600">Pathways International</div><div style="font-size:16px;color:var(--muted)">Colombia–Italy labour-mobility intelligence</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">10 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 11 · MARKET -->
+  <section class="s" data-label="Market">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>09</b>&nbsp;·&nbsp;MARKET</div></div>
+      <div class="body" style="gap:28px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim">€300–480M / year of addressable spend in Italy</h2>
+          <p class="lead anim d1" style="max-width:84ch; font-size:23px">Three segments with structural regulatory drivers. Chorema 3-year SAM: €20–30M / year.</p>
+        </div>
+        <div class="cols c3 anim d2" style="gap:20px">
+          <div class="card stack" style="gap:2px"><div class="lbl">TAM · EU</div><div class="num em" style="font-size:52px">€5–8B</div></div>
+          <div class="card stack" style="gap:2px"><div class="lbl">SAM · Italy</div><div class="num em" style="font-size:52px">€300–480M</div></div>
+          <div class="card stack" style="gap:2px; border-color:rgba(62,232,214,.35)"><div class="lbl teal">SOM · 3Y</div><div class="num teal" style="font-size:52px">€20–30M</div></div>
+        </div>
+        <div class="cols c3 anim d3" style="flex:1; align-items:stretch; gap:20px">
+          <div class="card stack" style="gap:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:600">Public admin &amp; planning</div><div class="num teal" style="font-size:26px">€150–200M</div></div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.4">20 regions · 14 metro cities · 107 provinces · 500 municipalities with spending capacity.</p><div style="font-size:17px;color:var(--dim);line-height:1.4"><b style="color:var(--muted)">Driver</b> — EU structural funds 2021–27 · PNRR · climate plans · 15-minute city</div><div class="lbl" style="margin-top:auto">Avg ACV €40–100k</div></div>
+          <div class="card stack" style="gap:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:600">Corporate</div><div class="num teal" style="font-size:26px">€100–180M</div></div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.4">20–30 insurers · utilities · top 50 real-estate developers · exposed banks.</p><div style="font-size:17px;color:var(--dim);line-height:1.4"><b style="color:var(--muted)">Driver</b> — Mandatory catastrophe insurance (2025) · EIOPA stress tests · ESG</div><div class="lbl" style="margin-top:auto">Avg ACV €80–120k</div></div>
+          <div class="card stack" style="gap:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:22px;font-weight:600">Functional entities</div><div class="num teal" style="font-size:26px">€50–100M</div></div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.4">150 DMOs · cultural foundations · 20 regional labour agencies · IOM, UN.</p><div style="font-size:17px;color:var(--dim);line-height:1.4"><b style="color:var(--muted)">Driver</b> — Overtourism · 1.3M skill mismatch · PNRR M1 · EU Talent Pool (2027)</div><div class="lbl" style="margin-top:auto">Avg ACV €30–50k</div></div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">11 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 12 · POSITIONING -->
+  <section class="s" data-label="Positioning">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>10</b>&nbsp;·&nbsp;POSITIONING</div></div>
+      <div class="body" style="gap:26px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim">Nobody owns the intersection of the three axes</h2>
+          <p class="lead anim d1" style="max-width:88ch; font-size:23px">We create the category that doesn't exist: <span class="em">sub-municipal space × prospective time × agentic AI.</span></p>
+        </div>
+        <div class="card anim d2" style="flex:1; display:flex; align-items:center; padding:6px 30px">
+          <table class="cmp">
+            <thead><tr><th>Player</th><th>Category</th><th>Sub-municipal space</th><th>Prospective time</th><th>Economics + AI</th><th>Format</th></tr></thead>
+            <tbody>
+              <tr><td class="k">ESRI / ArcGIS</td><td>Enterprise GIS</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td>Software</td></tr>
+              <tr><td class="k">CARTO / Placer.ai</td><td>Location intelligence</td><td class="yes">Yes</td><td class="no">No</td><td class="no">No</td><td>Cloud SaaS</td></tr>
+              <tr><td class="k">Deloitte / McKinsey Foresight</td><td>Foresight consulting</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td><td>PDF reports</td></tr>
+              <tr><td class="k">Oxford Economics</td><td>Macro projections</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td><td>Dataset</td></tr>
+              <tr><td class="k">AlphaGeo (US)</td><td>Climate risk geo</td><td class="yes">Yes</td><td>Partial</td><td class="no">No</td><td>SaaS</td></tr>
+              <tr class="hl"><td class="k">Chorema</td><td>Geospatial Futures</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td><b class="teal">KaaS</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">12 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 13 · BUSINESS MODEL -->
+  <section class="s" data-label="Business model">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>11</b>&nbsp;·&nbsp;BUSINESS&nbsp;MODEL</div></div>
+      <div class="body" style="gap:26px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim">Knowledge-as-a-Service + Research Partnership</h2>
+          <p class="lead anim d1" style="max-width:86ch; font-size:23px">Three reinforcing revenue streams: recurring license, partnerships, API marketplace.</p>
+        </div>
+        <div class="cols c3 anim d2" style="align-items:stretch; gap:22px">
+          <div class="card stack" style="gap:10px"><div class="idx">01</div><div style="font-size:23px;font-weight:600">Knowledge-as-a-Service</div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.4">Annual license on the knowledge infrastructure: platform, agents, Data Lake, curated indices, continuous updates. Tiered Basic → Enterprise.</p><div style="display:flex;gap:18px;margin-top:auto"><div><div class="num teal" style="font-size:26px">€20–30k</div><div class="lbl">Entry</div></div><div><div class="num teal" style="font-size:26px">€40–120k</div><div class="lbl">Expansion</div></div></div></div>
+          <div class="card stack" style="gap:10px"><div class="idx">02</div><div style="font-size:23px;font-weight:600">Research Partnership</div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.4">Co-design of sector-specific indices with academic validation (Aalborg, LUM, Università di Bari, Politecnico di Milano). Applied research with public &amp; private bodies.</p><div style="display:flex;gap:18px;margin-top:auto"><div><div class="num teal" style="font-size:26px">€30–80k</div><div class="lbl">Per project</div></div><div><div class="num teal" style="font-size:26px">rev share</div><div class="lbl">On indices</div></div></div></div>
+          <div class="card stack" style="gap:10px"><div class="idx">03</div><div style="font-size:23px;font-weight:600">API Marketplace</div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.4">Metered API calls for programmatic access to curated indices and datasets — the "Netflix of territorial big data" for developers. H1 2027 roadmap.</p><div style="display:flex;gap:18px;margin-top:auto"><div><div class="num teal" style="font-size:26px">Pay-per-use</div><div class="lbl">Metered</div></div></div></div>
+        </div>
+        <div class="card anim d3" style="background:linear-gradient(90deg, rgba(62,232,214,.09), rgba(212,92,166,.07)); border-color:rgba(62,232,214,.3); padding:20px 30px">
+          <div class="lbl teal" style="margin-bottom:14px">Unit economics — the token cost objection, answered</div>
+          <div style="display:flex; flex-wrap:wrap; gap:14px 40px; align-items:baseline">
+            <div><span class="num em" style="font-size:30px">~75%</span> <span style="font-size:17px;color:var(--muted)">KaaS gross margin</span></div>
+            <div><span class="num em" style="font-size:30px">&gt;120%</span> <span style="font-size:17px;color:var(--muted)">Target NRR</span></div>
+            <div><span class="num em" style="font-size:30px">12–18 mo</span> <span style="font-size:17px;color:var(--muted)">CAC payback</span></div>
+            <div><span class="num teal" style="font-size:30px">≈ $0.02–0.03</span> <span style="font-size:17px;color:var(--muted)">Marginal cost / generated report (Haiku 4.5)</span></div>
+            <div><span class="num teal" style="font-size:30px">&lt;3%</span> <span style="font-size:17px;color:var(--muted)">Infra cost of revenue at scale</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">13 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 14 · TEAM -->
+  <section class="s" data-label="Team">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>12</b>&nbsp;·&nbsp;TEAM</div></div>
+      <div class="body" style="gap:26px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim">Frontier research + consolidated entrepreneurial experience</h2>
+        </div>
+        <div class="cols c3 anim d2" style="gap:22px">
+          <div class="card stack" style="gap:10px"><div style="display:flex;align-items:center;gap:14px"><div style="width:54px;height:54px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;color:#06121a">MB</div><div><div style="font-size:22px;font-weight:600">Martino Bellincampi</div><div class="lbl">CEO · Co-founder</div></div></div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.45">20+ years founder and strategic advisor. Independent Expert, EU Commission (Horizon Europe). Co-author of <i>Futures Thinking</i> (Routledge, 2026).</p></div>
+          <div class="card stack" style="gap:10px"><div style="display:flex;align-items:center;gap:14px"><div style="width:54px;height:54px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;color:#06121a">LS</div><div><div style="font-size:22px;font-weight:600">Luca Simeone</div><div class="lbl">CSO · Co-founder</div></div></div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.45">Serial entrepreneur and Associate Professor, Aalborg University. Visiting researcher at Harvard, Stanford, MIT (Cambridge, USA). Co-author of 8 books and 100+ scientific publications.</p></div>
+          <div class="card stack" style="gap:10px"><div style="display:flex;align-items:center;gap:14px"><div style="width:54px;height:54px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;color:#06121a">PA</div><div><div style="font-size:22px;font-weight:600">Paola Amendola</div><div class="lbl">CMO</div></div></div><p style="margin:0;font-size:18px;color:var(--muted);line-height:1.45">Leads marketing, institutional partnerships, and business development. Co-author of <i>Costruire il futuro</i> (2026). Coordinates the international futures-intelligence cluster.</p></div>
+        </div>
+        <div class="card anim d3" style="padding:20px 30px">
+          <div class="lbl" style="margin-bottom:16px">Extended team · 14 people</div>
+          <div class="cols c4" style="gap:14px 30px">
+            <div><div style="font-size:18px;font-weight:600">Andrea Modica Bosinco</div><div style="font-size:15px;color:var(--dim)">Chairman · Partner IZI spa</div></div>
+            <div><div style="font-size:18px;font-weight:600">Giordano Onorati</div><div style="font-size:15px;color:var(--dim)">Geo-Data Scientist · H3 / ML</div></div>
+            <div><div style="font-size:18px;font-weight:600">Federico Peliti</div><div style="font-size:15px;color:var(--dim)">Service / Interaction Designer</div></div>
+            <div><div style="font-size:18px;font-weight:600">Luca Incerti</div><div style="font-size:15px;color:var(--dim)">CDO · product design &amp; UX</div></div>
+            <div><div style="font-size:18px;font-weight:600">Roberto Ottolino</div><div style="font-size:15px;color:var(--dim)">Foresight Expert · BD</div></div>
+            <div><div style="font-size:18px;font-weight:600">Alessandro Alberti</div><div style="font-size:15px;color:var(--dim)">Research · scientific validation</div></div>
+            <div><div style="font-size:18px;font-weight:600">Stefano Mizzella</div><div style="font-size:15px;color:var(--dim)">Sales Manager</div></div>
+            <div><div style="font-size:18px;font-weight:600">Marco Vettorello</div><div style="font-size:15px;color:var(--dim)">Senior Tech Advisor</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">14 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 15 · THE ASK -->
+  <section class="s" data-label="The ask">
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec"><b>13</b>&nbsp;·&nbsp;THE&nbsp;ASK</div></div>
+      <div class="body" style="gap:24px; padding-top:28px">
+        <div class="stack" style="gap:12px">
+          <h2 class="t anim">€2M round with multiplier public leverage</h2>
+          <p class="lead anim d1" style="max-width:84ch; font-size:23px">Pre-money €5M · post-money €6.2M · runway ~24 months · operating break-even Q4 2027.</p>
+        </div>
+        <div class="cols anim d2" style="grid-template-columns:1fr 1fr; gap:44px; flex:1; align-items:stretch">
+          <div class="card stack" style="gap:0; padding:14px 30px">
+            <div class="lbl" style="padding:12px 0">Round structure</div>
+            <div style="display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line2)"><div><div style="font-size:19px;font-weight:600">Private investors</div><div style="font-size:15px;color:var(--muted)">Equity · 65% IRPEF tax relief</div></div><div class="num teal" style="font-size:24px">€500k</div></div>
+            <div style="display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line2)"><div><div style="font-size:19px;font-weight:600">Qualified VC (VTL + CDP)</div><div style="font-size:15px;color:var(--muted)">Equity · unlocks VTL + Rilancio</div></div><div class="num teal" style="font-size:24px">€200k</div></div>
+            <div style="display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line2)"><div><div style="font-size:19px;font-weight:600">Venture Tech Lazio (matching)</div><div style="font-size:15px;color:var(--muted)">Pari passu · €500k/company cap</div></div><div class="num teal" style="font-size:24px">€500k</div></div>
+            <div style="display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line2)"><div><div style="font-size:19px;font-weight:600">CDP Rilancio Fund (convertible)</div><div style="font-size:15px;color:var(--muted)">5 yrs · 4:1 leverage · converts at discount</div></div><div class="num teal" style="font-size:24px">€800k</div></div>
+            <div style="display:flex;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid var(--line);margin-top:4px"><div style="font-size:20px;font-weight:700">Total round</div><div class="num em" style="font-size:30px">€2.0M</div></div>
+            <div style="font-size:16px;color:var(--dim);padding-bottom:8px">+ non-dilutive: Smart&amp;Start + two co-developed research projects with other companies (€300k)</div>
+          </div>
+          <div class="card stack" style="gap:0; padding:14px 30px">
+            <div class="lbl" style="padding:12px 0">Use of funds · €2M</div>
+            <div style="display:flex;gap:16px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line2)"><div class="num teal" style="font-size:26px;min-width:84px">45%</div><div><div style="font-size:19px;font-weight:600">Product &amp; R&amp;D <span style="color:var(--dim);font-weight:400">· €900k</span></div><div style="font-size:16px;color:var(--muted)">Time Machine UX · Marketplace API · GeoSentinel + StratoHealth · predictive indices</div></div></div>
+            <div style="display:flex;gap:16px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line2)"><div class="num teal" style="font-size:26px;min-width:84px">30%</div><div><div style="font-size:19px;font-weight:600">Go-to-market <span style="color:var(--dim);font-weight:400">· €600k</span></div><div style="font-size:16px;color:var(--muted)">IT sales + international EU/MENA BD · events · brand</div></div></div>
+            <div style="display:flex;gap:16px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line2)"><div class="num teal" style="font-size:26px;min-width:84px">15%</div><div><div style="font-size:19px;font-weight:600">Team · hiring <span style="color:var(--dim);font-weight:400">· €300k</span></div><div style="font-size:16px;color:var(--muted)">2 senior data scientists · 1 DevOps/SRE · 1 international BD</div></div></div>
+            <div style="display:flex;gap:16px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line2)"><div class="num teal" style="font-size:26px;min-width:84px">10%</div><div><div style="font-size:19px;font-weight:600">Platform &amp; infrastructure <span style="color:var(--dim);font-weight:400">· €200k</span></div><div style="font-size:16px;color:var(--muted)">Cloud scaling · LLM · GDPR / ISO 27001 · tooling</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">15 / 16</span></div>
+    </div>
+  </section>
+
+  <!-- 16 · THANK YOU -->
+  <section class="s s--img" data-label="Thank you" style="background-image:url(assets/bg-network-city.png)">
+    <div class="veil" style="background:linear-gradient(100deg, rgba(7,10,22,.88) 0%, rgba(7,10,22,.55) 60%, rgba(7,10,22,.30) 100%)"></div>
+    <div class="frame">
+      <div class="top"><img class="wm" src="assets/wordmark-izilab.png" alt="IZILab"><div class="sec">CHOREMA · 2026</div></div>
+      <div class="body" style="justify-content:center; gap:28px">
+        <div class="kicker anim">Geospatial Futures Economics</div>
+        <h1 class="t anim d1" style="font-size:104px">Thank you</h1>
+        <div class="rule anim d1"></div>
+        <p class="lead anim d2" style="max-width:46ch; font-size:26px">The future doesn't wait — <span class="em">it's anticipated.</span> Let's build the category that doesn't exist yet.</p>
+        <div class="anim d3" style="display:flex; gap:40px; align-items:center; margin-top:8px; font-size:22px">
+          <a href="https://www.izilab.it" style="color:var(--teal); text-decoration:none; font-weight:600">www.izilab.it</a>
+          <span style="color:var(--muted)">Martino Bellincampi · martino.bellincampi@izi.it</span>
+        </div>
+      </div>
+      <div class="foot" style="border-color:rgba(240,244,248,.14)"><span>IZILab srl · Chorema · Investor Deck · 2026</span><span class="pg">16 / 16</span></div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>

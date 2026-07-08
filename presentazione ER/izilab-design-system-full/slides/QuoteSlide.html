@@ -1,0 +1,44 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Quote slide" subtitle="Light · big serif statement" -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  html,body { margin:0; }
+  .slide { position:relative; width:1280px; height:720px; overflow:hidden;
+    background:#FDFDFF; background-image:url(../assets/backgrounds/bg-light-violet.png); background-size:cover; background-position:center;
+    font-family:var(--font-body); }
+  .veil { position:absolute; inset:0; background:linear-gradient(120deg, rgba(253,253,255,0.55), rgba(253,253,255,0.92)); }
+  .inner { position:absolute; inset:0; padding:80px; display:flex; flex-direction:column; justify-content:space-between; z-index:2; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .logo img { height:28px; }
+  .meta { font-family:var(--font-mono); font-size:13px; color:var(--blanche-800); }
+  .mark { font-family:var(--font-display); font-size:120px; line-height:0.6; color:var(--color-accent); }
+  blockquote { font-family:var(--font-display); font-weight:500; font-size:52px; line-height:1.12; letter-spacing:-0.015em; color:#541BC6; margin:8px 0 0; max-width:24ch; }
+  .by { display:flex; align-items:center; gap:14px; }
+  .rule { width:48px; height:3px; background:var(--color-primary); border-radius:999px; }
+  .name { font-size:17px; color:var(--blanche-900); font-weight:600; }
+  .role { font-size:14px; color:var(--blanche-800); }
+</style>
+</head>
+<body>
+<div class="slide" data-screen-label="Quote">
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="top">
+      <div class="logo"><img src="../assets/logo/logo-izilab.png" alt="IZILab"></div>
+      <div class="meta">04 / 05</div>
+    </div>
+    <div>
+      <div class="mark">&ldquo;</div>
+      <blockquote>Anticipare non significa prevedere: significa preparare le condizioni per scegliere meglio.</blockquote>
+    </div>
+    <div class="by">
+      <span class="rule"></span>
+      <div><div class="name">Direzione Foresight</div><div class="role">IZILab</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

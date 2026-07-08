@@ -1,0 +1,22 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Logo" subtitle="Primary lockup · on dark / on light" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; font-family: var(--font-body); display: grid; grid-template-columns: 1fr 1fr; }
+  .pane { height: 180px; display: flex; align-items: center; justify-content: center; }
+  .dark { background: var(--bg-page); }
+  .light { background: #FDFDFF; }
+  .light img { width: 200px; }
+  /* logo art is violet+navy on transparent-ish white; invert wordmark feel on dark via filter */
+  .dark .wrap { background: #FDFDFF; padding: 18px 22px; border-radius: var(--radius-md); }
+  .dark img { width: 180px; display: block; }
+</style>
+</head>
+<body>
+  <div class="pane dark"><div class="wrap"><img src="../assets/logo/logo-izilab.png" alt="IZILab"></div></div>
+  <div class="pane light"><img src="../assets/logo/logo-izilab.png" alt="IZILab"></div>
+</body>
+</html>

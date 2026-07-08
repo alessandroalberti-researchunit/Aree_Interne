@@ -1,0 +1,466 @@
+
+===== ppt/slides/slide1.xml =====
+INVESTOR DECK   ·   APRIL 2026
+Chorema
+Geospatial Futures Economics
+The Knowledge-as-a-Service platform that makes territorial economic futures
+navigable, measurable, and actionable.
+Martino Bellincampi
+  CEO & Co-founder
+Luca Simeone
+  CSO & Co-founder
+Napoli  ·  Roma  ·  Bari  ·  Copenhagen
+
+===== ppt/slides/slide2.xml =====
+The challenge
+We address
+Public and private organizations face unprecedented volumes of 
+complex geospatial data without adequate tools at their disposal.
+ The lack of integrated predictive models limits the ability to anticipate future scenarios. Existing solutions (traditional GIS) provide only historical analysis and static visualizations, without predictive capabilities.
+IZILab srl  ·  Chorema  ·  Investor Deck  ·  April 2026
+2 / 18
+
+===== ppt/slides/slide3.xml =====
+01   ·   THE CONTEXT
+Problems and 
+key questions
+Where decision-makers get stuck today. What Chorema makes decidable.
+Where decision-makers get stuck
+—   
+Strategic decisions made under deep uncertainty and rapid change.
+—   
+Fragmented signals that fail to translate into actionable insight.
+—   
+Over-reliance on short-term planning and linear forecasts.
+—   
+Lack of internal foresight capability and shared sense-making.
+—   
+Difficulty aligning strategy, policy, and investment to long-term goals.
+What Chorema helps decide
+—   
+How can cities develop policies more resilient to climate, demographics, and migration?
+—   
+Which emerging trends and weak signals will disrupt specific sectors in the next 5–15 years?
+—   
+How robust is a company’s current strategy across different plausible futures?
+—   
+Where to invest today to stay competitive and relevant tomorrow?
+—   
+Which early indicators to monitor to anticipate systemic risks or opportunities?
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+3 / 18
+
+===== ppt/slides/slide4.xml =====
+02   ·   THE PROBLEM
+Three classes of tools. None solves the whole problem
+Decision-makers’ questions cut across space, time, and economics. Each tool covers only one dimension.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+4 / 18
+01
+Traditional GIS
+ESRI · QGIS · CARTO
+They don't project the future.
+Historical analysis only
+Static visualizations, rigid administrative boundaries, no predictive capability. They snapshot the past.
+02
+Foresight consulting
+DELOITTE · MCKINSEY · OXFORD
+Don't scale, don't integrate.
+One-shot PDFs
+Annual reports, high costs, not updatable in real time, no sub-municipal granularity.
+03
+Generalist LLMs
+CHATGPT · GEMINI · CLAUDE
+Not reliable on real data.
+Surface-level knowledge
+No territorial granularity, untraceable sources, high hallucination risk on vertical domains.
+
+===== ppt/slides/slide5.xml =====
+03   ·   THE SOLUTION
+Chorema
+A Knowledge-as-a-Service platform to plan the economic futures of territories.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+5 / 18
+8+
+Intelligence domains
+Urban, climate, health, migration, hydrogeological risk, air quality, transport, biodiversity. Each domain has dedicated AI agents and curated data.
+200+
+Validated indices
+Descriptive and predictive algorithms co-developed with 10+ universities (Aalborg, PoliMi, LUM). Custom indices via Index Crafter.
+13
+Specialized AI agents
+Coordinator agent → vertical experts → critic agent flagging gaps and hallucinations. Answers anchored to the proprietary Data Lake, not LLM memory.
+80.000+
+   GEOSPATIAL INDICATORS
+131
+   SPECIALIZED TOOLS
+29.000
+   INDEXED PATENTS
+4.700
+   HEALTH INDICATORS
+
+===== ppt/slides/slide6.xml =====
+04   ·   PRODUCT ARCHITECTURE
+One platform. Vertical channels
+Verticals share the same engine and Data Lake. Every new vertical makes the whole platform denser for everyone.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+6 / 18
+CHOREMA — CORE PLATFORM
+H3 map  ·  Time slider  ·  AI agents  ·  Data Lake  ·  Curated indices  ·  Report generation  ·  Marketplace
+ForeSkill
+LABOUR & MIGRATION
+First European KaaS for medium-term labour mismatch forecasting. Migration corridors Colombia–Italy, Tunisia–Italy. CEDEFOP, Eurostat, Excelsior data.
+MVP under evaluation by IOM + Colombian government
+GeoSentinel
+CRITICAL INFRASTRUCTURE
+Predictive IIoT intelligence. Early warning < 60 seconds. Sensors integrated with geospatial data for territorial resilience and environmental monitoring.
+STEP Lazio €381k  ·  Terna pipeline
+StratoHealth
+HEALTH & ENVIRONMENT
+4,700+ health indicators (Health4All) cross-referenced with Copernicus. Health profile by address at sub-municipal scale.
+Q3 2026 prototype
+
+===== ppt/slides/slide7.xml =====
+05   ·   DEFENSIBILITY
+Four cumulative, compounding assets
+The edge isn’t in the LLM — those converge. It’s in the knowledge infrastructure beneath them.
+01
+Proprietary Data Lake
+80k+ curated indicators, GeoParquet/Parquet, continuous ETL. 5+ years of editorial curation not replicable in 6 months.
+~9 GB · monthly growth
+02
+Proprietary indices & algorithms
+200+ indices co-developed with universities. Each index is IP: requires domain expertise + scientific validation.
+Index Crafter · continuous generation
+03
+Locked-in academic network
+Structural partnerships with Aalborg, PoliMi, LUM, UniCal. The research pipeline feeds the product pipeline.
+10+ universities  ·  3 continents
+04
+Vertical multi-agent architecture
+13 agents with curated tools. Each agent is a vertical LLM “trained” on Chorema data. Not replicable with a prompt.
+131 tools  ·  12 domain-specific modules
+⇢   Every asset compounds: more data → better indices → more precise answers → more clients → more data.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+7 / 18
+
+===== ppt/slides/slide8.xml =====
+06   ·   THE PROOF POINT: MUCH MORE THAN A STANDARD LLM
+Same question. Structurally different answers
+QUERY   
+“In which Piedmont provinces will demand for IT technicians be highest in 2025–29, and which Colombia–Italy corridors are most feasible in terms of qualification recognition?”
+DIMENSION
+Claude
+ChatGPT
+Gemini
+Chorema
+Data granularity
+No
+No
+Partial
+Yes
+Expansion vs replacement
+No
+No
+No
+Yes
+Negative intelligence
+No
+No
+No
+Yes
+Corridor time horizons
+No
+No
+No
+Yes
+Diaspora data
+No
+No
+No
+Yes
+Traceable sources
+Generic
+Good
+Uncertain
+Curated · 18 sources
+Hallucination risk
+Low
+Medium
+High
+Contained
+Actionability
+None
+Partial
+Apparent
+Full
+→   The difference isn’t in the model. It’s in the underlying knowledge infrastructure.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+8 / 18
+
+===== ppt/slides/slide9.xml =====
+07   ·   TRACTION
++250% YoY revenue · EBITDA positive already in 2025
+Not a prototype: already in production with national institutions and energy operators.
+2024 → 2025: 
++249% YoY
+   ·   EBITDA 2025: 
+€180k (29% margin)
+CLIENTS IN PRODUCTION
+MIT
+Italian Ministry of Infrastructure & Transport
+PNRR intelligence dashboard · €40B · 1,547 projects
+Sorgenia
+Innovation Observatory
+Long-term energy innovation foresight
+Roma Capitale · Zetema
+Osservatorio culturale metropolitano
+Territorial intelligence for cultural services
+ARTI Puglia
+Osservatorio S3 regionale
+Workshop foresight filiere aeronautica e ICT
+Parmigiano Reggiano
+Intelligence territoriale di filiera
+Consorzio agrifood
+Pathways International
+Labor mobility intelligence
+Colombia–Italy migration corridors
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+9 / 18
+
+===== ppt/slides/slide10.xml =====
+08   ·   MARKET
+€300–480M/year of addressable spend in Italy
+Three segments with structural regulatory drivers. Chorema 3-year SAM: €20–30M/year.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+10 / 18
+TAM · EU
+€5–8B
+SAM · ITALY
+€300–480M
+SOM · 3Y
+€20–30M
+€150–200M
+SEGMENT TAM
+Public 
+a
+dmin & planning
+20 regions · 14 metro cities · 107 provinces · 500 municipalities with spending capacity.
+DRIVER  
+EU structural funds 2021–27 · PNRR · climate plans · 15-minute city
+€40–100k
+AVG ACV
+€100–180M
+SEGMENT TAM
+Corporate
+20–30 insurers · utilities · top 50 real-estate developers · banks with exposure.
+DRIVER  
+Mandatory catastrophe insurance (2025) · EIOPA stress tests · CRO · ESG
+€80–120k
+AVG ACV
+€50–100M
+SEGMENT TAM
+Functional entities
+150 DMOs · cultural foundations · 20 regional labour agencies · IOM, UN.
+DRIVER  
+Overtourism · 1.3M skill mismatch · PNRR M1 · EU Talent Pool (2027)
+€30–50k
+AVG ACV
+METHODOLOGY  
+TAM median 4 top-down sources (EU, CAGR 11–13%). SAM bottom-up Italy: 141 PA × €50k + 200 corp × €100k + 250 functional × €40k × 2–3× maturity. SOM 5–10% SAM · 3Y (PA + corp wedge).
+
+===== ppt/slides/slide11.xml =====
+09   ·   POSITIONING
+Nobody owns the intersection of the three axes
+We create the category that doesn’t exist: sub-municipal space × prospective time × agentic AI.
+Category
+Sub-municipal space
+Prospective time
+Economics + AI
+Format
+ESRI / ArcGIS
+Enterprise GIS
+Yes
+No
+No
+Software
+CARTO / Placer.ai
+Location intelligence
+Yes
+No
+No
+Cloud SaaS
+Deloitte / McKinsey Foresight
+Foresight consulting
+No
+Yes
+No
+PDF reports
+Oxford Economics
+Macro projections
+No
+Yes
+No
+Dataset
+AlphaGeo  (US)
+Climate risk geo
+Yes
+Partial
+No
+SaaS
+Chorema
+Geospatial Futures
+Yes
+Yes
+Yes
+KaaS
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+11 / 18
+
+===== ppt/slides/slide12.xml =====
+13   ·   BUSINESS MODEL
+Knowledge-as-a-Service + Research Partnership.
+Three reinforcing revenue streams: recurring license, partnerships, API marketplace.
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+15 / 18
+01
+Knowledge-as-a-Service
+Annual license on the knowledge infrastructure: platform, agents, Data Lake, curated indices, continuous updates. Tiered Basic / Standard / Premium / Enterprise.
+€20–30k
+ENTRY
+€40–120k 
+EXPANSION
+02
+Research Partnership
+Co-design of sector-specific indices with academic validation (Aalborg, PoliMi, LUM, Padova). Applied research with public and private organizations.
+€30–80k
+PER PROJECT
+rev share 
+ON INDICES
+03
+API Marketplace
+Metered API calls for programmatic access to curated indices and datasets. The “Netflix of territorial big data” for developers and integrators. H1 2027 roadmap.
+Pay-per-use
+METERED
+rev share 
+ON PARTNERS
+UNIT ECONOMICS   
+KaaS gross margin  
+~75%
+    ·    Target NRR  
+>120%
+    ·    CAC payback  
+12–18 months
+    ·    Multi-year PA contracts  
+avg 3Y
+
+===== ppt/slides/slide13.xml =====
+15   ·   TEAM
+Frontier research 
++ consolidated entrepreneurial experience
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+17 / 18
+MB
+Martino Bellincampi
+CEO · CO-FOUNDER
+20+ years founder and strategic advisor. Independent Expert, EU Commission (Horizon Europe). Co-author of the book 
+Futures Thinking 
+(Routledge, 2026).
+LS
+Luca Simeone
+CSO · CO-FOUNDER
+Serial entrepreneur and Associate Professor, Aalborg University. Visiting researcher at Harvard, MIT, Stanford. Co-author of 8 books and 100+ scientific publications
+PA
+Paola Amendola
+CMO
+Leads marketing, institutional partnerships, and business development. Co-author of Costruire il futuro (2026). Coordinates the international futures-intelligence cluster.
+EXTENDED TEAM  ·  14 PEOPLE
+Andrea Modica Bosinco
+Chairman · Partner IZI spa
+Giordano Onorati
+Geo-Data Scientist · H3 / ML
+Federico Peliti
+Service Interaction Designer / UX
+Luca Incerti
+CDO · product design & UX
+Roberto Ottolino
+Foresight Expert · BD
+Alessandro Alberti
+Research · scientific validation
+Stefano Mizzella
+Sales Manager
+Marco Vettorello
+Senior Tech Advisor
+
+===== ppt/slides/slide14.xml =====
+16   ·   THE ASK
+€2M round with multiplier public leverage.
+Pre-money €5M · post-money €6.2M.
+ROUND STRUCTURE
+Private investors
+€500k
+Equity · 65% IRPEF tax relief
+Qualified VC (VTL + CDP)
+€200k
+Equity · dual role (unlocks VTL + Rilancio)
+Venture Tech Lazio (matching)
+€500k
+Pari passu equity · €500k/company cap
+CDP Rilancio Fund (convertible)
+€800k
+5 years · 4:1 leverage · converts at discount
+TOTAL ROUND
+€2.0M
++ ~€385k non-repayable Smart&Start
+€1.2M equity  →  
+€2.5M
+  total resources for the product
+Runway ~24 months  ·  
+operating break-even Q4 2027
+USE OF FUNDS  ·  €2M
+45%
+€900k
+Product & R&D
+Time Machine UX · Marketplace API · GeoSentinel + StratoHealth verticals · predictive indices
+30%
+€600k
+Go-to-market
+IT sales + international EU/MENA BD · events (EP Brussels, Turin) · brand
+15%
+€300k
+Team · hiring
+2 senior data scientists · 1 DevOps/SRE · 1 international BD
+10%
+€200k
+Platform & infrastructure
+Cloud scaling · LLM · GDPR / ISO 27001 · tooling
+IZILab srl
+   ·   
+Chorema  ·  Investor Deck  ·  April 2026
+18 / 18
+
+===== ppt/slides/slide15.xml =====
+Thank you
+www.izilab.it

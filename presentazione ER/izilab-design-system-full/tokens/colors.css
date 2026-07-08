@@ -1,0 +1,157 @@
+/* ============================================================
+   IZILab — Color tokens
+   Source of truth: tokens/colors.json + colors.css (Figma vars, Mar 2025)
+   Primary: Violet/500 #6422E8 · Accent: Aqua/500 #49E1C0 · Neutral: Blanche/500 #ECEBFE
+   NOTE: #6E54E8 is a refuso — do NOT use it as primary.
+   :root = Dark mode (digital-first default).
+   .light / [data-theme="light"] = Light mode (documents, high readability).
+   ============================================================ */
+
+:root {
+  /* ---- Primitives · Violet ---- */
+  --violet-100: #ECECFF;
+  --violet-200: #D7D5FF;
+  --violet-300: #B1AAFC;
+  --violet-400: #8E7DF6;
+  --violet-500: #6422E8;
+  --violet-600: #541BC6;
+  --violet-700: #370F86;
+  --violet-800: #1B054B;
+  --violet-900: #0F0830;
+
+  /* ---- Primitives · Aqua (dark values) ---- */
+  --aqua-100: #F0FCF9;
+  --aqua-200: #DEF9F1;
+  --aqua-300: #BCF3E3;
+  --aqua-400: #96ECD5;
+  --aqua-500: #49E1C0;
+  --aqua-600: #3DC0A4;
+  --aqua-700: #26826E;
+  --aqua-800: #12493D;
+  --aqua-900: #05231C;
+
+  /* ---- Primitives · Blanche (neutral) ---- */
+  --blanche-100: #FDFDFF;
+  --blanche-200: #FBFBFF;
+  --blanche-300: #F7F6FF;
+  --blanche-400: #F2F2FE;
+  --blanche-500: #ECEBFE;
+  --blanche-600: #CECDE0;
+  --blanche-700: #9695A7;
+  --blanche-800: #575767;
+  --blanche-900: #272735;
+
+  /* ---- Brand roles ---- */
+  --color-primary:        var(--violet-500);   /* #6422E8 */
+  --color-primary-hover:  var(--violet-600);
+  --color-primary-press:  var(--violet-700);
+  --color-accent:         var(--aqua-500);     /* #49E1C0 */
+  --color-accent-hover:   var(--aqua-600);
+  --color-accent-press:   var(--aqua-700);
+
+  /* ---- Semantic · surfaces (DARK) ---- */
+  --bg-page:        #0F0830;                    /* violet-900 — deepest canvas */
+  --bg-surface:     #1B054B;                    /* Bg/Surface → violet-800 */
+  --surface-card:   #1B054B;
+  --surface-raised: #240a5e;                    /* slightly lifted card */
+  --surface-sunken: #0F0830;
+  --surface-inverse: var(--blanche-200);
+  --bg-green-surface: #49E1C0;                  /* Bg/Green Surface → aqua-500 */
+
+  /* ---- Semantic · text (DARK) ---- */
+  --text-heading:  #ECECFF;                     /* Text/Heading → violet-100 */
+  --text-body:     #F2F2FE;                     /* Text/Body → blanche-400 */
+  --text-muted:    #B1AAFC;                     /* secondary → violet-300 */
+  --text-kicker:   #B1AAFC;                     /* kicker on dark → violet-300 */
+  --text-disabled: #575767;                     /* blanche-800 */
+  --text-on-accent: #0F0830;                    /* dark text on aqua fills */
+  --text-on-primary: #FDFDFF;                   /* light text on violet fills */
+  --text-link:     #96ECD5;                     /* aqua-400 */
+
+  /* ---- Semantic · borders & lines ---- */
+  --border-subtle:  rgba(236,236,255,0.10);
+  --border-default: rgba(236,236,255,0.18);
+  --border-strong:  rgba(236,236,255,0.32);
+  --border-accent:  var(--aqua-500);
+  --line-technical: rgba(236,236,255,0.14);     /* "Linee" wireframe overlays */
+
+  /* ---- Semantic · feedback ---- */
+  --color-success: var(--aqua-500);
+  --color-info:    var(--violet-400);
+  --color-warning: #F5C451;
+  --color-danger:  #F2657D;
+  --focus-ring:    var(--aqua-500);
+
+  /* ---- Background composition tokens (mono / duo / radial) ---- */
+  --bg-mono-1: #1B054B;       --bg-mono-2: #6422E8;
+  --bg-duo-1:  #6422E8;       --bg-duo-2:  #49E1C0;
+  --bg-radial-first: #49E1C0; --bg-radial-middle: #6422E8; --bg-radial-last: #1B054B;
+
+  /* ---- Gradients ---- */
+  --gradient-brand:        linear-gradient(135deg, #6422E8 0%, #49E1C0 100%); /* @kind color */
+  --gradient-brand-soft:   linear-gradient(135deg, #8E7DF6 0%, #96ECD5 100%); /* @kind color */
+  --gradient-mono:         linear-gradient(135deg, var(--bg-mono-1) 0%, var(--bg-mono-2) 100%); /* @kind color */
+  --gradient-radial:       radial-gradient(120% 120% at 70% 20%, var(--bg-radial-first) 0%, var(--bg-radial-middle) 45%, var(--bg-radial-last) 100%); /* @kind color */
+  --gradient-chart-violet: linear-gradient(180deg, #6422E8 0%, #1B054B 100%); /* @kind color */
+  --gradient-chart-aqua:   linear-gradient(180deg, #1B054B 0%, #49E1C0 100%); /* @kind color */
+
+  /* ---- Glows (dark-mode elevation) ---- */
+  --glow-violet: 0 0 0 1px rgba(142,125,246,0.25), 0 18px 60px -20px rgba(100,34,232,0.55);
+  --glow-aqua:   0 0 0 1px rgba(73,225,192,0.35), 0 18px 60px -20px rgba(73,225,192,0.45);
+}
+
+/* ============================================================
+   LIGHT MODE
+   ============================================================ */
+.light, [data-theme="light"] {
+  /* Aqua shifts slightly brighter in light mode */
+  --aqua-100: #F1FCF9;
+  --aqua-200: #E0F9F1;
+  --aqua-300: #C0F2E4;
+  --aqua-400: #9DEBD7;
+  --aqua-500: #5CE0C3;
+  --aqua-600: #4DBFA6;
+  --aqua-700: #328170;
+  --aqua-800: #18483E;
+  --aqua-900: #041612;
+  --violet-900: #050117;
+
+  /* surfaces */
+  --bg-page:        #FDFDFF;                    /* blanche-100 */
+  --bg-surface:     #FBFBFF;                    /* Bg/Surface → blanche-200 */
+  --surface-card:   #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --surface-sunken: #F2F2FE;                    /* blanche-400 */
+  --surface-inverse: var(--violet-800);
+  --bg-green-surface: #49E1C0;
+
+  /* text */
+  --text-heading:  #541BC6;                     /* Text/Heading → violet-600 */
+  --text-body:     #272735;                     /* Text/Body → blanche-900 */
+  --text-muted:    #575767;                     /* blanche-800 */
+  --text-kicker:   #575767;                     /* kicker on light → blanche-800 */
+  --text-disabled: #9695A7;                     /* blanche-700 */
+  --text-on-accent: #0F0830;
+  --text-on-primary: #FDFDFF;
+  --text-link:     #541BC6;
+
+  /* borders */
+  --border-subtle:  rgba(39,39,53,0.08);
+  --border-default: rgba(39,39,53,0.14);
+  --border-strong:  rgba(39,39,53,0.28);
+  --line-technical: rgba(39,39,53,0.12);
+
+  --focus-ring:    var(--violet-500);
+
+  /* background composition */
+  --bg-mono-1: #D7D5FF;       --bg-mono-2: #ECECFF;
+  --bg-duo-1:  #49E1C0;       --bg-duo-2:  #6422E8;
+  --bg-radial-first: #8E7DF6; --bg-radial-middle: #96ECD5; --bg-radial-last: #F0FCF9;
+
+  --gradient-chart-violet: linear-gradient(180deg, #6422E8 0%, rgba(255,255,255,0) 100%); /* @kind color */
+  --gradient-chart-aqua:   linear-gradient(180deg, #DEF9F1 0%, #49E1C0 100%); /* @kind color */
+
+  /* light-mode elevation uses soft shadows, not glows */
+  --glow-violet: 0 1px 2px rgba(39,39,53,0.06), 0 12px 32px -12px rgba(100,34,232,0.22);
+  --glow-aqua:   0 1px 2px rgba(39,39,53,0.06), 0 12px 32px -12px rgba(73,225,192,0.30);
+}
