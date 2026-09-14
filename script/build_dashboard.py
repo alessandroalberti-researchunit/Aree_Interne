@@ -1,17 +1,21 @@
 """
-Genera dashboard-aree-interne.html con GeoJSON SNAI embedded come variabile JS.
+Genera dashboard-aree-interne.html (in root) con GeoJSON SNAI embedded come variabile JS.
 Arricchisce ogni area con dati calcolati dall'Excel: n_comuni, pop_2020, distribuzione SNAI 2020.
 """
 import json, os
 import pandas as pd
 
-GEOJSON_PATH        = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\aree-snai-perimetri.geojson'
-COMUNI_GEOJSON_PATH = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\comuni-snai-perimetri.geojson'
-SLL_GEOJSON_PATH    = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\sll-perimetri.geojson'
-ACC_JSON_PATH       = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\accessibility_data.json'
-EXCEL_08            = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\08_elenco-aree-comuni.xlsx'
-EXCEL_MAPPA         = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\mappa-ai-2020-elenco-classificazione-comuni.xlsx'
-OUT_HTML            = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\dashboard-aree-interne.html'
+# Radice del repo, calcolata da __file__: gli script funzionano da qualsiasi cwd.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = lambda *p: os.path.join(ROOT, *p)
+
+GEOJSON_PATH        = R('geo', 'aree-snai-perimetri.geojson')
+COMUNI_GEOJSON_PATH = R('geo', 'comuni-snai-perimetri.geojson')
+SLL_GEOJSON_PATH    = R('geo', 'sll-perimetri.geojson')
+ACC_JSON_PATH       = R('DATA', 'accessibility_data.json')
+EXCEL_08            = R('DATA', '08_elenco-aree-comuni.xlsx')
+EXCEL_MAPPA         = R('DATA', 'mappa-ai-2020-elenco-classificazione-comuni.xlsx')
+OUT_HTML            = R('dashboard-aree-interne.html')
 
 # ── GeoJSON ────────────────────────────────────────────────────────────────────
 with open(GEOJSON_PATH, encoding='utf-8') as f:
@@ -909,7 +913,17 @@ function showSLLDetail(p) {
       <div class="econ-row"><span class="ek">Valore Aggiunto</span><span class="ev">${invest}</span></div>
       <div class="econ-row"><span class="ek">Retrib./dip.</span><span class="ev">${retDip}</span></div>
     </div>
-    ${accGrid(ACC_DATA.sll[p.cod_sll])}`;
+    ${accGrid(ACC_DATA.sll[p.cod_sll], sllAccNote(p))}`;
+}
+
+// Nota di copertura per il pannello SLL: i valori sono la media dei soli comuni
+// SNAI dell'SLL, pesata per superficie comunale.
+function sllAccNote(p) {
+  const m = ACC_DATA.sll_meta && ACC_DATA.sll_meta[p.cod_sll];
+  if (!m) return '';
+  const q = (m.quota_superficie_sll_coperta != null)
+    ? ` (${Math.round(Math.min(m.quota_superficie_sll_coperta, 1) * 100)}% della superficie)` : '';
+  return `Valore calcolato sui soli ${m.n_comuni_snai_usati} comuni SNAI dell'SLL su ${m.n_comuni_sll}${q}, non sull'intero sistema locale.`;
 }
 
 function sllVisibleCount() {
@@ -1051,7 +1065,7 @@ function accSev(k, v) {
   return 'ok';
 }
 
-function accGrid(vals) {
+function accGrid(vals, extraNote) {
   if (!vals || !ACC_DATA || !ACC_DATA.indicatori) return '';
   const inds = ACC_DATA.indicatori;
   const _light = document.body.classList.contains('light');
@@ -1070,7 +1084,7 @@ function accGrid(vals) {
   return `<div class="acc-section">
     <div class="econ-title">Accessibilita ai servizi &mdash; 30 min in auto</div>
     <div class="acc-grid">${cards}</div>
-    <div class="acc-note">Media strutture raggiungibili per cella H3 (~0.7 km&sup2;). Fonte: OvertureMaps + Min. Salute, IZI.</div>
+    <div class="acc-note">Media strutture raggiungibili per cella H3 r8 (~0.7 km&sup2;), isocrone 30 min trasporto privato con traffico. Fonte: MCP hex-intelligence (OvertureMaps + strutture sanitarie), snapshot 2021.${extraNote ? ' ' + extraNote : ''}</div>
   </div>`;
 }
 

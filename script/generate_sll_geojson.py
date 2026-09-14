@@ -1,6 +1,6 @@
 """
-Genera sll-perimetri.geojson a partire da:
-  - SLL_2021.shp (geometrie UTM 32N)
+Genera geo/sll-perimetri.geojson a partire da:
+  - DATA/sll_2021/SLL_2021.shp (geometrie UTM 32N)
   - DATA/tavole_istat_2023/... Tav.42 (dati economici 2023 per SLL)
   - SLL composition JSON (capoluogo per SLL)
 """
@@ -8,11 +8,15 @@ import geopandas as gpd
 import pandas as pd
 import json, os, sys
 
-SHP_PATH  = "SLL_2021.shp"
-ECON_XLS  = "DATA/tavole_istat_2023/Tavole/1. Appendice Statistica Frame territoriale.xlsx"
-SPEC_XLS  = "DATA/Specializzazione_produttiva_SLL_2021.xlsx"
-COMP_JSON = "Sistemi Locali del Lavoro (SLL) 2021 _ Composizione Data Indagine 28-06-2026 Stampa 28062026191300.json"
-OUT_PATH  = "sll-perimetri.geojson"
+# Radice del repo, calcolata da __file__: gli script funzionano da qualsiasi cwd.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = lambda *p: os.path.join(ROOT, *p)
+
+SHP_PATH  = R('DATA', 'sll_2021', 'SLL_2021.shp')
+ECON_XLS  = R('DATA', 'tavole_istat_2023', 'Tavole', '1. Appendice Statistica Frame territoriale.xlsx')
+SPEC_XLS  = R('DATA', 'Specializzazione_produttiva_SLL_2021.xlsx')
+COMP_JSON = R('DATA', 'sll_2021', 'Sistemi Locali del Lavoro (SLL) 2021 _ Composizione Data Indagine 28-06-2026 Stampa 28062026191300.json')
+OUT_PATH  = R('geo', 'sll-perimetri.geojson')
 SIMPLIFY_TOL = 0.005   # gradi decimali ≈ 400-500 m
 
 # ── 1. Shapefile ───────────────────────────────────────────────────────────────

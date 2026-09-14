@@ -1,5 +1,5 @@
 """
-Genera aree-snai-perimetri.geojson: poligoni dissolti per area SNAI.
+Genera geo/aree-snai-perimetri.geojson: poligoni dissolti per area SNAI.
 Pipeline: legge ISTAT codes da Excel → scarica confini comunali ISTAT → dissolve per area → semplifica → esporta.
 """
 import openpyxl
@@ -10,11 +10,14 @@ import requests
 import os
 import sys
 
-EXCEL_08 = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\08_elenco-aree-comuni.xlsx'
-EXCEL_72 = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\elenco_aree_snai_14-20-e-21-27.xlsx'
-COMUNI_CACHE = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\DATA\comuni_italia.geojson'
-OUT_GEOJSON = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\aree-snai-perimetri.geojson'
+# Radice del repo, calcolata da __file__: gli script funzionano da qualsiasi cwd.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = lambda *p: os.path.join(ROOT, *p)
 
+EXCEL_08 = R('DATA', '08_elenco-aree-comuni.xlsx')
+EXCEL_72 = R('DATA', 'elenco_aree_snai_14-20-e-21-27.xlsx')
+COMUNI_CACHE = R('DATA', 'comuni_italia.geojson')
+OUT_GEOJSON = R('geo', 'aree-snai-perimetri.geojson')
 # ── 1. Estrai comuni con codice ISTAT e nome area ─────────────────────────────
 
 def read_comuni(wb, sheet, istat_col, area_col, status, skip=4):
@@ -135,7 +138,7 @@ size_kb = os.path.getsize(OUT_GEOJSON) / 1024
 print(f"  Dimensione: {size_kb:.0f} KB")
 
 # ── 9. Esporta GeoJSON comuni individuali ─────────────────────────────────────
-OUT_COMUNI_GEOJSON = r'C:\Users\aalbe\Desktop\Code\Aree Interne Italia\comuni-snai-perimetri.geojson'
+OUT_COMUNI_GEOJSON = R('geo', 'comuni-snai-perimetri.geojson')
 print(f"\nEsporto comuni individuali -> {OUT_COMUNI_GEOJSON}")
 comuni_web = merged[['area', 'status', 'name', 'com_istat_code', 'geometry']].copy()
 comuni_web = comuni_web.rename(columns={'name': 'comune', 'com_istat_code': 'procom'})

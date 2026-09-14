@@ -4,7 +4,7 @@ Campione di comuni SNAI del Lazio coprendo tutto il range di valori.
 """
 import json, os
 
-REPO = r"C:/Users/aalbe/Desktop/Code/Aree Interne Italia"
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 IDX = os.path.join(os.path.dirname(os.path.abspath(__file__)), "comuni_snai_index.json")
 
 # valori restituiti da hex_aggregate_by_comune(LAZIO, ospedali, mean)

@@ -1,11 +1,11 @@
 """Costruisce l'indice comuni SNAI -> regione, e riepiloga la copertura attuale."""
 import ast, json, os, collections
 
-REPO = r"C:/Users/aalbe/Desktop/Code/Aree Interne Italia"
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = os.path.dirname(os.path.abspath(__file__))
 
 # ── estrai AREE_BASE da build_dashboard.py senza eseguire lo script ───────────
-src = open(os.path.join(REPO, "build_dashboard.py"), encoding="utf-8").read()
+src = open(os.path.join(REPO, "script", "build_dashboard.py"), encoding="utf-8").read()
 start = src.index("AREE_BASE = [")
 end = src.index("\n]", start) + 2
 aree = ast.literal_eval(src[start + len("AREE_BASE = "):end])
@@ -14,7 +14,7 @@ print("aree definite in build_dashboard.py: %d" % len(aree))
 print("regioni distinte: %d" % len(set(area2reg.values())))
 
 # ── comuni SNAI dal geojson ──────────────────────────────────────────────────
-gj = json.load(open(os.path.join(REPO, "comuni-snai-perimetri.geojson"), encoding="utf-8"))
+gj = json.load(open(os.path.join(REPO, "geo/comuni-snai-perimetri.geojson"), encoding="utf-8"))
 comuni = []
 senza_regione = []
 for f in gj["features"]:

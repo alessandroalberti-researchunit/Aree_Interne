@@ -6,35 +6,58 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Dashboard interattiva sulla Strategia Nazionale Aree Interne (SNAI), cicli 2014-2020 e 2021-2027. 128 aree, ~1.965 comuni, dati ufficiali DPCoe.
 
+## Struttura cartelle
+
+In root sta solo il deliverable web (`dashboard-aree-interne.html` e la landing
+`index.html`, che lo linka con path relativo). Tutto il resto in sottocartelle:
+
+| Cartella | Contenuto |
+|---|---|
+| `script/` | pipeline (`generate_*.py`, `build_dashboard.py`) e `script/diagnostica/` per le verifiche |
+| `geo/` | GeoJSON prodotti: `aree-snai-perimetri`, `comuni-snai-perimetri`, `sll-perimetri` |
+| `DATA/` | dati sorgente, incl. `mcp_accessibilita/`, `sll_2021/`, `nazionali/`, `tavole_istat_2023/` |
+| `DOCS/` | documentazione ufficiale SNAI; `DOCS/progetto/` le note di progetto (`NOTE*.md`) |
+| `output/` | elaborati prodotti, una sottocartella per regione |
+
 ## Pipeline di build
 
 Due script vanno eseguiti in sequenza:
 
 ```bash
 # 1. Genera i GeoJSON (scarica comuni_italia.geojson ~30 MB se non in cache)
-python generate_snai_geojson.py
+python script/generate_snai_geojson.py
 
 # 2. Genera la dashboard HTML self-contained
-python build_dashboard.py
+python script/build_dashboard.py
 ```
 
+Gli script risolvono i percorsi da `__file__`, quindi funzionano da qualsiasi
+directory di lavoro.
+
 Output finale: `dashboard-aree-interne.html` (file singolo, nessun server necessario).
+
+I dati di accessibilità sono già su disco in `DATA/accessibility_data.json` e non vanno
+rigenerati a ogni build. Servono solo se cambiano i dati MCP a monte:
+
+```bash
+python script/generate_accessibility_from_mcp.py   # merge DATA/mcp_accessibilita/* -> accessibility_data.json
+```
 
 ## Architettura
 
 ### Flusso dati
 ```
-DATA/*.xlsx  →  generate_snai_geojson.py  →  aree-snai-perimetri.geojson
-                                          →  comuni-snai-perimetri.geojson
+DATA/*.xlsx  →  script/generate_snai_geojson.py  →  geo/aree-snai-perimetri.geojson
+                                                 →  geo/comuni-snai-perimetri.geojson
                         ↓
-              build_dashboard.py  →  dashboard-aree-interne.html
+              script/build_dashboard.py  →  dashboard-aree-interne.html
               (inietta GeoJSON + metadati come variabili JS embedded)
 ```
 
-### `generate_snai_geojson.py`
+### `script/generate_snai_geojson.py`
 Legge i codici ISTAT comunali dai fogli Excel DPCoe, scarica i confini comunali da openpolis/geojson-italy (cache in `DATA/comuni_italia.geojson`), fa il dissolve con `geopandas` per ottenere i poligoni per area, e semplifica le geometrie (tolerance 0.002° per aree, 0.003° per comuni).
 
-### `build_dashboard.py`
+### `script/build_dashboard.py`
 Legge i GeoJSON e gli Excel, calcola statistiche per area (n. comuni, popolazione 2020, distribuzione classificazione ISTAT), poi inietta tutto in un template HTML/JS inline. Il template è hardcoded nello script come stringa Python con placeholder (`SNAI_GEOJSON_PLACEHOLDER`, `KPI_SI_INT`, ecc.).
 
 ### Dashboard (Leaflet + Chart.js)
@@ -47,6 +70,12 @@ Layout a 3 colonne: sidebar sinistra (grafici Chart.js), mappa centrale Leaflet 
 - `elenco_aree_snai_14-20-e-21-27.xlsx` — 5 aree solo ciclo 14-20
 - `comuni_italia.geojson` — cache confini comunali openpolis (~30 MB); cancellare per ri-scaricare
 - Altri Excel: classificazione ISTAT 2020, tavole sintesi, metadati OpenKit
+- `sll_2021/` — sorgenti SLL 2021 ISTAT: shapefile `SLL_2021.*`, JSON di composizione (comune → SLL), `metadati_SLL_2021.xlsx` e il PDF metodologico sulla specializzazione produttiva. Consumati da `script/generate_sll_geojson.py`.
+
+**Accessibilità ai servizi**:
+- `DATA/mcp_accessibilita/*.json` — un file per regione MCP con i 6 indicatori di accessibilità per comune SNAI, raccolti dal server MCP `hex-intelligence`. `_STATO.md` documenta le query verificate (due formulazioni intuitive cadono sull'indicatore sbagliato) e il formato.
+- `DATA/accessibility_data.json` — output del merge, consumato da `script/build_dashboard.py`. Copre 1.920 comuni SNAI su 1.967 (97,6%): la **Valle d'Aosta è assente dal dataset MCP**, quindi i suoi 47 comuni restano senza dati e 97,6% è il massimo raggiungibile.
+- Il blocco `sll` è ricavato aggregando i soli comuni SNAI di ciascun SLL, pesati per superficie: descrive la porzione SNAI del sistema locale, non l'intero SLL. Dettagli in `DOCS/progetto/NOTE.md`.
 
 **`DATA/nazionali/`** — dataset socioeconomici comunali a copertura nazionale, non ancora usati dagli script di build (importati dal workspace `Aree_Interne_Lombardia`):
 
@@ -64,9 +93,9 @@ Due avvertenze verificate sui quattro export IstatData:
 1. `openpyxl.load_workbook(..., read_only=True)` restituisce `max_row=1, max_column=1` perché la dimensione dichiarata nel file è errata. Usare `read_only=False`, oppure `pandas.read_excel` con `skiprows`.
 2. L'intestazione occupa più righe (metadati a r1-r3, poi `Anno`/`Indicatore`/`Territorio`; l'offset varia per file) e la colonna territoriale contiene **nomi di comune, non codici ISTAT**. Il join con i GeoJSON, che usano i codici, richiede quindi una normalizzazione dei nomi e la gestione degli omonimi.
 
-**`DOCS/`** — documentazione ufficiale SNAI (PDF, XLSX), non usata dagli script di build. Organizzata in `Documentazione Regionale/Nord|Centro|Sud` con rapporti istruttoria e dossier per regione; `Nord/Emilia-Romagna/` contiene gli APQ (Accordi di Programma Quadro), `Nord/Lombardia/` l'elenco dei comuni delle 14 aree interne regionali (Allegato A).
+**`DOCS/`** — documentazione ufficiale SNAI (PDF, XLSX), non usata dagli script di build. Organizzata in `Documentazione Regionale/Nord|Centro|Sud` con rapporti istruttoria e dossier per regione; `Nord/Emilia-Romagna/` contiene gli APQ (Accordi di Programma Quadro), `Nord/Lombardia/` l'elenco dei comuni delle 14 aree interne regionali (Allegato A). `DOCS/progetto/` contiene invece le note prodotte dal progetto: `NOTE.md` (tracciabilità e decisioni tecniche), `NOTE_discordanza-accessibilita.md`, `NOTE_sessione-2026-09-05.md`.
 
-**`output/`** — elaborati prodotti dal progetto, per regione. `output/Lombardia/` contiene i tre report `.docx` e la sceneggiatura del deck (26 slide). La cartella `presentazione ER/` in root ha la stessa funzione per l'Emilia-Romagna e non è ancora stata spostata sotto `output/`.
+**`output/`** — elaborati prodotti dal progetto, per regione. `output/Lombardia/` contiene i tre report `.docx` e la sceneggiatura del deck (26 slide); `output/Emilia-Romagna/` il materiale del convegno RER (ex cartella `presentazione ER/` in root); `output/Puglia/` il profilo dell'area Alta Murgia.
 
 ## Concetti dominio
 

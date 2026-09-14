@@ -2,6 +2,14 @@
 
 Documento di tracciabilità per la dashboard interattiva sulla Strategia Nazionale Aree Interne (SNAI), cicli 2014-2020 e 2021-2027.
 
+### Altre note in questa cartella
+
+| File | Contenuto |
+|---|---|
+| `NOTE_sessione-2026-09-06.md` | Completamento della raccolta accessibilità da MCP (97,6% dei comuni SNAI) e riorganizzazione delle cartelle del repo |
+| `NOTE_sessione-2026-09-05.md` | Incorporazione del workspace `Aree_Interne_Lombardia`, avvio della raccolta MCP |
+| `NOTE_discordanza-accessibilita.md` | Perché la fonte GeoParquet locale è stata abbandonata in favore di MCP |
+
 ---
 
 ## Contesto e obiettivo
@@ -14,15 +22,43 @@ La dashboard visualizza la distribuzione geografica delle 128 aree SNAI dei cicl
 
 ## Struttura del progetto
 
+Riorganizzata il 2026-09-06: in root resta solo il deliverable web, tutto il resto
+sta in sottocartelle. Gli script risolvono i percorsi da `__file__`, quindi si possono
+lanciare da qualsiasi directory di lavoro.
+
 ```
 /
-├── generate_snai_geojson.py       # Pipeline step 1: produce i GeoJSON
-├── build_dashboard.py             # Pipeline step 2: genera l'HTML finale
-├── dashboard-aree-interne.html    # Output (file singolo, self-contained)
-├── aree-snai-perimetri.geojson    # GeoJSON dissolto per area (645 KB)
-├── comuni-snai-perimetri.geojson  # GeoJSON per comune (1.932 KB)
-├── DATA/                          # Dati sorgente (non modificare)
-└── DOCS/                          # Documentazione ufficiale SNAI
+├── dashboard-aree-interne.html      # Output: file singolo, self-contained
+├── index.html                       # Landing page, linka la dashboard con path relativo
+├── CLAUDE.md                        # Istruzioni per Claude Code (deve stare in root)
+│
+├── script/                          # Pipeline
+│   ├── generate_snai_geojson.py             # step 1: GeoJSON aree e comuni
+│   ├── generate_sll_geojson.py              # SLL 2021 da shapefile ISTAT
+│   ├── generate_accessibility_from_mcp.py   # accessibilita da MCP hex-intelligence
+│   ├── generate_accessibility_data.py       # LEGACY: vecchia fonte GeoParquet, solo Lazio
+│   ├── build_dashboard.py                   # step 2: HTML finale
+│   └── diagnostica/                         # script di verifica e indice comuni SNAI
+│
+├── geo/                             # GeoJSON prodotti dalla pipeline
+│   ├── aree-snai-perimetri.geojson          # poligoni dissolti per area (645 KB)
+│   ├── comuni-snai-perimetri.geojson        # poligoni per comune (1.932 KB)
+│   └── sll-perimetri.geojson                # 515 SLL 2021 (1.610 KB)
+│
+├── DATA/                            # Dati sorgente (non modificare a mano)
+│   ├── mcp_accessibilita/                   # raccolta MCP, un file per regione
+│   ├── sll_2021/                             # shapefile SLL, composizione, metadati ISTAT
+│   ├── nazionali/                            # dataset socioeconomici comunali
+│   └── tavole_istat_2023/
+│
+├── DOCS/                            # Documentazione ufficiale SNAI
+│   ├── Documentazione Regionale/            # rapporti istruttoria e dossier per regione
+│   └── progetto/                            # queste note (NOTE.md, NOTE_*.md)
+│
+└── output/                          # Elaborati prodotti, per regione
+    ├── Emilia-Romagna/                      # ex "presentazione ER"
+    ├── Lombardia/
+    └── Puglia/
 ```
 
 ---
@@ -103,7 +139,7 @@ Tavole di sintesi per regione (A/B/C/D/E/F). Non usato negli script (le stesse i
 3. Fa il join tra codici ISTAT e geometrie
 4. Dissolve i poligoni comunali per ottenere il perimetro di area con `geopandas`
 5. Semplifica le geometrie: tolerance 0.002° per aree, 0.003° per comuni
-6. Scrive `aree-snai-perimetri.geojson` (128 features) e `comuni-snai-perimetri.geojson` (1.967 features)
+6. Scrive `geo/aree-snai-perimetri.geojson` (128 features) e `geo/comuni-snai-perimetri.geojson` (1.967 features)
 
 Properties nel GeoJSON comuni: `area`, `status`, `comune`, `procom` (codice ISTAT 6 cifre).
 
@@ -354,3 +390,61 @@ L'output è un file HTML singolo self-contained: nessun server necessario, nessu
 **Popup area fuori perimetro**: il popup descrittivo dell'area si apre all'anchor `{lat: bounds.getNorth(), lng: bounds.getCenter().lng}` con `autoPan:false`, così appare sopra l'area senza sovrapporsi ai confini comunali.
 
 **Tooltip comune come funzione lazy**: `bindTooltip(() => comuneTooltipHTML(c, areaName), ...)` — il contenuto viene calcolato al momento del primo hover, non al caricamento dell'area. La funzione `comuneTooltipHTML` costruisce la card mostrando solo i campi disponibili (omette righe con valore null).
+
+---
+
+## Accessibilità ai servizi: cambio di fonte (2026-09-06)
+
+`DATA/accessibility_data.json` era generato da `script/generate_accessibility_data.py`, che
+leggeva GeoParquet H3 locali e copriva **solo il Lazio** (189 comuni SNAI su 1.967).
+La motivazione tecnica dell'abbandono di quella fonte è in
+`NOTE_discordanza-accessibilita.md`.
+
+La fonte attuale è il **server MCP `hex-intelligence`**, tool `hex_aggregate_by_comune`
+con `agg_type="mean"`: sei indicatori di accessibilità (ospedali, servizi sanitari,
+strutture educative, infrastrutture di trasporto, sport, cultura) misurati come numero
+medio di strutture raggiungibili in 30 minuti di trasporto privato con traffico, per
+cella H3 r8 (~0,74 km²) di ciascun comune. Snapshot censimento 2021.
+
+**Copertura: 1.920 comuni SNAI su 1.967 (97,6%).** I 47 comuni mancanti sono tutti in
+Valle d'Aosta, regione **strutturalmente assente** dal dataset MCP (nessuna grafia del
+nome viene riconosciuta dal server). 97,6% è quindi la copertura massima raggiungibile
+con questa fonte.
+
+### Pipeline
+
+```bash
+# 1. raccolta: 6 chiamate MCP per regione (19 regioni MCP), un file per regione
+#    in DATA/mcp_accessibilita/. Per le regioni grandi il risultato MCP eccede il
+#    limite di token e viene salvato su file: in quel caso
+python script/diagnostica/estrai_mcp.py PIEMONTE "Piemonte"   # assembla dai tool-results
+
+# 2. validazione: confronto con l'indice dei comuni SNAI
+python script/diagnostica/valida_mcp.py
+
+# 3. merge + soglie + aggregazione SLL
+python script/generate_accessibility_from_mcp.py
+
+# 4. dashboard
+python script/build_dashboard.py
+```
+
+Le sei query MCP verificate, il tranello delle due formulazioni che cadono
+sull'indicatore sbagliato (`total_ristorazione`) e il formato dei file regionali sono
+documentati in `DATA/mcp_accessibilita/_STATO.md`.
+
+### Blocco `sll`
+
+I valori MCP sono medie per cella H3, quindi la media su un SLL equivale alla media dei
+valori comunali pesata per la superficie del comune (peso: geometria comunale
+riproiettata in EPSG:3035). **Limite noto**: sono disponibili i soli comuni SNAI, quindi
+il valore SLL descrive la porzione SNAI del sistema locale, non l'intero SLL. Per ogni
+SLL, `sll_meta` riporta `n_comuni_snai_usati`, `n_comuni_sll` e
+`quota_superficie_sll_coperta` (mediana 0,61), e il pannello SLL della dashboard mostra
+la nota di copertura. Gli SLL con valori sono 239 su 515.
+
+Per avere valori SLL rappresentativi dell'intero sistema locale servirebbe una seconda
+raccolta MCP estesa a **tutti** i comuni italiani, non solo quelli SNAI.
+
+Backup della versione precedente (solo Lazio, da GeoParquet):
+`DATA/accessibility_data.LAZIO-parquet.bak.json`.

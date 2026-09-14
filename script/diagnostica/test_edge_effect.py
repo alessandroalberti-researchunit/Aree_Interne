@@ -10,7 +10,7 @@ import numpy as np
 import geopandas as gpd
 import pandas as pd
 
-REPO = r"C:/Users/aalbe/Desktop/Code/Aree Interne Italia"
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PARQUET = os.path.expanduser("~/ILAB_DATA/OCPR_LAZIO/DATA/grid_08_adv.geoparquet")
 COL = "sanita_ospedale||traffic__30__total_ospedale"
 

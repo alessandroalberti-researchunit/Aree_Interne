@@ -5,7 +5,7 @@ con due geometrie di join: centroide-dentro (metodo dello script) e intersezione
 import json, os
 import geopandas as gpd
 
-REPO = r"C:/Users/aalbe/Desktop/Code/Aree Interne Italia"
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PARQUET = os.path.expanduser("~/ILAB_DATA/OCPR_LAZIO/DATA/grid_08_adv.geoparquet")
 COL = "sanita_ospedale||traffic__30__total_ospedale"
 
@@ -26,7 +26,7 @@ if grid.total_bounds[0] > 1000:
 else:
     grid = grid.to_crs("EPSG:4326")
 
-com = gpd.read_file(REPO + "/comuni-snai-perimetri.geojson").to_crs("EPSG:4326")
+com = gpd.read_file(REPO + "/geo/comuni-snai-perimetri.geojson").to_crs("EPSG:4326")
 com = com[com["comune"].isin(TEST)][["comune", "procom", "geometry"]]
 print("comuni di test trovati: %d\n" % len(com))
 

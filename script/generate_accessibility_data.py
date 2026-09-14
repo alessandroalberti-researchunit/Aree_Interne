@@ -50,10 +50,13 @@ IND_LABELS = {
     "cultura":    "Cultura",
 }
 
-COMUNI_GEOJSON = "comuni-snai-perimetri.geojson"
-SLL_GEOJSON    = "sll-perimetri.geojson"
-OUT_JSON       = "DATA/accessibility_data.json"
+# Radice del repo, calcolata da __file__: gli script funzionano da qualsiasi cwd.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = lambda *p: os.path.join(ROOT, *p)
 
+COMUNI_GEOJSON = R('geo', 'comuni-snai-perimetri.geojson')
+SLL_GEOJSON    = R('geo', 'sll-perimetri.geojson')
+OUT_JSON       = R('DATA', 'accessibility_data.json')
 # ── Carica poligoni target ────────────────────────────────────────────────────
 print("Carico comuni SNAI...", flush=True)
 comuni_snai = gpd.read_file(COMUNI_GEOJSON)
