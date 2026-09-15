@@ -561,8 +561,14 @@ function statusBadge(s) {
 
 // ── MAPPA ─────────────────────────────────────────────────────────────────────
 const map = L.map('map').setView([42.5, 12.5], 6);
-let tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution:'&copy; OpenStreetMap &copy; CARTO', subdomains:'abcd', maxZoom:19
+// Basemap Esri Canvas: CARTO da settembre 2026 serve tile con filigrana
+// "API KEY REQUIRED". Esri non richiede chiave, ma i suoi tile si fermano a
+// z=16 (oltre restituisce un segnaposto di 2.521 byte), quindi maxNativeZoom.
+const TILE_DARK  = 'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+const TILE_LIGHT = 'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+let tileLayer = L.tileLayer(TILE_DARK, {
+  attribution:'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+  maxZoom:19, maxNativeZoom:16
 }).addTo(map);
 
 function normalizeReg(r) {
@@ -22341,9 +22347,7 @@ function toggleTable(){tableOpen=!tableOpen;document.getElementById('tableConten
 function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
   document.getElementById('btnTheme').textContent = isLight ? '🌙' : '☀';
-  tileLayer.setUrl(isLight
-    ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png');
+  tileLayer.setUrl(isLight ? TILE_LIGHT : TILE_DARK);
   localStorage.setItem('snai-theme', isLight ? 'light' : 'dark');
   const reg=document.getElementById('filtroRegione').value;
   const fin=document.getElementById('filtroFin').value;
