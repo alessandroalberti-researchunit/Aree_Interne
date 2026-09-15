@@ -752,21 +752,40 @@ function normalizeReg(r) {
     .trim();
 }
 
+// Confini regionali. Lo stile dipende dal tema: regionStyle() e' la sola
+// fonte, cosi' il ripristino dopo il mouseout e il cambio tema non possono
+// divergere dal valore iniziale.
+let regionLayer = null;
+function regionStyle() {
+  const light = document.body.classList.contains('light');
+  return {
+    color:      light ? '#475569' : '#8695a8',
+    weight:     2.2,
+    fillColor:  light ? '#cbd5e1' : '#1e293b',
+    fillOpacity: 0.05
+  };
+}
+
 fetch('https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson')
   .then(r=>r.json())
-  .then(geo=>L.geoJSON(geo,{
-    style:{color:'#334155',weight:1,fillColor:'#1e293b',fillOpacity:0.05},
-    onEachFeature(feat,layer){
-      const nome=normalizeReg(feat.properties.reg_name);
-      layer.on('click',()=>{
-        document.getElementById('filtroRegione').value=nome;
-        applicaFiltri();
-        map.fitBounds(layer.getBounds(),{padding:[40,40]});
-      });
-      layer.on('mouseover',e=>{e.target.setStyle({fillOpacity:0.18,weight:2,color:'#475569'});});
-      layer.on('mouseout',e=>{e.target.setStyle({fillOpacity:0.05,weight:1,color:'#334155'});});
-    }
-  }).addTo(map)).catch(()=>{});
+  .then(geo=>{
+    regionLayer = L.geoJSON(geo,{
+      style: regionStyle,
+      onEachFeature(feat,layer){
+        const nome=normalizeReg(feat.properties.reg_name);
+        layer.on('click',()=>{
+          document.getElementById('filtroRegione').value=nome;
+          applicaFiltri();
+          map.fitBounds(layer.getBounds(),{padding:[40,40]});
+        });
+        layer.on('mouseover',e=>{e.target.setStyle({fillOpacity:0.18,weight:3.4});});
+        layer.on('mouseout',e=>{e.target.setStyle(regionStyle());});
+      }
+    }).addTo(map);
+    // La fetch puo' risolversi dopo il primo disegno delle aree SNAI: senza
+    // questo il layer regioni finirebbe sopra, coprendole e intercettandone i clic.
+    regionLayer.bringToBack();
+  }).catch(()=>{});
 
 const SNAI_GEO   = SNAI_GEOJSON_PLACEHOLDER;
 const COMUNI_GEO = COMUNI_GEO_PLACEHOLDER;
@@ -1323,6 +1342,7 @@ function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
   document.getElementById('btnTheme').textContent = isLight ? '🌙' : '☀';
   tileLayer.setUrl(isLight ? TILE_LIGHT : TILE_DARK);
+  if (regionLayer) regionLayer.setStyle(regionStyle());
   localStorage.setItem('snai-theme', isLight ? 'light' : 'dark');
   const reg=document.getElementById('filtroRegione').value;
   const fin=document.getElementById('filtroFin').value;
